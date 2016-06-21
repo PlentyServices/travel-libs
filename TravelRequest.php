@@ -1,6 +1,6 @@
 <?php
 
-class TravelApi
+class TravelRequest
 {
     protected $apiEndpoint;
     protected $apiKey;
