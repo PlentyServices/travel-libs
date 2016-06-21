@@ -1,6 +1,8 @@
 <?php
 
-class TravelRequest
+namespace PlentyServices\TravelCoreBundle\Service;
+
+class TravelApiRequest
 {
     protected $apiEndpoint;
     protected $apiKey;
