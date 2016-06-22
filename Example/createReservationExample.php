@@ -6,6 +6,7 @@ $reservation = new Reservation();
 
 $reservation->setGlobalSystem('camper');
 $reservation->setGlobalCurrency('EUR');
+$reservation->setGlobalStatus('request');
 $reservation->setGlobalOperator('alacampa');
 $reservation->setGlobalBroker('service');
 $reservation->setGlobalLocale('DE');
