@@ -12,6 +12,7 @@ $reservation->setGlobalDisplay('Jucy Rentals (AU), Crib');
 $reservation->setGlobalLocale('DE');
 $reservation->setGlobalType('vehicle');
 $reservation->setGlobalPayment('invoice');
+$reservation->setGlobalIp('127.0.0.1');
 
 
 $reservation->setContractorFirstName('Dona');

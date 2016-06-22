@@ -42,6 +42,10 @@ class Reservation
 
     /* GLOBAL --> */
 
+    public function setGlobalIp($ip){
+        $this->global['ip'] = $ip;
+    }
+
     public function setGlobalStatus($status){
         $this->global['status'] = $status;
     }
@@ -90,10 +94,6 @@ class Reservation
     /* <-- GLOBAL */
 
     /* CONTRACTOR --> */
-
-    public function setContractorIp($ip){
-        $this->contractor['ip'] = $ip;
-    }
 
     public function setContractorFirstName($firstName){
         $this->contractor['name_first'] = $firstName;
