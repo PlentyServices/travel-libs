@@ -1,6 +1,6 @@
 <?php
 
-use PlentyServices\TravelCoreBundle\Service\TravelApiRequest;
+require 'TravelApiRequest.php';
 
 class Reservation
 {
@@ -26,7 +26,7 @@ class Reservation
         $this->error = false;
         $this->passenger = array();
         $this->resourceMembers = array();
-        $this->calculation = array('sums' => array(), 'index' => array(), 'total' => array('amount' => 0));
+        $this->calculation = array();
         $this->global = array();
         $this->contractor = array();
         $this->journey = array();
@@ -203,7 +203,7 @@ class Reservation
     }
 
     public function setPassengerFirstName($firstName){
-        $this->passenger[$this->passengerCounter]['name_last'] = $firstName;
+        $this->passenger[$this->passengerCounter]['name_first'] = $firstName;
     }
 
     public function setPassengerLastName($lastName){
@@ -310,11 +310,10 @@ class Reservation
     }
 
     public function newJourneySegment(){
-        if(!is_array($this->journey[$this->journeyCounter]))
-            $this->journey[$this->journeyCounter] = array();
-
         $this->journeySegmentCounter++;
-
+        if(!key_exists($this->journeyCounter, $this->journey))
+            $this->journey[$this->journeyCounter] = array();
+        
         $this->journey[$this->journeyCounter][$this->journeySegmentCounter] = array();
     }
 
@@ -363,7 +362,7 @@ class Reservation
     }
 
     public function newItemSegment(){
-        if(!is_array($this->items[$this->itemCounter]))
+        if(!key_exists($this->itemCounter, $this->items))
             $this->items[$this->itemCounter] = array();
 
         $this->itemSegmentCounter++;
@@ -424,10 +423,11 @@ class Reservation
     }
 
     public function newCalculationSegment(){
-        if(!is_array($this->calculation[$this->calculationCounter]))
+        $this->calculationSegmentCounter++;
+
+        if(!key_exists($this->calculationCounter, $this->calculation))
             $this->calculation[$this->calculationCounter] = array();
 
-        $this->calculationSegmentCounter++;
 
         $this->calculation[$this->calculationCounter][$this->calculationSegmentCounter] = array();
     }
@@ -510,7 +510,9 @@ class Reservation
     
     /* Do it! */
     public function persist(){
-        return new TravelApiRequest('/create/reservation', $this->reservation);
+        $response = new TravelApiRequest('/create/reservation', $this->reservation);
+        
+        return $response->getResponse();
     }
 
 }

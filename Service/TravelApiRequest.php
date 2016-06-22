@@ -1,6 +1,5 @@
 <?php
 
-namespace PlentyServices\TravelCoreBundle\Service;
 
 class TravelApiRequest
 {
@@ -13,7 +12,7 @@ class TravelApiRequest
     protected $userAuth;
     protected $userContext;
 
-    function __construct($action, $parameters = array(), $userContext = false, $userAuth = false)
+    public function __construct($action, $parameters = array(), $userContext = false, $userAuth = false)
     {
         $this->apiKey = '58E66190-BDDD-42EA-8D8F-D3BFBD05B91A';
         $this->apiEndpoint = 'https://travel.plenty.services';
@@ -24,13 +23,19 @@ class TravelApiRequest
         $this->userAuth = $userAuth;
         $this->userContext = $userContext;
 
-        return $this->apiRequest();
+        $this->apiRequest();
     }
 
     /* Get Error */
     public function getError()
     {
         return $this->error;
+    }
+    
+    /* Get Result */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     private function setError($error)
@@ -80,7 +85,7 @@ class TravelApiRequest
 
         if ($response['error']) return $this->setError($response['error']);
 
-        return $response;
+        return $this->response;
 
     }
 

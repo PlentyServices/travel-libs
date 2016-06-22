@@ -1,6 +1,6 @@
 <?php
 
-require('Reservation.php');
+require '../Service/Reservation.php';
 
 $reservation = new Reservation();
 
@@ -19,8 +19,12 @@ $reservation->setContractorLastName('Duck');
 $reservation->setContractorGender('female');
 $reservation->setContractorPostal('12345');
 $reservation->setContractorCity('Entenhausen');
+$reservation->setContractorStreet('Daglfing');
 $reservation->setContractorCountry('DE');
 $reservation->setContractorNationality('EN');
+$reservation->setContractorDateOfBirth('1968-08-25');
+$reservation->setContractorEmail('info@plenty.services');
+$reservation->setContractorPhone('0123456');
 $reservation->setContractorIsPassenger();
 
 
@@ -61,7 +65,8 @@ $reservation->setCalculationSegmentCurrency('EUR');
 $reservation->setCalculationSegmentService('basic');
 $reservation->setCalculationSegmentDisplay('Basis Paket');
 
-
 $reservation->flush();
 
 $response = $reservation->persist();
+
+echo json_encode($response, JSON_PRETTY_PRINT);
