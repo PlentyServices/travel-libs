@@ -8,7 +8,6 @@ $reservation->setGlobalSystem('camper');
 $reservation->setGlobalCurrency('EUR');
 $reservation->setGlobalOperator('alacampa');
 $reservation->setGlobalBroker('service');
-$reservation->setGlobalDisplay('Jucy Rentals (AU), Crib');
 $reservation->setGlobalLocale('DE');
 $reservation->setGlobalType('vehicle');
 $reservation->setGlobalPayment('invoice');
