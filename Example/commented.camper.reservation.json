@@ -1,0 +1,228 @@
+{
+  "contractor":{ //signing person
+    "name_last":"Gündert",
+    "name_first":"Patrick",
+    "name_title":"", //optional
+    "gender":"male",
+    "street":"Hamshire Str. 101",
+    "postal":"9000",
+    "city":"New Port",
+    "phone":"077712345",
+    "dob":"1968-05-27",
+    "email":"info@itrun-solutions.com",
+    "state":"Schottland",
+    "country":"England",
+    "nationality":"en", //optional
+    "contractor_notice":"Möchte mich unbedingt für den Newsletter anmelden", //optional
+    "tags":[ //custom tags
+      "adult",
+      "driver"
+    ],
+    "ids":{ //custom IDs
+      "driving_license":123456789,
+      "passport":"DE123"
+    },
+    "is_passenger":true, //default true
+    "is_billing_contact":false //default true
+  },
+  "passenger":[ //(additional) passengers
+    {
+      "name_last":"Mitreisender",
+      "name_first":"Erster",
+      "gender":"female",
+      "passenger_notice":"Möchte mich auch unbedingt für den Newsletter anmelden",
+      "tags":[
+        "adult",
+        "driver"
+      ],
+      "ids":{
+        "driving_license":123456789
+      }
+    }
+  ],
+  "cart":[ //passenger/item/calculation/quantity assignment
+    {
+      "quantity":1,
+      "item":0,
+      "passenger":[
+        0,
+        1
+      ]
+    },
+    {
+      "quantity":1,
+      "item":1,
+      "passenger":[
+        0,
+        1
+      ]
+    }
+  ],
+  "billing_contact":{ //optional billing contact
+    "name_last":"Gündert",
+    "name_first":"Patrick",
+    "gender":"male",
+    "street":"Hamshire Str. 101",
+    "postal":"9000",
+    "city":"New Port",
+    "state":"Schottland",
+    "country":"England",
+    "company":"nettags"
+  },
+  "global":{ //reservation wide params
+    "status":"request", //request or booking
+    "system":"camper", //system namespace for aliases
+    "broker":"service",  //if reservation is made through broker
+    "operator":"alacampa", //tour operator
+    "transaction_type":"direct", //direct if b2c, business if b2b
+    "display":"Camper Vergleich", //optional header text
+    "currency":"eur", //total amount currency
+    "payment_type":"invoice", //invoice or credit_card
+    "payment_fee":2, //optional payment fee
+    "ip_referred":"8.8.8.8", //referred ip
+    "consultant_notice":"Hinweise für den Bearbeiter" //notice for consultant
+  },
+  "items": [ //products
+    {
+      "vendor_alias":"JUCY_AU", //map to vendor with vendor alias from given system, vendor data is used from travel core
+      "product_alias":"JUCY_JUCY", //map to product alias from given system, product data is used from travel core
+      "product_type":"vehicle", //optional if in travel core
+      "product_subtype":"motorhome", //optional if in travel core
+      "display":"JUCY CAMPER", //display to custom name, if not in travel core
+      "display_description":"Der Jucy unter den Jucies!", //display to description, if not in travel core
+      "depart_place":"SYD1", //map to place with place alias from given system, vendor data is used from travel core
+      "depart_date":"2017-01-01", //depart_date or depart_time
+      "arrive_place":"SYD1",
+      "arrive_date":"2017-01-14",
+      "consultant_notice":"Hier zahlen wir keine Provision!",
+      "is_optional":true, //if type is request items can be optional
+      "items_holds":[ //child items
+        {
+          "display":"Stuhl",
+          "display_description":"Der Stuhl unter den Stühlen!",
+          "is_optional":true, //default false
+          "amount": 40,
+          "currency": "AUD",
+          "payable":"on_arrival", //default on_booking
+          "margin":false //if parent margin should be used
+        }
+      ],
+      "pax_holds": { //max number of passengers
+        "adult":4, //if 2 pax are both, 2 adults are left
+        "driver":2
+      }
+    },
+    {
+      "vendor_alias":"JUCY_AU",
+      "product_alias":"JUCY_SUPER_JUCY",
+      "product_type":"vehicle",
+      "product_subtype":"motorhome",
+      "display":"JUCY CAMPER",
+      "display_description":"Der Super Jucy unter den Jucies!",
+      "depart_place":"SYD1",
+      "depart_date":"2017-01-01",
+      "arrive_place":"SYD1",
+      "arrive_date":"2017-01-14",
+      "is_optional":true,
+      "items_holds":[
+        {
+          "display":"Stuhl",
+          "display_description":"Der Stuhl unter den Stühlen!",
+          "is_optional":true,
+          "amount": 40,
+          "currency": "AUD",
+          "payable":"on_arrival",
+          "pax_holds":1,
+          "margin":{
+            "percent":10,
+            "included":true
+          }
+        }
+      ]
+    }
+  ],
+  "calculations":[
+    {
+      "pax_holds": { //default unlimited, lookup in passenger tags
+        "adult":4,
+        "driver":2
+      },
+      "id_conditions": { //set id conditions
+        "driver":"driver_license"
+      },
+      "amount":50,
+      "currency":"aud",
+      "exchange":0.86, //exchange to global currency
+      "option":"basic", //option/veriant of product
+      "display":"Standard Paket",
+      "display_description":"Standard Leistungen",
+      "consultant_notice":"Kalkulationshinweise",
+      "margin_operator":{ //margin calculation for operator, if not in travel core
+        "percent":6,
+        "included":true //if is included in amount
+      },
+      "margin_broker":{
+        "percent":3,
+        "included":true
+      },
+      "calculations_holds":[ //additional or included price segments
+        {
+          "display":"Vor Ort Gebühr",
+          "display_description":"Ist vor Ort zu bezahlen",
+          "payable":"on_arrival",
+          "amount":10,
+          "currency":"aud",
+          "margin":false
+        },
+        {
+          "display":"TAX",
+          "amount":10,
+          "currency":"aud",
+          "included":true,
+          "margin":true
+        }
+      ]
+    },
+    {
+      "pax_holds": {
+        "adult":4,
+        "driver":2
+      },
+      "conditions": [
+        "driving_license"
+      ],
+      "amount":50,
+      "currency":"aud",
+      "exchange":0.86,
+      "service":"basic",
+      "display":"Standard Paket",
+      "display_description":"Standard Leistungen",
+      "consultant_notice":"Kalkulationshinweise",
+      "margin_operator":{
+        "percent":6,
+        "included":true
+      },
+      "margin_broker":{
+        "percent":3,
+        "included":true
+      },
+      "calculations_holds":[
+        {
+          "display":"Vor Ort Gebühr",
+          "display_description":"Ist vor Ort zu bezahlen",
+          "payable":"on_arrival",
+          "amount":10,
+          "currency":"aud",
+          "margin":false
+        },
+        {
+          "display":"TAX",
+          "amount":10,
+          "currency":"aud",
+          "included":true,
+          "margin":true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "contractor":{
+    "name_last":"Gündert",
+    "name_first":"Patrick",
+    "name_title":"",
+    "gender":"male",
+    "street":"Hamshire Str. 101",
+    "postal":"9000",
+    "city":"New Port",
+    "phone":"077712345",
+    "dob":"1968-05-27",
+    "email":"info@itrun-solutions.com",
+    "passport":"JMCA777",
+    "state":"Schottland",
+    "country":"England",
+    "nationality":"en",
+    "contractor_notice":"Möchte mich unbedingt für den Newsletter anmelden",
+    "tags":[
+      "adult",
+      "driver"
+    ],
+    "ids":{
+      "driving_license":123456789
+    },
+    "is_passenger":true,
+    "is_billing_contact":false,
+    "associated_calculations":[
+      0
+    ]
+  },
+  "passenger":[
+    {
+      "name_last":"Mitreisender",
+      "name_first":"Erster",
+      "gender":"female",
+      "passenger_notice":"Möchte mich unbedingt für den Newsletter anmelden",
+      "tags":[
+        "adult",
+        "driver"
+      ],
+      "ids":{
+        "driving_license":123456789
+      },
+      "associated_calculations":[
+        0
+      ]
+    }
+  ],
+  "billing_contact":{
+    "name_last":"Gündert",
+    "name_first":"Patrick",
+    "gender":"male",
+    "street":"Hamshire Str. 101",
+    "postal":"9000",
+    "city":"New Port",
+    "state":"Schottland",
+    "country":"England",
+    "company":"nettags"
+  },
+  "global":{
+    "status":"request",
+    "system":"camper",
+    "broker":"service",
+    "operator":"alacampa",
+    "transaction_type":"direct",
+    "product_type":"vehicle",
+    "currency":"eur",
+    "total_amount":300,
+    "payment_type":"invoice",
+    "payment_fee":2,
+    "ip_referred":"8.8.8.8",
+    "consultant_notice":"Hinweise für den Bearbeiter"
+  },
+  "items":[
+    {
+      "vendor_alias":"JUCY_AU",
+      "product_alias":"JUCY_JUCY",
+      "product_type":"vehicle",
+      "product_subtype":"motorhome",
+      "display":"JUCY CAMPER",
+      "display_description":"Der Jucy unter den Jucies!",
+      "depart_place":"SYD1",
+      "depart_date":"2017-01-01",
+      "arrive_place":"SYD1",
+      "arrive_date":"2017-01-14",
+      "consultant_notice":"Hier zahlen wir keine Provision!",
+      "is_optional":true,
+      "items_holds":[
+        {
+          "display":"Stuhl",
+          "display_description":"Der Stuhl unter den Stühlen!",
+          "is_optional":true,
+          "amount": 40,
+          "currency": "AUD",
+          "payable":"on_arrival",
+          "pax_holds":1,
+          "margin":false
+        }
+      ]
+    },
+    {
+      "vendor_alias":"JUCY_AU",
+      "product_alias":"JUCY_SUPER_JUCY",
+      "product_type":"vehicle",
+      "product_subtype":"motorhome",
+      "display":"JUCY CAMPER",
+      "display_description":"Der Super Jucy unter den Jucies!",
+      "depart_place":"SYD1",
+      "depart_date":"2017-01-01",
+      "arrive_place":"SYD1",
+      "arrive_date":"2017-01-14",
+      "is_optional":true,
+      "items_holds":[
+        {
+          "display":"Stuhl",
+          "display_description":"Der Stuhl unter den Stühlen!",
+          "is_optional":true,
+          "amount": 40,
+          "currency": "AUD",
+          "payable":"on_arrival",
+          "pax_holds":1,
+          "margin":{
+            "percent":10,
+            "included":true
+          }
+        }
+      ]
+    }
+  ],
+  "calculations":[
+    {
+      "type":"main",
+      "pax_holds": {
+        "adult":4,
+        "driver":2
+      },
+      "conditions": [
+        "driving_license"
+      ],
+      "amount":50,
+      "currency":"aud",
+      "exchange":0.86,
+      "service":"basic",
+      "display":"Standard Paket",
+      "display_description":"Standard Leistungen",
+      "consultant_notice":"Kalkulationshinweise",
+      "margin_operator":{
+        "percent":6,
+        "included":true
+      },
+      "margin_broker":{
+        "percent":3,
+        "included":true
+      },
+      "calculations_holds":[
+        {
+          "display":"Vor Ort Gebühr",
+          "display_description":"Ist vor Ort zu bezahlen",
+          "payable":"on_arrival",
+          "amount":10,
+          "currency":"aud",
+          "margin":false
+        },
+        {
+          "display":"TAX",
+          "amount":10,
+          "currency":"aud",
+          "included":true,
+          "margin":true
+        }
+      ],
+      "associated_items":[
+        0
+      ]
+    },
+    {
+      "type":"main",
+      "pax_holds": {
+        "adult":4,
+        "driver":2
+      },
+      "conditions": [
+        "driving_license"
+      ],
+      "amount":50,
+      "currency":"aud",
+      "exchange":0.86,
+      "service":"basic",
+      "display":"Standard Paket",
+      "display_description":"Standard Leistungen",
+      "consultant_notice":"Kalkulationshinweise",
+      "margin_operator":{
+        "percent":6,
+        "included":true
+      },
+      "margin_broker":{
+        "percent":3,
+        "included":true
+      },
+      "calculations_holds":[
+        {
+          "display":"Vor Ort Gebühr",
+          "display_description":"Ist vor Ort zu bezahlen",
+          "payable":"on_arrival",
+          "amount":10,
+          "currency":"aud",
+          "margin":false
+        },
+        {
+          "display":"TAX",
+          "amount":10,
+          "currency":"aud",
+          "included":true,
+          "margin":true
+        }
+      ],
+      "associated_items":[
+        1
+      ]
+    }
+  ]
+}
