@@ -25,7 +25,19 @@ class TravelApiRequest
 
         $this->apiRequest();
     }
+    
+    /* Set API key */
+    public function setApiKey($key)
+    {
+        $this->apiKey = $key;
+    }
 
+    /* Set API endpoint */
+    public function setApiEndpoint($endpoint)
+    {
+        $this->apiEndpoint = $endpoint;
+    }
+    
     /* Get Error */
     public function getError()
     {

@@ -42,20 +42,21 @@
   ],
   "cart":[ //passenger/item/calculation/quantity assignment
     {
-      "quantity":1,
-      "item":0,
-      "passenger":[
-        0,
-        1
-      ]
+      "quantity":1, //default 1
+      "item":"ffaab434455", //default 0 if just one item
+      "amount":123,
+      "passenger_calculation":{
+        "bffaa7392af":0,
+        "bda12339444":0
+      }
     },
     {
       "quantity":1,
-      "item":1,
-      "passenger":[
-        0,
-        1
-      ]
+      "item":"ffaab434455", //default 0 if just one item
+      "passenger_calculation":{
+        "bffaa7392af":0,
+        "bda12339444":0
+      }
     }
   ],
   "billing_contact":{ //optional billing contact
@@ -69,7 +70,7 @@
     "country":"England",
     "company":"nettags"
   },
-  "global":{ //reservation wide params
+  "general":{ //reservation wide params
     "status":"request", //request or booking
     "system":"camper", //system namespace for aliases
     "broker":"service",  //if reservation is made through broker
@@ -103,8 +104,8 @@
           "is_optional":true, //default false
           "amount": 40,
           "currency": "AUD",
-          "payable":"on_arrival", //default on_booking
-          "margin":false //if parent margin should be used
+          "payable":"on_booking", //default on_booking
+          "margin":false //if parent margin should be used: 'parent'
         }
       ],
       "pax_holds": { //max number of passengers
@@ -131,7 +132,7 @@
           "is_optional":true,
           "amount": 40,
           "currency": "AUD",
-          "payable":"on_arrival",
+          "payable":"on_booking",
           "pax_holds":1,
           "margin":{
             "percent":10,
