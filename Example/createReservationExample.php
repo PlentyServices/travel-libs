@@ -101,15 +101,17 @@ $calculation->setIdCondition('driver', 'drivers-license');
 $calculation->setMarginOperator('percent', 8);
 $calculation->setMarginBroker('percent', 3);
 
+$calc1 = $reservation->addCalculation($calculation);
+
 $reservation->addToCart($item1, array(
-        $pax1 => $calculation,
-        $pax2 => $calculation
+        $pax1 => $calc1,
+        $pax2 => $calc1
     )
 );
 
 $reservation->addToCart($item2, array(
-        $pax1 => $calculation,
-        $pax2 => $calculation
+        $pax1 => $calc1,
+        $pax2 => $calc1
     )
 );
 
