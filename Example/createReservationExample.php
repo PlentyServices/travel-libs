@@ -60,7 +60,9 @@ $pax2 = $reservation->addPassenger($passenger);
 $item = new Item();
 
 $item->setProductAlias('JUCNZ_CASA6');
+$item->setDepartPlaceAlias('SYD1');
 $item->setDepartDate('2016-10-01');
+$item->setArrivePlaceAlias('Syd1');
 $item->setArriveDate('2016-10-14');
 $item->isOptional();
 
@@ -80,7 +82,9 @@ $item1 = $reservation->addItem($item);
 $item = new Item();
 
 $item->setProductAlias('JUCAU_CASA6');
+$item->setDepartPlaceAlias('SYD1');
 $item->setDepartDate('2016-10-01');
+$item->setArrivePlaceAlias('Syd1');
 $item->setArriveDate('2016-10-14');
 $item->isOptional();
 

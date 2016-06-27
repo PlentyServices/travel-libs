@@ -35,6 +35,16 @@ class General
 
     /**
      * @var string
+     */
+    public $travel_type;
+
+    /**
+     * @var string
+     */
+    public $travel_type_sub;
+
+    /**
+     * @var string
      * @Assert\Choice(choices = {"direct", "business"}, message = "transaction_type: b2c => 'direct', b2b => 'business'" groups={"booking", "request"})
      */
     public $transaction_type;
@@ -105,6 +115,16 @@ class General
     public function setTransactionType($transactionType = 'direct')
     {
         $this->transaction_type= $transactionType;
+    }
+
+    public function setTravelType($travelType)
+    {
+        $this->transaction_type= $travelType;
+    }
+
+    public function setTravelSubType($travelSubType)
+    {
+        $this->travel_type_sub = $travelSubType;
     }
 
     public function setDisplay($display)
@@ -455,9 +475,11 @@ class Item
     public $display;
     public $display_description;
     public $depart_place;
+    public $depart_place_alias;
     public $depart_date;
     public $depart_time;
     public $arrive_place;
+    public $arrive_place_alias;
     public $arrive_date;
     public $arrive_time;
     public $consultant_notice;
@@ -511,6 +533,11 @@ class Item
         $this->display_description = $displayDescription;
     }
 
+    public function setDepartPlaceAlias($departPlaceAlias)
+    {
+        $this->depart_place_alias = $departPlaceAlias;
+    }
+    
     public function setDepartPlace($departPlace)
     {
         $this->depart_place = $departPlace;
@@ -529,6 +556,11 @@ class Item
     public function setArrivePlace($arrivePlace)
     {
         $this->arrive_place = $arrivePlace;
+    }
+
+    public function setArrivePlaceAlias($arrivePlaceAlias)
+    {
+        $this->arrive_place_alias = $arrivePlaceAlias;
     }
 
     public function setArriveDate($arriveDate)
@@ -553,7 +585,7 @@ class Item
 
     public function addItemHolds($itemHolds)
     {
-        $this->items_holds[] = $itemHolds;
+        $this->items_holds[] = (array) $itemHolds;
     }
 }
 
@@ -717,7 +749,7 @@ class Calculation
 
     public function addCalculationHolds($calculationHolds)
     {
-        $this->calculations_holds = $calculationHolds;
+        $this->calculations_holds = (array) $calculationHolds;
     }
 }
 
