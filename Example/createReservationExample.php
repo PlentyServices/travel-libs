@@ -4,70 +4,73 @@ require '../Service/Reservation.php';
 
 $reservation = new Reservation();
 
-$reservation->setGlobalSystem('camper');
-$reservation->setGlobalCurrency('EUR');
-$reservation->setGlobalStatus('request');
-$reservation->setGlobalOperator('alacampa');
-$reservation->setGlobalBroker('service');
-$reservation->setGlobalLocale('DE');
-$reservation->setGlobalType('vehicle');
-$reservation->setGlobalPayment('invoice');
-$reservation->setGlobalIp('127.0.0.1');
+$general = new General();
 
+$general->setSystem('camper');
+$general->setStatus('request');
+$general->setOperator('alacampa');
+$general->setBroker('service');
+$general->setLocale('de');
+$general->setTransactionType('direct');
+$general->setCurrency('eur');
+$general->setIpReferred('127.0.0.1');
 
-$reservation->setContractorFirstName('Dona');
-$reservation->setContractorLastName('Duck');
-$reservation->setContractorGender('female');
-$reservation->setContractorPostal('12345');
-$reservation->setContractorCity('Entenhausen');
-$reservation->setContractorStreet('Daglfing');
-$reservation->setContractorCountry('DE');
-$reservation->setContractorNationality('EN');
-$reservation->setContractorDateOfBirth('1968-08-25');
-$reservation->setContractorEmail('info@plenty.services');
-$reservation->setContractorPhone('0123456');
-$reservation->setContractorIsPassenger();
+$reservation->setGeneralParameters($general);
 
+$contractor = new Contractor();
 
-$reservation->newPassenger();
-$reservation->setPassengerFirstName('Daniel');
-$reservation->setPassengerLastName('Düsentrieb');
-$reservation->setPassengerGender('male');
+$contractor->setFirstName('Peter');
+$contractor->setLastName('Parker');
+$contractor->setGender('male');
+$contractor->setDateOfBirth('1921-07-02');
+$contractor->setPostal('12345');
+$contractor->setCity('Smallville');
+$contractor->setStreet('Batman Str. 123');
+$contractor->setContractorNotice('Freitext Bemerkung vom Reiseanmelder');
+$contractor->setEmail('badboy77@heromail.com');
+$contractor->setPhone('0123456');
+$contractor->isPassenger();
 
+$reservation->setContractor($contractor);
 
-$reservation->newJourney();
+$billing = new BillingContact();
 
-$reservation->newJourneySegment();
-$reservation->setJourneySegmentPlaceAlias('SY1');
-$reservation->setJourneySegmentDepartDate('2016-07-02');
-$reservation->setJourneySegmentType('departure');
+$billing->setFirstName('Alfons');
+$billing->setLastName('Schuhbeck');
+$billing->setGender('male');
+$billing->setCity('Minga');
+$billing->setStreet('Münchnerstr. 1');
+$billing->setCountry('de');
+$billing->setCompany('Partyservice GmbH');
 
-$reservation->newJourneySegment();
-$reservation->setJourneySegmentPlaceAlias('SY1');
-$reservation->setJourneySegmentDepartDate('2016-14-02');
-$reservation->setJourneySegmentType('return');
+$reservation->setBillingContact($billing);
 
+$passenger = new Passenger();
 
-$reservation->newItem();
+$passenger->setFirstName('John');
+$passenger->setLastName('Doe');
+$passenger->setGender('male');
 
-$reservation->newItemSegment();
-$reservation->setItemSegmentType('vehicle');
-$reservation->setItemSegmentVendorAlias('JUCY_AU');
-$reservation->setItemSegmentProductAlias('JUCYAU_CRIB');
-$reservation->setItemSegmentDisplay('Jucy Rentals (AU), Crib');
+$reservation->addPassenger($passenger);
 
+$item = new Item();
 
-$reservation->newCalculation();
+$item->setProductAlias('JUCNZ_CASA6');
+$item->setDepartDate('2016-10-01');
+$item->setArriveDate('2016-10-14');
+$item->isOptional();
 
-$reservation->newCalculationSegment();
-$reservation->setCalculationSegmentType('package');
-$reservation->setCalculationSegmentAmount(300);
-$reservation->setCalculationSegmentCurrency('EUR');
-$reservation->setCalculationSegmentService('basic');
-$reservation->setCalculationSegmentDisplay('Basis Paket');
+$itemHolds = new ItemHolds();
 
-$reservation->flush();
+$itemHolds->setDisplay('Stuhl');
+$itemHolds->setDisplayDescription('Der Stuhl unter den Stühlen');
+$itemHolds->setPayable();
+$itemHolds->setCurrency('eur');
+$itemHolds->setAmount(40);
+$itemHolds->isOptional();
+$itemHolds->setMargin(false);
 
-$response = $reservation->persist();
+$item->addItemHolds($itemHolds);
 
-echo json_encode($response, JSON_PRETTY_PRINT);
+$reservation->addItem($item);
+

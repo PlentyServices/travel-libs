@@ -18,6 +18,12 @@ class General
 
     /**
      * @var string
+     * @Assert\NotBlank(message = "locale: en, de.." groups={"booking", "request"})
+     */
+    protected $locale;
+
+    /**
+     * @var string
      */
     protected $broker;
 
@@ -79,6 +85,11 @@ class General
     public function setSystem($system = 'travel')
     {
         $this->system = $system;
+    }
+
+    public function setLocale($locale = 'de')
+    {
+        $this->locale = $locale;
     }
 
     public function setBroker($broker)
@@ -540,7 +551,7 @@ class Item
         $this->is_optional = $isOptional;
     }
 
-    public function setItemHolds($itemHolds)
+    public function addItemHolds($itemHolds)
     {
         $this->items_holds[] = $itemHolds;
     }
@@ -569,7 +580,7 @@ class ItemHolds
         $this->display_description = $displayDescription;
     }
 
-    public function isOptional($isOptional = false)
+    public function isOptional($isOptional = true)
     {
         $this->is_optional = $isOptional;
     }
@@ -594,7 +605,7 @@ class ItemHolds
         $this->payable = $payable;
     }
 
-    public function setMargin($margin = false)
+    public function setMargin($margin = true)
     {
         $this->margin = $margin;
     }
