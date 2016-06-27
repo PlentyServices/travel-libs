@@ -8,72 +8,72 @@ class General
      * @var string
      * @Assert\Choice(choices = {"request", "booking"}, message = "status: request or booking" groups={"booking", "request"})
      */
-    protected $status;
+    public $status;
 
     /**
      * @var string
      * @Assert\Choice(choices = {"travel", "camper"}, message = "system: context" groups={"booking", "request"})
      */
-    protected $system;
+    public $system;
 
     /**
      * @var string
      * @Assert\NotBlank(message = "locale: en, de.." groups={"booking", "request"})
      */
-    protected $locale;
+    public $locale;
 
     /**
      * @var string
      */
-    protected $broker;
+    public $broker;
 
     /**
      * @var string
      * @Assert\NotBlank(message = "operator: touroperator" groups={"booking", "request"})
      */
-    protected $operator;
+    public $operator;
 
     /**
      * @var string
      * @Assert\Choice(choices = {"direct", "business"}, message = "transaction_type: b2c => 'direct', b2b => 'business'" groups={"booking", "request"})
      */
-    protected $transaction_type;
+    public $transaction_type;
 
     /**
      * @var string
      * @Assert\NotBlank(message = "display: head title" groups={"booking", "request"})
      */
-    protected $display;
+    public $display;
 
     /**
      * @var string
      * @Assert\NotBlank(message = "currency: selling currency" groups={"booking", "request"})
      */
-    protected $currency;
+    public $currency;
 
     /**
      * @var string
      * @Assert\NotBlank(message = "currency: selling currency" groups={"booking"})
      */
-    protected $payment_type;
+    public $payment_type;
 
     /**
      * @var string
      * @Assert\NotBlank(message = "currency: selling currency" groups={"booking"})
      */
-    protected $payment_fee;
+    public $payment_fee;
 
     /**
      * @var string
      * @Assert\NotBlank(message = "currency: selling currency" groups={"booking", "request"})
      */
-    protected $ip_referred;
+    public $ip_referred;
 
     /**
      * @var string
      * @Assert\NotBlank(message = "currency: selling currency" groups={"booking", "request"})
      */
-    protected $consultant_notice;
+    public $consultant_notice;
 
     
     
@@ -141,23 +141,23 @@ class General
 
 class Contractor
 {
-    protected $name_last;
-    protected $name_first;
-    protected $name_title;
-    protected $gender;
-    protected $street;
-    protected $postal;
-    protected $city;
-    protected $phone;
-    protected $dob;
-    protected $email;
-    protected $state;
-    protected $country;
-    protected $nationality;
-    protected $contractor_notice;
-    protected $tags;
-    protected $ids;
-    protected $is_passenger;
+    public $name_last;
+    public $name_first;
+    public $name_title;
+    public $gender;
+    public $street;
+    public $postal;
+    public $city;
+    public $phone;
+    public $dob;
+    public $email;
+    public $state;
+    public $country;
+    public $nationality;
+    public $contractor_notice;
+    public $tags;
+    public $ids;
+    public $is_passenger;
     public $uid;
 
     public function __construct()
@@ -255,19 +255,19 @@ class Contractor
 
 class BillingContact
 {
-    protected $name_last;
-    protected $name_first;
-    protected $name_title;
-    protected $gender;
-    protected $street;
-    protected $postal;
-    protected $city;
-    protected $state;
-    protected $country;
-    protected $company;
-    protected $dob;
-    protected $phone;
-    protected $email;
+    public $name_last;
+    public $name_first;
+    public $name_title;
+    public $gender;
+    public $street;
+    public $postal;
+    public $city;
+    public $state;
+    public $country;
+    public $company;
+    public $dob;
+    public $phone;
+    public $email;
 
 
     public function setCompany($company)
@@ -338,22 +338,22 @@ class BillingContact
 
 class Passenger
 {
-    protected $name_last;
-    protected $name_first;
-    protected $name_title;
-    protected $gender;
-    protected $street;
-    protected $postal;
-    protected $city;
-    protected $phone;
-    protected $dob;
-    protected $email;
-    protected $state;
-    protected $country;
-    protected $nationality;
-    protected $contractor_notice;
-    protected $tags;
-    protected $passport;
+    public $name_last;
+    public $name_first;
+    public $name_title;
+    public $gender;
+    public $street;
+    public $postal;
+    public $city;
+    public $phone;
+    public $dob;
+    public $email;
+    public $state;
+    public $country;
+    public $nationality;
+    public $contractor_notice;
+    public $tags;
+    public $passport;
     public $uid;
 
     public function __construct()
@@ -446,23 +446,23 @@ class Passenger
 
 class Item
 {
-    protected $vendor_alias;
-    protected $vendor_id;
-    protected $product_alias;
-    protected $product_id;
-    protected $product_type;
-    protected $product_subtype;
-    protected $display;
-    protected $display_description;
-    protected $depart_place;
-    protected $depart_date;
-    protected $depart_time;
-    protected $arrive_place;
-    protected $arrive_date;
-    protected $arrive_time;
-    protected $consultant_notice;
-    protected $is_optional;
-    protected $items_holds;
+    public $vendor_alias;
+    public $vendor_id;
+    public $product_alias;
+    public $product_id;
+    public $product_type;
+    public $product_subtype;
+    public $display;
+    public $display_description;
+    public $depart_place;
+    public $depart_date;
+    public $depart_time;
+    public $arrive_place;
+    public $arrive_date;
+    public $arrive_time;
+    public $consultant_notice;
+    public $is_optional;
+    public $items_holds;
     public $uid;
 
     public function __construct()
@@ -559,14 +559,15 @@ class Item
 
 class ItemHolds
 {
-    protected $display;
-    protected $display_description;
-    protected $is_optional;
-    protected $amount;
-    protected $amount_buy;
-    protected $currency;
-    protected $payable;
-    protected $margin;
+    public $display;
+    public $display_description;
+    public $is_optional;
+    public $amount;
+    public $amount_buy;
+    public $currency;
+    public $payable;
+    public $margin_operator;
+    public $margin_broker;
     public $uid;
     
     public function setDisplay($display)
@@ -605,27 +606,38 @@ class ItemHolds
         $this->payable = $payable;
     }
 
-    public function setMargin($margin = true)
+    public function setMarginOperator($type = 'percent', $amount, $onTop = true)
     {
-        $this->margin = $margin;
+        $this->margin_operator = array(
+            $type => $amount,
+            'included' => $onTop
+        );
+    }
+
+    public function setMarginBroker($type = 'percent', $amount, $onTop = true)
+    {
+        $this->margin_broker = array(
+            $type => $amount,
+            'included' => $onTop
+        );
     }
 }
 
 class Calculation
 {
-    protected $pax_holds;
-    protected $id_conditions;
-    protected $amount;
-    protected $amount_buy;
-    protected $currency;
-    protected $exchange;
-    protected $option;
-    protected $display;
-    protected $display_description;
-    protected $consultant_notice;
-    protected $margin_operator;
-    protected $margin_broker;
-    protected $calculations_holds;
+    public $pax_holds;
+    public $id_conditions;
+    public $amount;
+    public $amount_buy;
+    public $currency;
+    public $exchange;
+    public $option;
+    public $display;
+    public $display_description;
+    public $consultant_notice;
+    public $margin_operator;
+    public $margin_broker;
+    public $calculations_holds;
     public $uid;
     
     public function __construct()
@@ -687,19 +699,19 @@ class Calculation
         $this->consultant_notice = $consultantNotice;
     }
 
-    public function setMarginOperator($type = 'percent', $amount, $included = true)
+    public function setMarginOperator($type = 'percent', $amount, $onTop = true)
     {
         $this->margin_operator = array(
             $type => $amount,
-            'included' => $included
+            'included' => $onTop
         );
     }
 
-    public function setMarginBroker($type = 'percent', $amount, $included = true)
+    public function setMarginBroker($type = 'percent', $amount, $onTop = true)
     {
-        $this->margin_operator = array(
+        $this->margin_broker = array(
             $type => $amount,
-            'included' => $included
+            'included' => $onTop
         );
     }
 
@@ -711,13 +723,13 @@ class Calculation
 
 class CalculationHolds
 {
-    protected $display;
-    protected $display_description;
-    protected $payable;
-    protected $amount;
-    protected $currency;
-    protected $margin;
-    protected $included;
+    public $display;
+    public $display_description;
+    public $payable;
+    public $amount;
+    public $currency;
+    public $margin;
+    public $included;
     public $uid;
 
 

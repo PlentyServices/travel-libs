@@ -5,7 +5,6 @@ require_once ('resource/ReservationObjects.php');
 
 class Reservation
 {
-    protected $error;
     protected $contractor;
     protected $passengers;
     protected $billing_contact;
@@ -26,37 +25,41 @@ class Reservation
 
     public function setGeneralParameters($params)
     {
-        $this->general = $params;
+        $this->general = (array) $params;
     }
 
     public function setContractor($contractor)
     {
-        $this->contractor = $contractor;
+        $this->contractor = (array) $contractor;
+        if($this->contractor['is_passenger'])
+            $this->addPassenger($contractor);
+        return $contractor->uid;
     }
 
     public function setBillingContact($billingContact)
     {
-        $this->billing_contact = $billingContact;
+        $this->billing_contact = (array) $billingContact;
     }
 
     public function addItem($item)
     {
-        $this->items[] = $item;
+        $this->items[$item->uid] = (array) $item;
+        unset($this->items[$item->uid]['uid']);
+        return $item->uid;
     }
 
     public function addCalculation($calculation)
     {
-        $this->calculations[] = $calculation;
+        $this->calculations[$calculation->uid] = (array) $calculation;
+        unset ($this->calculations[$calculation->uid]['uid']);
+        return $calculation->uid;
     }
 
     public function addPassenger($passenger)
     {
-        $this->passengers[] = $passenger;
-    }
-
-    public function addPaxToCalculation($pax, $calculation)
-    {
-        
+        $this->passengers[$passenger->uid] = (array) $passenger;
+        unset($this->passengers[$passenger->uid]['uid']);
+        return $passenger->uid;
     }
     
     public function addToCart($item, $passengerCalculation = array(), $quantity = 1)
@@ -68,5 +71,9 @@ class Reservation
         );
     }
 
+    public function serialize()
+    {
+        return $this;
+    }
 
 }

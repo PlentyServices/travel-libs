@@ -30,8 +30,10 @@ $contractor->setContractorNotice('Freitext Bemerkung vom Reiseanmelder');
 $contractor->setEmail('badboy77@heromail.com');
 $contractor->setPhone('0123456');
 $contractor->isPassenger();
+$contractor->addTag('driver');
+$contractor->addId('drivers-license', 'DE123435678490');
 
-$reservation->setContractor($contractor);
+$pax1 = $reservation->setContractor($contractor);
 
 $billing = new BillingContact();
 
@@ -50,8 +52,10 @@ $passenger = new Passenger();
 $passenger->setFirstName('John');
 $passenger->setLastName('Doe');
 $passenger->setGender('male');
+$passenger->addTag('driver');
+$passenger->addId('drivers-license', 'DE123435678491');
 
-$reservation->addPassenger($passenger);
+$pax2 = $reservation->addPassenger($passenger);
 
 $item = new Item();
 
@@ -68,9 +72,45 @@ $itemHolds->setPayable();
 $itemHolds->setCurrency('eur');
 $itemHolds->setAmount(40);
 $itemHolds->isOptional();
-$itemHolds->setMargin(false);
 
 $item->addItemHolds($itemHolds);
 
-$reservation->addItem($item);
+$item1 = $reservation->addItem($item);
+
+$item = new Item();
+
+$item->setProductAlias('JUCAU_CASA6');
+$item->setDepartDate('2016-10-01');
+$item->setArriveDate('2016-10-14');
+$item->isOptional();
+
+$item2 = $reservation->addItem($item);
+
+$calculation = new Calculation();
+
+$calculation->setCurrency('aud');
+$calculation->setExchange(0.86);
+$calculation->setAmountBuy(50);
+$calculation->setDisplay('Basis Paket');
+$calculation->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
+$calculation->setIdCondition('driver', 'drivers-license');
+$calculation->setMarginOperator('percent', 8);
+$calculation->setMarginBroker('percent', 3);
+
+$reservation->addToCart($item1, array(
+        $pax1 => $calculation,
+        $pax2 => $calculation
+    )
+);
+
+$reservation->addToCart($item2, array(
+        $pax1 => $calculation,
+        $pax2 => $calculation
+    )
+);
+
+print_r($reservation->serialize());
+
+
+
 
