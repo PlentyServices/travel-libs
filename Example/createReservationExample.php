@@ -12,6 +12,7 @@ $general->setOperator('alacampa');
 $general->setBroker('service');
 $general->setLocale('de');
 $general->setTransactionType('direct');
+$general->setTravelType('camper');
 $general->setCurrency('eur');
 $general->setIpReferred('127.0.0.1');
 
