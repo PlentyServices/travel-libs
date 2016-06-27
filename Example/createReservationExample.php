@@ -96,6 +96,7 @@ $calculation = new Calculation();
 $calculation->setCurrency('aud');
 $calculation->setExchange(0.86);
 $calculation->setAmountBuy(50);
+$calculation->setPaxHolds(2);
 $calculation->setDisplay('Basis Paket');
 $calculation->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
 $calculation->setIdCondition('driver', 'drivers-license');
