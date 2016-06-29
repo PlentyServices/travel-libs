@@ -693,11 +693,17 @@ class Calculation
         $this->uid = uniqid();
         $this->id_conditions = array();
         $this->calculations_holds = array();
+        $this->tag_conditions = array();
     }
 
-    public function setPaxHolds($paxHolds)
+    public function setPaxHolds($maxPax)
     {
-        $this->pax_holds = $paxHolds;
+        $this->pax_holds = $maxPax;
+    }
+
+    public function setTagCondition($tag, $paxMax)
+    {
+        $this->tag_conditions[$tag] = $paxMax;
     }
 
     public function setIdCondition($tag, $idName)
