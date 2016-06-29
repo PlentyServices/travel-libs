@@ -101,9 +101,26 @@ $calculation->setDisplay('Basis Paket');
 $calculation->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
 $calculation->setIdCondition('driver', 'drivers-license');
 $calculation->setMarginOperator('percent', 8);
+$calculation->setMarginPeer('percent', 1);
 $calculation->setMarginBroker('percent', 3);
 
 $calc1 = $reservation->addCalculation($calculation);
+
+
+$calculation = new Calculation();
+
+$calculation->setCurrency('aud');
+$calculation->setExchange(0.86);
+$calculation->setAmountBuy(50);
+$calculation->setPaxHolds(2);
+$calculation->setDisplay('Basis Paket');
+$calculation->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
+$calculation->setIdCondition('driver', 'drivers-license');
+$calculation->setMarginOperator('percent', 8);
+$calculation->setMarginPeer('percent', 1);
+$calculation->setMarginBroker('percent', 3);
+
+$calc2 = $reservation->addCalculation($calculation);
 
 $reservation->addToCart($item1, array(
         $pax1 => $calc1,
@@ -112,8 +129,8 @@ $reservation->addToCart($item1, array(
 );
 
 $reservation->addToCart($item2, array(
-        $pax1 => $calc1,
-        $pax2 => $calc1
+        $pax1 => $calc2,
+        $pax2 => $calc2
     )
 );
 

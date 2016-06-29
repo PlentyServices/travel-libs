@@ -599,6 +599,7 @@ class ItemHolds
     public $currency;
     public $payable;
     public $margin_operator;
+    public $margin_peer;
     public $margin_broker;
     public $uid;
     
@@ -646,6 +647,14 @@ class ItemHolds
         );
     }
 
+    public function setMarginPeer($type = 'percent', $amount, $onTop = true)
+    {
+        $this->margin_peer = array(
+            $type => $amount,
+            'included' => $onTop
+        );
+    }
+
     public function setMarginBroker($type = 'percent', $amount, $onTop = true)
     {
         $this->margin_broker = array(
@@ -668,6 +677,7 @@ class Calculation
     public $display_description;
     public $consultant_notice;
     public $margin_operator;
+    public $margin_peer;
     public $margin_broker;
     public $calculations_holds;
     public $uid;
@@ -676,8 +686,6 @@ class Calculation
     {
         $this->uid = uniqid();
         $this->id_conditions = array();
-        $this->margin_broker = array();
-        $this->margin_operator = array();
         $this->calculations_holds = array();
     }
 
@@ -734,6 +742,14 @@ class Calculation
     public function setMarginOperator($type = 'percent', $amount, $onTop = true)
     {
         $this->margin_operator = array(
+            $type => $amount,
+            'included' => $onTop
+        );
+    }
+
+    public function setMarginPeer($type = 'percent', $amount, $onTop = true)
+    {
+        $this->margin_peer = array(
             $type => $amount,
             'included' => $onTop
         );
