@@ -12,7 +12,7 @@ class TravelApiRequest
     protected $userAuth;
     protected $userContext;
 
-    public function __construct($action, $parameters = array(), $userContext = false, $userAuth = false)
+    public function __construct($action = false, $parameters = array(), $userContext = false, $userAuth = false)
     {
         $this->apiKey = '58E66190-BDDD-42EA-8D8F-D3BFBD05B91A';
         $this->apiEndpoint = 'https://travel.plenty.services';
@@ -22,8 +22,6 @@ class TravelApiRequest
         $this->response = false;
         $this->userAuth = $userAuth;
         $this->userContext = $userContext;
-
-        $this->apiRequest();
     }
     
     /* Set API key */
@@ -36,6 +34,33 @@ class TravelApiRequest
     public function setApiEndpoint($endpoint)
     {
         $this->apiEndpoint = $endpoint;
+    }
+    
+    /* Set Action */
+    public function setAction($action)
+    {
+        $this->action = $action;
+    }
+
+    /* Set Parameters */
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
+    }
+    
+    /* Make User auth, obtain access key */
+    public function isUserAuth()
+    {
+        $this->userAuth = true;
+    }
+
+    /* Set User context */
+    public function setUserContext($accessKey, $authority)
+    {
+        $this->userContext = array(
+            'access_key' => $accessKey,
+            'authority' => $authority
+        );
     }
     
     /* Get Error */
@@ -57,7 +82,7 @@ class TravelApiRequest
     }
 
     /* API Request */
-    protected function apiRequest()
+    public function request()
     {
 
         if ($this->userAuth && key_exists('user', $this->parameters) && key_exists('password', $this->parameters) && key_exists('corporate', $this->parameters)) {

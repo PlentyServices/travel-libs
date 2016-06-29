@@ -29,6 +29,11 @@ class General
 
     /**
      * @var string
+     */
+    public $peer;
+
+    /**
+     * @var string
      * @Assert\NotBlank(message = "operator: touroperator" groups={"booking", "request"})
      */
     public $operator;
@@ -105,6 +110,11 @@ class General
     public function setBroker($broker)
     {
         $this->broker = $broker;
+    }
+
+    public function setPeer($peer)
+    {
+        $this->peer = $peer;
     }
 
     public function setOperator($operator)
@@ -606,6 +616,8 @@ class ItemHolds
     {
         $this->uid = uniqid();
         $this->display = $display;
+        $this->setAmount();
+        $this->setPayable();
     }
 
     public function setDisplayDescription($displayDescription)
@@ -613,7 +625,7 @@ class ItemHolds
         $this->display_description = $displayDescription;
     }
 
-    public function setAmount($amount)
+    public function setAmount($amount = 0)
     {
         $this->amount = $amount;
     }
