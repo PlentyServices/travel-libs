@@ -593,7 +593,6 @@ class ItemHolds
 {
     public $display;
     public $display_description;
-    public $is_optional;
     public $amount;
     public $amount_buy;
     public $currency;
@@ -612,11 +611,6 @@ class ItemHolds
     public function setDisplayDescription($displayDescription)
     {
         $this->display_description = $displayDescription;
-    }
-
-    public function isOptional($isOptional = true)
-    {
-        $this->is_optional = $isOptional;
     }
 
     public function setAmount($amount)
@@ -639,27 +633,27 @@ class ItemHolds
         $this->payable = $payable;
     }
 
-    public function setMarginOperator($type = 'percent', $amount, $onTop = true)
+    public function setMarginOperator($type = 'percent', $amount, $include = true)
     {
         $this->margin_operator = array(
             $type => $amount,
-            'included' => $onTop
+            'included' => $include
         );
     }
 
-    public function setMarginPeer($type = 'percent', $amount, $onTop = true)
+    public function setMarginPeer($type = 'percent', $amount, $include = true)
     {
         $this->margin_peer = array(
             $type => $amount,
-            'included' => $onTop
+            'included' => $include
         );
     }
 
-    public function setMarginBroker($type = 'percent', $amount, $onTop = true)
+    public function setMarginBroker($type = 'percent', $amount, $include = true)
     {
         $this->margin_broker = array(
             $type => $amount,
-            'included' => $onTop
+            'included' => $include
         );
     }
 }
@@ -739,27 +733,27 @@ class Calculation
         $this->consultant_notice = $consultantNotice;
     }
 
-    public function setMarginOperator($type = 'percent', $amount, $onTop = true)
+    public function setMarginOperator($type = 'percent', $amount, $include = true)
     {
         $this->margin_operator = array(
             $type => $amount,
-            'included' => $onTop
+            'included' => $include
         );
     }
 
-    public function setMarginPeer($type = 'percent', $amount, $onTop = true)
+    public function setMarginPeer($type = 'percent', $amount, $include = true)
     {
         $this->margin_peer = array(
             $type => $amount,
-            'included' => $onTop
+            'included' => $include
         );
     }
 
-    public function setMarginBroker($type = 'percent', $amount, $onTop = true)
+    public function setMarginBroker($type = 'percent', $amount, $include = true)
     {
         $this->margin_broker = array(
             $type => $amount,
-            'included' => $onTop
+            'included' => $include
         );
     }
 

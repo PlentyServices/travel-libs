@@ -74,7 +74,6 @@ $itemHolds->setDisplayDescription('Der Stuhl unter den Stühlen');
 $itemHolds->setPayable();
 $itemHolds->setCurrency('eur');
 $itemHolds->setAmount(40);
-$itemHolds->isOptional();
 
 $item->addItemHolds($itemHolds);
 
