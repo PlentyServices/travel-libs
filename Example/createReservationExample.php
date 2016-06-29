@@ -99,7 +99,7 @@ $calculation->setAmountBuy(50); //endpreis wird berechnet, ansonsten setAmount()
 $calculation->setPaxHolds(2); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
 $calculation->setDisplay('Basis Paket');
 $calculation->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
-$calculation->setIdCondition('driver', 'drivers-license'); //pax muss tag driver haben und die id drivers-license
+$calculation->setIdCondition('driver', 'drivers-license'); //pax mit tag driver muss id drivers-license vorweisen
 $calculation->setMarginOperator('percent', 8, true); //percent oder fixed, amount, include=true: marge wird auf ek angewendet und ist basis für weitere kalkulation, include=false: ek wird nicht verändert marge wird am ende addiert
 $calculation->setMarginPeer('percent', 1); //Bsp. AER
 $calculation->setMarginBroker('percent', 3); //Vermittler/Reisebüro
