@@ -12,7 +12,6 @@ class Reservation
     protected $calculations;
     protected $general;
     protected $cart;
-    protected $reservation;
 
     public function __construct()
     {

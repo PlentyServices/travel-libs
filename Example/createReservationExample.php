@@ -125,7 +125,7 @@ $calc2 = $reservation->addCalculation($calculation);
 $reservation->addToCart($item1, array( //nicht nötig wenn nur ein item und eine kalkulation vorhanden
         $pax1 => $calc1, //pax uid zugeordnet mit kalkulations uid
         $pax2 => $calc1
-    ,1) //plus optionaler parameter für quantity, default 1
+    ), 1 //plus optionaler parameter für quantity, default 1
 );
 
 $reservation->addToCart($item2, array(
