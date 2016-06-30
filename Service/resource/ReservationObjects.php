@@ -606,6 +606,7 @@ class ItemHolds
     public $amount;
     public $amount_buy;
     public $currency;
+    public $exchange;
     public $payable;
     public $margin_operator;
     public $margin_peer;
@@ -633,6 +634,11 @@ class ItemHolds
     public function setAmountBuy($amount)
     {
         $this->amount_buy = $amount;
+    }
+
+    public function setExchange($exchange)
+    {
+        $this->exchange = $exchange;
     }
 
     public function setCurrency($currency)
