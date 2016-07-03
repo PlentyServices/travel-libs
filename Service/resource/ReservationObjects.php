@@ -129,7 +129,7 @@ class General
 
     public function setTravelType($travelType)
     {
-        $this->transaction_type= $travelType;
+        $this->travel_type= $travelType;
     }
 
     public function setTravelSubType($travelSubType)
