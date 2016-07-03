@@ -5,13 +5,13 @@ require_once ('resource/ReservationObjects.php');
 
 class Reservation
 {
-    protected $contractor;
-    protected $passengers;
-    protected $billing_contact;
-    protected $items;
-    protected $calculations;
-    protected $general;
-    protected $cart;
+    public $contractor;
+    public $passengers;
+    public $billing_contact;
+    public $items;
+    public $calculations;
+    public $general;
+    public $cart;
 
     public function __construct()
     {

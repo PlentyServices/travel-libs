@@ -134,7 +134,9 @@ $reservation->addToCart($item2, array(
     )
 );
 
-print_r($ro = $reservation->serialize());
+$ro = $reservation->serialize();
+
+print_r(json_encode($ro));
 
 /* MAKE REQUEST
 
