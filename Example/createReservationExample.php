@@ -92,7 +92,7 @@ $product2 = $reservation->addProduct($product);
 
 $fare = new Fare();
 
-$chairs = new Service(); //zusatzleistung und inkludierte leistungen
+$chairs = new Service(); //zusatzleistung oder auch inkludierte leistung
 
 $chairs->setDisplay('4 Campingstühle');
 $chairs->setAmount(0); //default 0 => inklusive
