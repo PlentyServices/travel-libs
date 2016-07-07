@@ -59,78 +59,84 @@ $passenger->addId('drivers-license', 'DE123435678491');
 
 $pax2 = $reservation->addPassenger($passenger);
 
-$item = new Item();
+$product = new Product();
 
-$item->setProductAlias('JUCNZ_CASA6'); //camper 2.0 kodierung
-$item->setDepartPlaceAlias('SYD1'); //camper 2.0 kodierung, depot oder city
-$item->setDepartDate('2016-10-01'); //pickup
-$item->setArrivePlaceAlias('Syd1'); //drop
-$item->setArriveDate('2016-10-14');
-$item->isOptional(); //nur möglich bei status 'request'
+$product->setProductAlias('JUCNZ_CASA6'); //camper 2.0 kodierung
+$product->setDepartPlaceAlias('SYD1'); //camper 2.0 kodierung, depot oder city
+$product->setDepartDate('2016-10-01'); //pickup
+$product->setArrivePlaceAlias('Syd1'); //drop
+$product->setArriveDate('2016-10-14');
+$product->isOptional(); //nur möglich bei status 'request'
 
-$itemHolds = new ItemHolds(); //child item oder zusatzgebühr pro produkt
+$charge = new Charge(); //Gebühr
 
-$itemHolds->setDisplay('Stuhl');
-$itemHolds->setDisplayDescription('Der Stuhl unter den Stühlen');
-$itemHolds->setPayable('on_arrival'); //default ist on_booking, on_arrrival wird nicht berechnet
-$itemHolds->setCurrency('eur');
-$itemHolds->setAmount(40); //default 0 => inklusive
+$charge->setDisplay('Einweggebühr');
+$charge->setPayable('on_arrival'); //default ist on_booking, on_arrival wird nicht berechnet
+$charge->setCurrency('aud');
+$charge->setAmount(40);
 
-$item->addItemHolds($itemHolds); //child items haben nur eine kalkulationsvariante und sind deshalb im item
+$product->addCharge($charge);
 
-$item1 = $reservation->addItem($item);
+$product1 = $reservation->addProduct($product);
 
-$item = new Item();
+$product = new Product();
 
-$item->setProductAlias('JUCAU_CASA6');
-$item->setDepartPlaceAlias('SYD1');
-$item->setDepartDate('2016-10-01');
-$item->setArrivePlaceAlias('Syd1');
-$item->setArriveDate('2016-10-14');
-$item->isOptional();
+$product->setProductAlias('JUCAU_CASA6');
+$product->setDepartPlaceAlias('SYD1');
+$product->setDepartDate('2016-10-01');
+$product->setArrivePlaceAlias('Syd1');
+$product->setArriveDate('2016-10-14');
+$product->isOptional();
 
-$item2 = $reservation->addItem($item);
+$product2 = $reservation->addProduct($product);
 
-$calculation = new Calculation();
+$fare = new Fare();
 
-$calculation->setCurrency('aud'); //einkaufswährung, default = general currency, NICHT BEI setAmount()!!!
-$calculation->setExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
-$calculation->setAmountBuy(50); //endpreis wird berechnet, ansonsten setAmount()
-$calculation->setPaxHolds(2); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
-$calculation->setDisplay('Basis Paket');
-$calculation->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
-$calculation->setIdCondition('driver', 'drivers-license'); //pax mit tag driver muss id drivers-license vorweisen
-$calculation->setMarginOperator('percent', 8, true); //percent oder fixed, amount, include=true: marge wird auf ek angewendet und ist basis für weitere kalkulation, include=false: ek wird nicht verändert marge wird am ende addiert
-$calculation->setMarginPeer('percent', 1); //Bsp. AER
-$calculation->setMarginBroker('percent', 3); //Vermittler/Reisebüro
+$chairs = new Service(); //zusatzleistung und inkludierte leistungen
 
-$calc1 = $reservation->addCalculation($calculation);
+$chairs->setDisplay('4 Campingstühle');
+$chairs->setAmount(0); //default 0 => inklusive
+
+$fare->addService($chairs); //bei diesem tarif sind 4 campingstühle inkludiert
+
+$fare->setCurrency('aud'); //einkaufswährung, default = general currency, NICHT BEI setAmount()!!!
+$fare->setExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
+$fare->setCost(50); //endpreis wird berechnet, ansonsten setAmount()
+$fare->setPaxHolds(2); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
+$fare->setDisplay('Basis Paket');
+$fare->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
+$fare->setIdCondition('driver', 'drivers-license'); //pax mit tag driver muss id drivers-license vorweisen
+$fare->setMarginOperatorAmount(80); //percent oder fixed, amount, include=true: marge wird auf ek angewendet und ist basis für weitere kalkulation, include=false: ek wird nicht verändert marge wird am ende addiert
+$fare->setMarginPeerAmount(10); //Bsp. AER
+$fare->setMarginBrokerAmount(30); //Vermittler/Reisebüro
+
+$fare1 = $reservation->addFare($fare);
 
 
-$calculation = new Calculation();
+$fare = new Fare();
 
-$calculation->setCurrency('aud');
-$calculation->setExchange(0.86);
-$calculation->setAmountBuy(50);
-$calculation->setPaxHolds(2);
-$calculation->setDisplay('Basis Paket');
-$calculation->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
-$calculation->setIdCondition('driver', 'drivers-license');
-$calculation->setMarginOperator('percent', 8);
-$calculation->setMarginPeer('percent', 1);
-$calculation->setMarginBroker('percent', 3);
+$fare->setCurrency('aud');
+$fare->setExchange(0.86);
+$fare->setCost(50);
+$fare->setPaxHolds(2);
+$fare->setDisplay('Basis Paket');
+$fare->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
+$fare->setIdCondition('driver', 'drivers-license');
+$fare->setMarginOperatorAmount(80);
+$fare->setMarginPeerAmount(10);
+$fare->setMarginBrokerAmount(30);
 
-$calc2 = $reservation->addCalculation($calculation);
+$fare2 = $reservation->addFare($fare);
 
-$reservation->addToCart($item1, array( //nicht nötig wenn nur ein item und eine kalkulation vorhanden
-        $pax1 => $calc1, //pax uid zugeordnet mit kalkulations uid
-        $pax2 => $calc1
+$reservation->addAllocation($product1, array( //nicht nötig wenn nur ein product und eine fare vorhanden
+        $pax1 => $fare1, //pax uid zu fare uid
+        $pax2 => $fare1
     ), 1 //plus optionaler parameter für quantity, default 1
 );
 
-$reservation->addToCart($item2, array(
-        $pax1 => $calc2,
-        $pax2 => $calc2
+$reservation->addAllocation($product2, array(
+        $pax1 => $fare2,
+        $pax2 => $fare2
     )
 );
 

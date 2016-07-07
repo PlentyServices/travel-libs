@@ -474,7 +474,7 @@ class Passenger
     }
 }
 
-class Item
+class Product
 {
     public $vendor_alias;
     public $vendor_id;
@@ -494,13 +494,17 @@ class Item
     public $arrive_time;
     public $consultant_notice;
     public $is_optional;
-    public $items_holds;
+    public $services;
+    public $tax;
+    public $charges;
     public $uid;
 
     public function __construct()
     {
         $this->uid = uniqid();
-        $this->items_holds = array();
+        $this->services = array();
+        $this->tax = array();
+        $this->charges = array();
     }
 
     public function setVendorAlias($vendorAlias)
@@ -593,113 +597,55 @@ class Item
         $this->is_optional = $isOptional;
     }
 
-    public function addItemHolds($itemHolds)
+    public function addService($service)
     {
-        $this->items_holds[] = (array) $itemHolds;
+        $this->services[] = (array) $service;
+    }
+
+    public function addTax($tax)
+    {
+        $this->tax[] = (array) $tax;
+    }
+
+    public function addCharge($charge)
+    {
+        $this->charges[] = (array) $charge;
     }
 }
 
-class ItemHolds
-{
-    public $display;
-    public $display_description;
-    public $amount;
-    public $amount_buy;
-    public $currency;
-    public $exchange;
-    public $payable;
-    public $margin_operator;
-    public $margin_peer;
-    public $margin_broker;
-    public $uid;
-    
-    public function setDisplay($display)
-    {
-        $this->uid = uniqid();
-        $this->display = $display;
-        $this->setAmount();
-        $this->setPayable();
-    }
 
-    public function setDisplayDescription($displayDescription)
-    {
-        $this->display_description = $displayDescription;
-    }
 
-    public function setAmount($amount = 0)
-    {
-        $this->amount = $amount;
-    }
-
-    public function setAmountBuy($amount)
-    {
-        $this->amount_buy = $amount;
-    }
-
-    public function setExchange($exchange)
-    {
-        $this->exchange = $exchange;
-    }
-
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-    }
-
-    public function setPayable($payable = 'on_booking')
-    {
-        $this->payable = $payable;
-    }
-
-    public function setMarginOperator($type = 'percent', $amount, $include = true)
-    {
-        $this->margin_operator = array(
-            $type => $amount,
-            'included' => $include
-        );
-    }
-
-    public function setMarginPeer($type = 'percent', $amount, $include = true)
-    {
-        $this->margin_peer = array(
-            $type => $amount,
-            'included' => $include
-        );
-    }
-
-    public function setMarginBroker($type = 'percent', $amount, $include = true)
-    {
-        $this->margin_broker = array(
-            $type => $amount,
-            'included' => $include
-        );
-    }
-}
-
-class Calculation
+class Fare
 {
     public $pax_holds;
     public $id_conditions;
     public $amount;
-    public $amount_buy;
+    public $cost;
     public $currency;
     public $exchange;
     public $option;
     public $display;
     public $display_description;
     public $consultant_notice;
-    public $margin_operator;
-    public $margin_peer;
-    public $margin_broker;
-    public $calculations_holds;
+    public $margin_operator_percentage;
+    public $margin_peer_percentage;
+    public $margin_broker_percentage;
+    public $margin_operator_amount;
+    public $margin_peer_amount;
+    public $margin_broker_amount;
+    public $services;
+    public $tax;
+    public $charges;
     public $uid;
     
     public function __construct()
     {
         $this->uid = uniqid();
         $this->id_conditions = array();
-        $this->calculations_holds = array();
         $this->tag_conditions = array();
+        $this->services = array();
+        $this->tax = array();
+        $this->charges = array();
     }
 
     public function setPaxHolds($maxPax)
@@ -722,9 +668,9 @@ class Calculation
         $this->amount = $amount;
     }
 
-    public function setAmountBuy($amountBuy)
+    public function setCost($cost)
     {
-        $this->amount_buy = $amountBuy;
+        $this->cost = $cost;
     }
 
     public function setCurrency($currency)
@@ -757,45 +703,146 @@ class Calculation
         $this->consultant_notice = $consultantNotice;
     }
 
-    public function setMarginOperator($type = 'percent', $amount, $include = true)
+    public function setMarginOperatorPercentage($percentage)
     {
-        $this->margin_operator = array(
-            $type => $amount,
-            'included' => $include
-        );
+        $this->margin_operator_percentage = $percentage;
     }
 
-    public function setMarginPeer($type = 'percent', $amount, $include = true)
+    public function setMarginOperatorAmount($amount)
     {
-        $this->margin_peer = array(
-            $type => $amount,
-            'included' => $include
-        );
+        $this->margin_operator_amount = $amount;
     }
 
-    public function setMarginBroker($type = 'percent', $amount, $include = true)
+    public function setMarginPeerPercentage($percentage)
     {
-        $this->margin_broker = array(
-            $type => $amount,
-            'included' => $include
-        );
+        $this->margin_peer_percentage = $percentage;
     }
 
-    public function addCalculationHolds($calculationHolds)
+    public function setMarginPeerAmount($amount)
     {
-        $this->calculations_holds = (array) $calculationHolds;
+        $this->margin_peer_amount = $amount;
+    }
+
+    public function setMarginBrokerPercentage($percentage)
+    {
+        $this->margin_broker_percentage = $percentage;
+    }
+
+    public function setMarginBrokerAmount($amount)
+    {
+        $this->margin_broker_amount = $amount;
+    }
+
+    public function addService($service)
+    {
+        $this->services[] = (array) $service;
+    }
+
+    public function addTax($tax)
+    {
+        $this->tax[] = (array) $tax;
+    }
+
+    public function addCharge($charge)
+    {
+        $this->charges[] = (array) $charge;
     }
 }
 
-class CalculationHolds
+
+class Service
+{
+    public $display;
+    public $display_description;
+    public $amount;
+    public $cost;
+    public $currency;
+    public $exchange;
+    public $payable;
+    public $margin_operator_percentage;
+    public $margin_peer_percentage;
+    public $margin_broker_percentage;
+    public $margin_operator_amount;
+    public $margin_peer_amount;
+    public $margin_broker_amount;
+    public $uid;
+
+    public function setDisplay($display)
+    {
+        $this->uid = uniqid();
+        $this->display = $display;
+        $this->setAmount();
+        $this->setPayable();
+    }
+
+    public function setDisplayDescription($displayDescription)
+    {
+        $this->display_description = $displayDescription;
+    }
+
+    public function setAmount($amount = 0)
+    {
+        $this->amount = $amount;
+    }
+
+    public function setCost($cost = 0)
+    {
+        $this->cost = $cost;
+    }
+
+    public function setExchange($exchange)
+    {
+        $this->exchange = $exchange;
+    }
+
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+    }
+
+    public function setPayable($payable = 'on_booking')
+    {
+        $this->payable = $payable;
+    }
+
+    public function setMarginOperatorPercentage($percentage)
+    {
+        $this->margin_operator_percentage = $percentage;
+    }
+
+    public function setMarginOperatorAmount($amount)
+    {
+        $this->margin_operator_amount = $amount;
+    }
+
+    public function setMarginPeerPercentage($percentage)
+    {
+        $this->margin_peer_percentage = $percentage;
+    }
+
+    public function setMarginPeerAmount($amount)
+    {
+        $this->margin_peer_amount = $amount;
+    }
+
+    public function setMarginBrokerPercentage($percentage)
+    {
+        $this->margin_broker_percentage = $percentage;
+    }
+
+    public function setMarginBrokerAmount($amount)
+    {
+        $this->margin_broker_amount = $amount;
+    }
+}
+
+class Tax
 {
     public $display;
     public $display_description;
     public $payable;
     public $amount;
     public $currency;
-    public $margin;
-    public $included;
     public $uid;
 
 
@@ -824,14 +871,41 @@ class CalculationHolds
     {
         $this->currency = $currency;
     }
+}
 
-    public function setMargin($margin)
+class Charge
+{
+    public $display;
+    public $display_description;
+    public $payable;
+    public $amount;
+    public $currency;
+    public $uid;
+
+
+    public function setDisplay($display)
     {
-        $this->margin = $margin;
+        $this->uid = uniqid();
+        $this->display = $display;
     }
 
-    public function setIncluded($included = true)
+    public function setDisplayDescription($displayDescription)
     {
-        $this->included = $included;
+        $this->display_description = $displayDescription;
+    }
+
+    public function setPayable($payable)
+    {
+        $this->payable = $payable;
+    }
+
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+    }
+
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 }

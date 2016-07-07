@@ -5,20 +5,19 @@ require_once ('resource/ReservationObjects.php');
 
 class Reservation
 {
+    public $general;
     public $contractor;
     public $passengers;
     public $billing_contact;
-    public $items;
-    public $calculations;
-    public $general;
-    public $cart;
+    public $products;
+    public $fares;
+    public $allocation;
 
     public function __construct()
     {
-        $this->items = array();
-        $this->calculations = array();
+        $this->fares = array();
         $this->passengers = array();
-        $this->cart = array();
+        $this->allocation = array();
     }
 
 
@@ -40,33 +39,33 @@ class Reservation
         $this->billing_contact = (array) $billingContact;
     }
 
-    public function addItem($item)
-    {
-        $this->items[$item->uid] = (array) $item;
-        unset($this->items[$item->uid]['uid']);
-        return $item->uid;
-    }
-
-    public function addCalculation($calculation)
-    {
-        $this->calculations[$calculation->uid] = (array) $calculation;
-        unset ($this->calculations[$calculation->uid]['uid']);
-        return $calculation->uid;
-    }
-
     public function addPassenger($passenger)
     {
         $this->passengers[$passenger->uid] = (array) $passenger;
         unset($this->passengers[$passenger->uid]['uid']);
         return $passenger->uid;
     }
-    
-    public function addToCart($item, $passengerCalculation = array(), $quantity = 1)
+
+    public function addProduct($product)
     {
-        $this->cart[] = array(
-            'item' => $item,
+        $this->products[$product->uid] = (array) $product;
+        unset($this->products[$product->uid]['uid']);
+        return $product->uid;
+    }
+
+    public function addFare($fare)
+    {
+        $this->fares[$fare->uid] = (array) $fare;
+        unset ($this->fares[$fare->uid]['uid']);
+        return $fare->uid;
+    }
+    
+    public function addAllocation($product, $fares = array(), $quantity = 1)
+    {
+        $this->allocation[] = array(
+            'product' => $product,
             'quantity' => $quantity,
-            'passenger_calculation' => $passengerCalculation
+            'fares' => $fares
         );
     }
 
