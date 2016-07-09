@@ -645,7 +645,7 @@ class Fare
     public $margin_broker_amount;
     public $services;
     public $tax;
-    public $charges;
+    public $surcharges;
     public $uid;
     
     public function __construct()
@@ -655,7 +655,7 @@ class Fare
         $this->tag_conditions = array();
         $this->services = array();
         $this->tax = array();
-        $this->charges = array();
+        $this->surcharges = array();
     }
 
     public function setPaxHolds($maxPax)
@@ -763,9 +763,9 @@ class Fare
         $this->tax[] = (array) $tax;
     }
 
-    public function addCharge($charge)
+    public function addSurcharge($surcharge)
     {
-        $this->charges[] = (array) $charge;
+        $this->surcharges[] = (array) $surcharge;
     }
 }
 
@@ -905,7 +905,7 @@ class Tax
     }
 }
 
-class Charge
+class Surcharge
 {
     public $display;
     public $display_description;
