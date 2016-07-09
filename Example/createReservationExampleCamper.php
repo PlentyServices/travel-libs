@@ -129,9 +129,9 @@ $fare->setMarginBrokerAmount(30);
 $fare2 = $reservation->addFare($fare);
 
 $reservation->addAllocation($product1, array( //nicht nötig wenn nur ein product und eine fare vorhanden
-        $pax1 => $fare1, //pax uid zu fare uid
-        $pax2 => $fare1
-    ), 1 //plus optionaler parameter für quantity, default 1
+    $pax1 => $fare1, //pax uid zu fare uid
+    $pax2 => $fare1
+), 1 //plus optionaler parameter für quantity, default 1
 );
 
 $reservation->addAllocation($product2, array(

@@ -90,8 +90,16 @@ class General
      */
     public $consultant_notice;
 
-    
-    
+    public function __construct()
+    {
+        $this->setStatus();
+        $this->setSystem();
+        $this->setLocale();
+        $this->setTransactionType();
+        $this->setCurrency();
+        $this->setPaymentType();
+    }
+
     public function setStatus($status = 'request')
     {
         $this->status = $status;
@@ -771,6 +779,8 @@ class Service
     public $currency;
     public $exchange;
     public $payable;
+    public $markup_operator_percentage;
+    public $markup_operator_amount;
     public $margin_operator_percentage;
     public $margin_peer_percentage;
     public $margin_broker_percentage;
@@ -815,6 +825,16 @@ class Service
     public function setPayable($payable = 'on_booking')
     {
         $this->payable = $payable;
+    }
+
+    public function setMarkupOperatorPercentage($percentage)
+    {
+        $this->markup_operator_percentage = $percentage;
+    }
+
+    public function setMarkupOperatorAmount($amount)
+    {
+        $this->markup_operator_amount = $amount;
     }
 
     public function setMarginOperatorPercentage($percentage)
