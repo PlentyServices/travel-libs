@@ -627,6 +627,8 @@ class Fare
     public $display;
     public $display_description;
     public $consultant_notice;
+    public $markup_operator_percentage;
+    public $markup_operator_amount;
     public $margin_operator_percentage;
     public $margin_peer_percentage;
     public $margin_broker_percentage;
@@ -701,6 +703,16 @@ class Fare
     public function setConsultantNotice($consultantNotice)
     {
         $this->consultant_notice = $consultantNotice;
+    }
+
+    public function setMarkupOperatorPercentage($percentage)
+    {
+        $this->markup_operator_percentage = $percentage;
+    }
+
+    public function setMarkupOperatorAmount($amount)
+    {
+        $this->markup_operator_amount = $amount;
     }
 
     public function setMarginOperatorPercentage($percentage)
