@@ -504,7 +504,7 @@ class Product
     public $is_optional;
     public $services;
     public $tax;
-    public $charges;
+    public $surcharges;
     public $uid;
 
     public function __construct()
@@ -512,7 +512,7 @@ class Product
         $this->uid = uniqid();
         $this->services = array();
         $this->tax = array();
-        $this->charges = array();
+        $this->surcharges = array();
     }
 
     public function setVendorAlias($vendorAlias)
@@ -615,9 +615,9 @@ class Product
         $this->tax[] = (array) $tax;
     }
 
-    public function addCharge($charge)
+    public function addSurcharge($surcharge)
     {
-        $this->charges[] = (array) $charge;
+        $this->surcharges[] = (array) $surcharge;
     }
 }
 
