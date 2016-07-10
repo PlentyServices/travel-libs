@@ -46,9 +46,9 @@ $pax2 = $reservation->addPassenger($passenger);
 $product = new Product();
 
 $product->setDisplay('Queensland Rail: Brisbane - Harvey Bay');
-$product->setDepartPlace('bne');
+$product->setDepartPlaceAlias('bne');
 $product->setDepartDate('2016-10-01');
-$product->setArrivePlace('hvb');
+$product->setArrivePlaceAlias('hvb');
 $product->setArriveDate('2016-10-14');
 
 $product1 = $reservation->addProduct($product);
