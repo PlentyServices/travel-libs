@@ -68,7 +68,7 @@ $product->setArrivePlaceAlias('Syd1'); //drop
 $product->setArriveDate('2016-10-14');
 $product->isOptional(); //nur möglich bei status 'request'
 
-$charge = new Charge(); //Gebühr
+$charge = new Surcharge(); //Gebühr
 
 $charge->setDisplay('Einweggebühr');
 $charge->setPayable('on_arrival'); //default ist on_booking, on_arrival wird nicht berechnet
