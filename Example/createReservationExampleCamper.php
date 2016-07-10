@@ -75,7 +75,7 @@ $charge->setPayable('on_arrival'); //default ist on_booking, on_arrival wird nic
 $charge->setCurrency('aud');
 $charge->setAmount(40);
 
-$product->addCharge($charge);
+$product->addSurcharge($charge);
 
 $product1 = $reservation->addProduct($product);
 
