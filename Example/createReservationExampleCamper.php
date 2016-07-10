@@ -16,6 +16,8 @@ $general->setTransactionType('business'); //business => b2b, direct => b2c
 $general->setTravelType('camper');
 $general->setCurrency('eur'); //vk
 $general->setIpReferred('127.0.0.1');
+$general->setPaymentType('credit-card');
+$general->setPaymentSurchargePercentage(2); //kreditkartengebühr
 
 $reservation->setGeneralParameters($general);
 

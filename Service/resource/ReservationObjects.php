@@ -76,7 +76,13 @@ class General
      * @var string
      * @Assert\NotBlank(message = "currency: selling currency" groups={"booking"})
      */
-    public $payment_fee;
+    public $payment_surcharge_amount;
+
+    /**
+     * @var string
+     * @Assert\NotBlank(message = "currency: selling currency" groups={"booking"})
+     */
+    public $payment_surcharge_percentage;
 
     /**
      * @var string
@@ -160,9 +166,14 @@ class General
         $this->payment_type = $paymentType;
     }
 
-    public function setPaymentFee($paymentFee)
+    public function setPaymentSurchargeAmount($paymentFee)
     {
-        $this->payment_fee = $paymentFee;
+        $this->payment_surcharge_amount = $paymentFee;
+    }
+
+    public function setPaymentSurchargePercentage($paymentFee)
+    {
+        $this->payment_surcharge_percentage = $paymentFee;
     }
 
     public function setIpReferred($ipReferred)
