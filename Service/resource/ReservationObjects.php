@@ -647,6 +647,7 @@ class Fare
     public $cost;
     public $currency;
     public $exchange;
+    public $pretty_pricing;
     public $display;
     public $display_description;
     public $consultant_notice;
@@ -772,6 +773,11 @@ class Fare
     {
         $this->services[] = (array) $service;
     }
+    
+    public function prettyPrice()
+    {
+        $this->pretty_pricing = true;
+    }
 
     public function addTax($tax)
     {
@@ -793,6 +799,7 @@ class Service
     public $cost;
     public $currency;
     public $exchange;
+    public $pretty_pricing;
     public $payable;
     public $markup_operator_percentage;
     public $markup_operator_amount;
@@ -880,6 +887,11 @@ class Service
     public function setMarginBrokerAmount($amount)
     {
         $this->margin_broker_amount = $amount;
+    }
+
+    public function prettyPrice()
+    {
+        $this->pretty_pricing = true;
     }
 }
 
