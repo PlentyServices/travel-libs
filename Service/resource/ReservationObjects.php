@@ -512,7 +512,7 @@ class Product
     public $arrive_date;
     public $arrive_time;
     public $consultant_notice;
-    public $is_optional;
+    public $status;
     public $services;
     public $tax;
     public $surcharges;
@@ -611,9 +611,14 @@ class Product
         $this->consultant_notice = $consultantNotice;
     }
 
-    public function isOptional($isOptional = false)
+    public function isOptional()
     {
-        $this->is_optional = $isOptional;
+        $this->status = 'option';
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 
     public function addService($service)
@@ -642,7 +647,6 @@ class Fare
     public $cost;
     public $currency;
     public $exchange;
-    public $option;
     public $display;
     public $display_description;
     public $consultant_notice;
