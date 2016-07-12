@@ -202,6 +202,7 @@ class Contractor
     public $email;
     public $state;
     public $country;
+    public $company;
     public $nationality;
     public $contractor_notice;
     public $tags;
@@ -274,6 +275,11 @@ class Contractor
     public function setCountry($country)
     {
         $this->country = $country;
+    }
+
+    public function setCompany($company)
+    {
+        $this->company = $company;
     }
 
     public function setNationality($nationality)
@@ -399,6 +405,7 @@ class Passenger
     public $email;
     public $state;
     public $country;
+    public $company;
     public $nationality;
     public $contractor_notice;
     public $tags;
@@ -470,6 +477,11 @@ class Passenger
     public function setCountry($country)
     {
         $this->country = $country;
+    }
+
+    public function setCompany($company)
+    {
+        $this->company = $company;
     }
 
     public function setNationality($nationality)
