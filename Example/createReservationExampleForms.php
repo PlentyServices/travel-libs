@@ -12,6 +12,7 @@ $general->setBroker('service');
 $general->setTravelType('rail');
 $general->setCurrency('eur'); //vk
 $general->setIpReferred('127.0.0.1');
+$general->addConsultantNotice('Freitext Bemerkung vom Reiseanmelder');
 
 $reservation->setGeneralParameters($general);
 
@@ -24,7 +25,6 @@ $contractor->setDateOfBirth('1921-07-02');
 $contractor->setPostal('12345');
 $contractor->setCity('Smallville');
 $contractor->setStreet('Batman Str. 123');
-$contractor->setContractorNotice('Freitext Bemerkung vom Reiseanmelder');
 $contractor->setEmail('badboy77@heromail.com');
 $contractor->setPhone('0123456');
 $contractor->isPassenger();

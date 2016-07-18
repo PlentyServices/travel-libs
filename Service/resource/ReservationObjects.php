@@ -96,6 +96,8 @@ class General
      */
     public $consultant_notice;
 
+    public $contractor_notice;
+
     public function __construct()
     {
         $this->setStatus();
@@ -104,6 +106,8 @@ class General
         $this->setTransactionType();
         $this->setCurrency();
         $this->setPaymentType();
+        $this->consultant_notice = array();
+        $this->contractor_notice = array();
     }
 
     public function setStatus($status = 'request')
@@ -181,9 +185,14 @@ class General
         $this->ip_referred = $ipReferred;
     }
 
-    public function setConsultantNotice($consultantNotice)
+    public function addConsultantNotice($consultantNotice)
     {
-        $this->consultant_notice = $consultantNotice;
+        $this->consultant_notice[] = $consultantNotice;
+    }
+
+    public function addContractorNotice($contractorNotice)
+    {
+        $this->contractor_notice[] = $contractorNotice;
     }
 
 }
@@ -204,7 +213,6 @@ class Contractor
     public $country;
     public $company;
     public $nationality;
-    public $contractor_notice;
     public $tags;
     public $ids;
     public $is_passenger;
@@ -285,11 +293,6 @@ class Contractor
     public function setNationality($nationality)
     {
         $this->nationality = $nationality;
-    }
-
-    public function setContractorNotice($contractorNotice)
-    {
-        $this->contractor_notice = $contractorNotice;
     }
 
     public function addTag($tag)
@@ -407,7 +410,7 @@ class Passenger
     public $country;
     public $company;
     public $nationality;
-    public $contractor_notice;
+    public $consultant_notice;
     public $tags;
     public $passport;
     public $uid;
@@ -417,6 +420,7 @@ class Passenger
         $this->uid = uniqid();
         $this->tags = array();
         $this->ids = array();
+        $this->consultant_notice = array();
     }
 
     public function setLastName($lastName)
@@ -489,9 +493,9 @@ class Passenger
         $this->nationality = $nationality;
     }
 
-    public function setContractorNotice($contractorNotice)
+    public function addConsultantNotice($consultantNotice)
     {
-        $this->contractor_notice = $contractorNotice;
+        $this->consultant_notice[] = $consultantNotice;
     }
 
     public function addTag($tag)
@@ -524,6 +528,7 @@ class Product
     public $arrive_date;
     public $arrive_time;
     public $consultant_notice;
+    public $contractor_notice;
     public $status;
     public $services;
     public $tax;
@@ -536,6 +541,8 @@ class Product
         $this->services = array();
         $this->tax = array();
         $this->surcharges = array();
+        $this->consultant_notice = array();
+        $this->contractor_notice = array();
     }
 
     public function setVendorAlias($vendorAlias)
@@ -618,9 +625,14 @@ class Product
         $this->arrive_time = $arriveTime;
     }
 
-    public function setConsultantNotice($consultantNotice)
+    public function addConsultantNotice($consultantNotice)
     {
-        $this->consultant_notice = $consultantNotice;
+        $this->consultant_notice[] = $consultantNotice;
+    }
+
+    public function addContractorNotice($contractorNotice)
+    {
+        $this->contractor_notice[] = $contractorNotice;
     }
 
     public function isOptional()
@@ -663,6 +675,7 @@ class Fare
     public $display;
     public $display_description;
     public $consultant_notice;
+    public $contractor_notice;
     public $markup_operator_percentage;
     public $markup_operator_amount;
     public $margin_operator_percentage;
@@ -684,6 +697,8 @@ class Fare
         $this->services = array();
         $this->tax = array();
         $this->surcharges = array();
+        $this->consultant_notice = array();
+        $this->contractor_notice = array();
     }
 
     public function setPaxHolds($maxPax)
@@ -736,9 +751,14 @@ class Fare
         $this->display_description = $displayDescription;
     }
 
-    public function setConsultantNotice($consultantNotice)
+    public function addConsultantNotice($consultantNotice)
     {
-        $this->consultant_notice = $consultantNotice;
+        $this->consultant_notice[] = $consultantNotice;
+    }
+
+    public function addContractorNotice($contractorNotice)
+    {
+        $this->contractor_notice[] = $contractorNotice;
     }
 
     public function setMarkupOperatorPercentage($percentage)
