@@ -665,6 +665,7 @@ class Product
 
 class Fare
 {
+    public $fare_alias;
     public $pax_holds;
     public $id_conditions;
     public $amount;
@@ -699,6 +700,11 @@ class Fare
         $this->surcharges = array();
         $this->consultant_notice = array();
         $this->contractor_notice = array();
+    }
+
+    public function setFareAlias($fareAlias)
+    {
+        $this->fare_alias = $fareAlias;
     }
 
     public function setPaxHolds($maxPax)
@@ -825,6 +831,7 @@ class Fare
 
 class Service
 {
+    public $service_alias;
     public $display;
     public $display_description;
     public $amount;
@@ -842,6 +849,11 @@ class Service
     public $margin_peer_amount;
     public $margin_broker_amount;
     public $uid;
+
+    public function setServiceAlias($serviceAlias)
+    {
+        $this->service_alias = $serviceAlias;
+    }
 
     public function setDisplay($display)
     {
