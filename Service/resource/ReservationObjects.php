@@ -3,99 +3,22 @@
 
 class General
 {
-
-    /**
-     * @var string
-     * @Assert\Choice(choices = {"request", "booking"}, message = "status: request or booking" groups={"booking", "request"})
-     */
     public $status;
-
-    /**
-     * @var string
-     * @Assert\Choice(choices = {"travel", "camper"}, message = "system: context" groups={"booking", "request"})
-     */
     public $system;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message = "locale: en, de.." groups={"booking", "request"})
-     */
     public $locale;
-
-    /**
-     * @var string
-     */
     public $broker;
-
-    /**
-     * @var string
-     */
     public $peer;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message = "operator: touroperator" groups={"booking", "request"})
-     */
     public $operator;
-
-    /**
-     * @var string
-     */
     public $travel_type;
-
-    /**
-     * @var string
-     */
     public $travel_type_sub;
-
-    /**
-     * @var string
-     * @Assert\Choice(choices = {"direct", "business"}, message = "transaction_type: b2c => 'direct', b2b => 'business'" groups={"booking", "request"})
-     */
     public $transaction_type;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message = "display: head title" groups={"booking", "request"})
-     */
     public $display;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message = "currency: selling currency" groups={"booking", "request"})
-     */
     public $currency;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message = "currency: selling currency" groups={"booking"})
-     */
     public $payment_type;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message = "currency: selling currency" groups={"booking"})
-     */
     public $payment_surcharge_amount;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message = "currency: selling currency" groups={"booking"})
-     */
     public $payment_surcharge_percentage;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message = "currency: selling currency" groups={"booking", "request"})
-     */
     public $ip_referred;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message = "currency: selling currency" groups={"booking", "request"})
-     */
     public $consultant_notice;
-
     public $contractor_notice;
 
     public function __construct()
@@ -530,9 +453,7 @@ class Product
     public $consultant_notice;
     public $contractor_notice;
     public $status;
-    public $services;
-    public $tax;
-    public $surcharges;
+    public $charges;
     public $uid;
 
     public function __construct()
@@ -645,19 +566,9 @@ class Product
         $this->status = $status;
     }
 
-    public function addService($service)
+    public function addCharge($charge)
     {
-        $this->services[] = (array) $service;
-    }
-
-    public function addTax($tax)
-    {
-        $this->tax[] = (array) $tax;
-    }
-
-    public function addSurcharge($surcharge)
-    {
-        $this->surcharges[] = (array) $surcharge;
+        $this->charges[] = (array) $charge;
     }
 }
 
@@ -665,29 +576,31 @@ class Product
 
 class Fare
 {
-    public $fare_alias;
+    public $fare_base;
+    public $discount_id;
     public $pax_holds;
     public $id_conditions;
-    public $amount;
-    public $cost;
-    public $currency;
-    public $exchange;
-    public $pretty_pricing;
+    public $retail_price;
+    public $retail_exchange;
+    public $purchase_nett;
+    public $purchase_gross;
+    public $purchase_currency;
+    public $purchase_commission_percentage;
+    public $purchase_commission_amount;
+    public $calc_from_gross;
+    public $round_retail_price;
     public $display;
     public $display_description;
     public $consultant_notice;
     public $contractor_notice;
-    public $markup_operator_percentage;
-    public $markup_operator_amount;
-    public $margin_operator_percentage;
-    public $margin_peer_percentage;
-    public $margin_broker_percentage;
-    public $margin_operator_amount;
-    public $margin_peer_amount;
-    public $margin_broker_amount;
-    public $services;
-    public $tax;
-    public $surcharges;
+    public $markup_percentage;
+    public $markup_amount;
+    public $margin_percentage;
+    public $commission_peer_percentage;
+    public $commission_peer_amount;
+    public $commission_broker_percentage;
+    public $commission_broker_amount;
+    public $charges;
     public $uid;
     
     public function __construct()
@@ -700,11 +613,17 @@ class Fare
         $this->surcharges = array();
         $this->consultant_notice = array();
         $this->contractor_notice = array();
+        $this->round_retail_price = true;
     }
 
-    public function setFareAlias($fareAlias)
+    public function setFareBase($fareBase)
     {
-        $this->fare_alias = $fareAlias;
+        $this->fare_base = $fareBase;
+    }
+
+    public function setDiscountId($discountId)
+    {
+        $this->discount_id = $discountId;
     }
 
     public function setPaxHolds($maxPax)
@@ -722,29 +641,35 @@ class Fare
         $this->id_conditions[$tag] = $idName;
     }
 
-    public function setAmount($amount)
+    public function calcFromGross()
     {
-        $this->amount = $amount;
+        $this->calc_from_gross = true;
     }
 
-    public function setCost($cost)
+    public function roundRetailPrice($bool = true)
     {
-        $this->cost = $cost;
+        $this->round_retail_price = $bool;
     }
 
-    public function setCurrency($currency)
+    public function setPurchase($cost, $currency, $commission = false)
     {
-        $this->currency = $currency;
+        if($commission)
+        {
+            $this->purchase_commission_percentage = $commission;
+            $this->purchase_commission_amount = $cost * $commission / 100;
+            $this->purchase_nett = $cost * (100 - $commission) / 100;
+            $this->purchase_gross = $cost;
+        } else {
+            $this->purchase_nett = $cost;
+        }
+
+        $this->purchase_currency = $currency;
     }
 
-    public function setExchange($exchange)
-    {
-        $this->exchange = $exchange;
-    }
 
-    public function setOption($option)
+    public function setRetailExchange($exchange)
     {
-        $this->option = $option;
+        $this->retail_exchange = $exchange;
     }
 
     public function setDisplay($display)
@@ -767,100 +692,98 @@ class Fare
         $this->contractor_notice[] = $contractorNotice;
     }
 
-    public function setMarkupOperatorPercentage($percentage)
+    public function setMarkupPercentage($percentage)
     {
-        $this->markup_operator_percentage = $percentage;
+        $this->markup_percentage = $percentage;
     }
 
-    public function setMarkupOperatorAmount($amount)
+    public function setMarkupAmount($amount)
     {
-        $this->markup_operator_amount = $amount;
+        $this->markup_amount = $amount;
     }
 
-    public function setMarginOperatorPercentage($percentage)
+    public function setMarginPercentage($percentage)
     {
-        $this->margin_operator_percentage = $percentage;
+        $this->margin_percentage = $percentage;
     }
 
-    public function setMarginOperatorAmount($amount)
+    public function setCommissionPeerPercentage($percentage)
     {
-        $this->margin_operator_amount = $amount;
+        $this->commission_peer_percentage = $percentage;
     }
 
-    public function setMarginPeerPercentage($percentage)
+    public function setCommissionPeerAmount($amount)
     {
-        $this->margin_peer_percentage = $percentage;
+        $this->commission_peer_amount = $amount;
     }
 
-    public function setMarginPeerAmount($amount)
+    public function setCommissionBrokerPercentage($percentage)
     {
-        $this->margin_peer_amount = $amount;
+        $this->commission_broker_percentage = $percentage;
     }
 
-    public function setMarginBrokerPercentage($percentage)
+    public function setCommissionBrokerAmount($amount)
     {
-        $this->margin_broker_percentage = $percentage;
+        $this->commission_broker_amount = $amount;
     }
 
-    public function setMarginBrokerAmount($amount)
+    public function addCharge($charge)
     {
-        $this->margin_broker_amount = $amount;
+        $this->charges[] = (array) $charge;
     }
 
-    public function addService($service)
-    {
-        $this->services[] = (array) $service;
-    }
-    
-    public function prettyPrice()
-    {
-        $this->pretty_pricing = true;
-    }
-
-    public function addTax($tax)
-    {
-        $this->tax[] = (array) $tax;
-    }
-
-    public function addSurcharge($surcharge)
-    {
-        $this->surcharges[] = (array) $surcharge;
-    }
 }
 
 
-class Service
+class Charge
 {
-    public $service_alias;
+    public $charge_type;
     public $display;
     public $display_description;
-    public $amount;
-    public $cost;
-    public $currency;
-    public $exchange;
-    public $pretty_pricing;
+    public $retail_price;
+    public $retail_exchange;
+    public $purchase_nett;
+    public $purchase_gross;
+    public $purchase_currency;
+    public $purchase_commission_percentage;
+    public $purchase_commission_amount;
+    public $calc_from_gross;
+    public $round_retail_price;
     public $payable;
-    public $markup_operator_percentage;
-    public $markup_operator_amount;
-    public $margin_operator_percentage;
-    public $margin_peer_percentage;
-    public $margin_broker_percentage;
-    public $margin_operator_amount;
-    public $margin_peer_amount;
-    public $margin_broker_amount;
+    public $markup_percentage;
+    public $markup_amount;
+    public $margin_percentage;
+    public $commission_peer_percentage;
+    public $commission_peer_amount;
+    public $commission_broker_percentage;
+    public $commission_broker_amount;
     public $uid;
 
-    public function setServiceAlias($serviceAlias)
+    public function setChargeType($chargeType)
     {
-        $this->service_alias = $serviceAlias;
+        switch ($chargeType)
+        {
+            case 'tax':
+                $this->charge_type = 'tax';
+                break;
+            case 'surcharge':
+                $this->charge_type = 'surcharge';
+                break;
+            case 'service':
+                $this->charge_type = 'service';
+                break;
+            case 'item':
+                $this->charge_type = 'item';
+                break;
+        }
     }
 
     public function setDisplay($display)
     {
         $this->uid = uniqid();
         $this->display = $display;
-        $this->setAmount();
         $this->setPayable();
+        $this->round_retail_price = true;
     }
 
     public function setDisplayDescription($displayDescription)
@@ -868,24 +791,35 @@ class Service
         $this->display_description = $displayDescription;
     }
 
-    public function setAmount($amount = 0)
+    public function setPurchase($cost, $currency, $commission = false)
     {
-        $this->amount = $amount;
+        if($commission)
+        {
+            $this->purchase_commission_percentage = $commission;
+            $this->purchase_commission_amount = $cost * $commission / 100;
+            $this->purchase_nett = $cost * (100 - $commission) / 100;
+            $this->purchase_gross = $cost;
+        } else {
+            $this->purchase_nett = $cost;
+        }
+
+        $this->purchase_currency = $currency;
     }
 
-    public function setCost($cost = 0)
+
+    public function setRetailExchange($exchange)
     {
-        $this->cost = $cost;
+        $this->retail_exchange = $exchange;
     }
 
-    public function setExchange($exchange)
+    public function calcFromGross()
     {
-        $this->exchange = $exchange;
+        $this->calc_from_gross = true;
     }
 
-    public function setCurrency($currency)
+    public function roundRetailPrice($bool = true)
     {
-        $this->currency = $currency;
+        $this->round_retail_price = $bool;
     }
 
     public function setPayable($payable = 'on_booking')
@@ -893,122 +827,39 @@ class Service
         $this->payable = $payable;
     }
 
-    public function setMarkupOperatorPercentage($percentage)
+    public function setMarkupPercentage($percentage)
     {
-        $this->markup_operator_percentage = $percentage;
+        $this->markup_percentage = $percentage;
     }
 
-    public function setMarkupOperatorAmount($amount)
+    public function setMarkupAmount($amount)
     {
-        $this->markup_operator_amount = $amount;
+        $this->markup_amount = $amount;
     }
 
-    public function setMarginOperatorPercentage($percentage)
+    public function setMarginPercentage($percentage)
     {
-        $this->margin_operator_percentage = $percentage;
+        $this->margin_percentage = $percentage;
     }
 
-    public function setMarginOperatorAmount($amount)
+    public function setCommissionPeerPercentage($percentage)
     {
-        $this->margin_operator_amount = $amount;
+        $this->commission_peer_percentage = $percentage;
     }
 
-    public function setMarginPeerPercentage($percentage)
+    public function setCommissionPeerAmount($amount)
     {
-        $this->margin_peer_percentage = $percentage;
+        $this->commission_peer_amount = $amount;
     }
 
-    public function setMarginPeerAmount($amount)
+    public function setCommissionBrokerPercentage($percentage)
     {
-        $this->margin_peer_amount = $amount;
+        $this->commission_broker_percentage = $percentage;
     }
 
-    public function setMarginBrokerPercentage($percentage)
+    public function setCommissionBrokerAmount($amount)
     {
-        $this->margin_broker_percentage = $percentage;
+        $this->commission_broker_amount = $amount;
     }
 
-    public function setMarginBrokerAmount($amount)
-    {
-        $this->margin_broker_amount = $amount;
-    }
-
-    public function prettyPrice()
-    {
-        $this->pretty_pricing = true;
-    }
-}
-
-class Tax
-{
-    public $display;
-    public $display_description;
-    public $payable;
-    public $amount;
-    public $currency;
-    public $uid;
-
-
-    public function setDisplay($display)
-    {
-        $this->uid = uniqid();
-        $this->display = $display;
-    }
-
-    public function setDisplayDescription($displayDescription)
-    {
-        $this->display_description = $displayDescription;
-    }
-
-    public function setPayable($payable)
-    {
-        $this->payable = $payable;
-    }
-
-    public function setAmount($amount)
-    {
-        $this->amount = $amount;
-    }
-
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-    }
-}
-
-class Surcharge
-{
-    public $display;
-    public $display_description;
-    public $payable;
-    public $amount;
-    public $currency;
-    public $uid;
-
-
-    public function setDisplay($display)
-    {
-        $this->uid = uniqid();
-        $this->display = $display;
-    }
-
-    public function setDisplayDescription($displayDescription)
-    {
-        $this->display_description = $displayDescription;
-    }
-
-    public function setPayable($payable)
-    {
-        $this->payable = $payable;
-    }
-
-    public function setAmount($amount)
-    {
-        $this->amount = $amount;
-    }
-
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-    }
 }

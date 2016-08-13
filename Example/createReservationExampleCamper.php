@@ -70,14 +70,13 @@ $product->setArrivePlaceAlias('Syd1'); //drop
 $product->setArriveDate('2016-10-14');
 $product->isOptional(); //nur möglich bei status 'request'
 
-$charge = new Surcharge(); //Gebühr
+$charge = new Charge(); //surcharge, tax, item, service
 
 $charge->setDisplay('Einweggebühr');
 $charge->setPayable('on_arrival'); //default ist on_booking, on_arrival wird nicht berechnet
-$charge->setCurrency('aud');
-$charge->setAmount(40);
+$charge->setPurchase(40,'aud');
 
-$product->addSurcharge($charge);
+$product->addCharge($charge);
 
 $product1 = $reservation->addProduct($product);
 
@@ -94,39 +93,37 @@ $product2 = $reservation->addProduct($product);
 
 $fare = new Fare();
 
-$chairs = new Service(); //zusatzleistung oder auch inkludierte leistung
+$chairs = new Charge(); //zusatzleistung oder auch inkludierte leistung
 
 $chairs->setDisplay('4 Campingstühle');
-$chairs->setAmount(0); //default 0 => inklusive
+$chairs->setPurchase(0,'nuc'); //inklusive
 
-$fare->addService($chairs); //bei diesem tarif sind 4 campingstühle inkludiert
+$fare->addCharge($chairs); //bei diesem tarif sind 4 campingstühle inkludiert
 
-$fare->setCurrency('aud'); //einkaufswährung, default = general currency, NICHT BEI setAmount()!!!
-$fare->setExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
-$fare->setCost(50); //endpreis wird berechnet, ansonsten setAmount()
+$fare->setRetailExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
+$fare->setPurchase(50,'aud');
 $fare->setPaxHolds(2); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
 $fare->setDisplay('Basis Paket');
 $fare->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
 $fare->setIdCondition('driver', 'drivers-license'); //pax mit tag driver muss id drivers-license vorweisen
-$fare->setMarginOperatorAmount(80); //percent oder fixed, amount, include=true: marge wird auf ek angewendet und ist basis für weitere kalkulation, include=false: ek wird nicht verändert marge wird am ende addiert
-$fare->setMarginPeerAmount(10); //Bsp. AER
-$fare->setMarginBrokerAmount(30); //Vermittler/Reisebüro
+$fare->setMarkupAmount(80); //alacampa
+$fare->setCommissionPeerAmount(10); //Bsp. AER
+$fare->setCommissionBrokerAmount(30); //Vermittler/Reisebüro
 
 $fare1 = $reservation->addFare($fare);
 
 
 $fare = new Fare();
 
-$fare->setCurrency('aud');
-$fare->setExchange(0.86);
-$fare->setCost(50);
+$fare->setPurchase(50,'aud');
+$fare->setRetailExchange(0.86);
 $fare->setPaxHolds(2);
 $fare->setDisplay('Basis Paket');
 $fare->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
 $fare->setIdCondition('driver', 'drivers-license');
-$fare->setMarginOperatorAmount(80);
-$fare->setMarginPeerAmount(10);
-$fare->setMarginBrokerAmount(30);
+$fare->setMarkupAmount(80);
+$fare->setCommissionPeerAmount(10);
+$fare->setCommissionBrokerAmount(30);
 
 $fare2 = $reservation->addFare($fare);
 

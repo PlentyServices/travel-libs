@@ -55,14 +55,14 @@ $product1 = $reservation->addProduct($product);
 
 $fare = new Fare();
 
-$fare->setCurrency('aud'); //einkaufswährung, default = general currency, NICHT BEI setAmount()!!!
-$fare->setExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
-$fare->setCost(73.2); //endpreis wird berechnet, ansonsten setAmount()
+$fare->setFareBase('sydbne');
+$fare->setPurchase(73.2,'aud',17);
+$fare->setRetailExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
 $fare->setPaxHolds(1); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
-$fare->prettyPrice(); //auf ganze beträge runden
 $fare->setDisplay('Economy Seat');
 $fare->setIdCondition('adult', 'passport'); //pax mit tag adult muss id passport vorweisen
-$fare->setMarkupOperatorPercentage(17); // 17% aufschlag
+$fare->setMarkupPercentage(17); //Aufschlagskalulation
+$fare->setCommissionBrokerPercentage(10); //10% Provision von Endpreis
 
 $fare1 = $reservation->addFare($fare);
 

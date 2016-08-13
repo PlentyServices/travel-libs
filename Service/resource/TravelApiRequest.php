@@ -75,6 +75,7 @@ class TravelApiRequest
         return $this->response;
     }
 
+    /* Set Error */
     private function setError($error)
     {
         $this->error = $error;
@@ -127,3 +128,4 @@ class TravelApiRequest
     }
 
 }
+
