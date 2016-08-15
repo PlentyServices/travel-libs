@@ -72,6 +72,7 @@ $product->isOptional(); //nur möglich bei status 'request'
 
 $charge = new Charge(); //surcharge, tax, item, service
 
+$charge->setChargeType('surcharge');
 $charge->setDisplay('Einweggebühr');
 $charge->setPayable('on_arrival'); //default ist on_booking, on_arrival wird nicht berechnet
 $charge->setPurchase(40,'aud');
@@ -95,6 +96,7 @@ $fare = new Fare();
 
 $chairs = new Charge(); //zusatzleistung oder auch inkludierte leistung
 
+$chairs->setChargeType('item');
 $chairs->setDisplay('4 Campingstühle');
 $chairs->setPurchase(0,'nuc'); //inklusive
 
