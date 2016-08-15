@@ -459,9 +459,7 @@ class Product
     public function __construct()
     {
         $this->uid = uniqid();
-        $this->services = array();
-        $this->tax = array();
-        $this->surcharges = array();
+        $this->charges = array();
         $this->consultant_notice = array();
         $this->contractor_notice = array();
     }
@@ -580,7 +578,6 @@ class Fare
     public $discount_id;
     public $pax_holds;
     public $id_conditions;
-    public $retail_price;
     public $retail_exchange;
     public $purchase_nett;
     public $purchase_gross;
@@ -608,9 +605,7 @@ class Fare
         $this->uid = uniqid();
         $this->id_conditions = array();
         $this->tag_conditions = array();
-        $this->services = array();
-        $this->tax = array();
-        $this->surcharges = array();
+        $this->charges = array();
         $this->consultant_notice = array();
         $this->contractor_notice = array();
         $this->round_retail_price = true;
@@ -740,7 +735,6 @@ class Charge
     public $charge_type;
     public $display;
     public $display_description;
-    public $retail_price;
     public $retail_exchange;
     public $purchase_nett;
     public $purchase_gross;
