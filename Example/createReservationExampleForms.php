@@ -45,7 +45,7 @@ $pax2 = $reservation->addPassenger($passenger);
 
 $product = new Product();
 
-$product->setDisplay('Queensland Rail: Brisbane - Harvey Bay');
+$product->setProductAlias('railaustralia');
 $product->setDepartPlaceAlias('bne');
 $product->setDepartDate('2016-10-01');
 $product->setArrivePlaceAlias('hvb');
@@ -56,13 +56,6 @@ $product1 = $reservation->addProduct($product);
 $fare = new Fare();
 
 $fare->setFareBase('sydbne');
-$fare->setPurchase(73.2,'aud',17);
-$fare->setRetailExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
-$fare->setPaxHolds(1); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
-$fare->setDisplay('Economy Seat');
-$fare->setIdCondition('adult', 'passport'); //pax mit tag adult muss id passport vorweisen
-$fare->setMarkupPercentage(17); //Aufschlagskalulation
-$fare->setCommissionBrokerPercentage(10); //10% Provision von Endpreis
 
 $fare1 = $reservation->addFare($fare);
 
