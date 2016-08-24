@@ -576,6 +576,7 @@ class Fare
 {
     public $farebase;
     public $discount;
+    public $pax_type;
     public $pax_holds;
     public $id_conditions;
     public $retail_exchange;
@@ -637,6 +638,11 @@ class Fare
     public function setPaxHolds($maxPax)
     {
         $this->pax_holds = $maxPax;
+    }
+
+    public function setPaxType($paxType)
+    {
+        $this->pax_type = $paxType;
     }
 
     public function setTagCondition($tag, $paxMax)

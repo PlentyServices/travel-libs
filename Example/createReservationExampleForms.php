@@ -46,10 +46,10 @@ $pax2 = $reservation->addPassenger($passenger);
 $product = new Product();
 
 $product->setProductAlias('xpt');
-$product->setDepartPlace('bne');
-$product->setDepartDate('2016-10-01');
-$product->setArrivePlace('syd');
-$product->setArriveDate('2016-10-14');
+$product->setDeparturePlace('bne');
+$product->setDepartureDate('2016-10-01');
+$product->setArrivalPlace('syd');
+$product->setArrivalDate('2016-10-14');
 
 $product1 = $reservation->addProduct($product);
 
