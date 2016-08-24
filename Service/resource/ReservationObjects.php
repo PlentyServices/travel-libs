@@ -442,14 +442,14 @@ class Product
     public $product_subtype;
     public $display;
     public $display_description;
-    public $depart_place;
-    public $depart_place_display;
-    public $depart_date;
-    public $depart_time;
-    public $arrive_place;
-    public $arrive_place_display;
-    public $arrive_date;
-    public $arrive_time;
+    public $departure_place;
+    public $departure_place_display;
+    public $departure_date;
+    public $departure_time;
+    public $arrival_place;
+    public $arrival_place_display;
+    public $arrival_date;
+    public $arrival_time;
     public $consultant_notice;
     public $contractor_notice;
     public $status;
@@ -504,44 +504,44 @@ class Product
         $this->display_description = $displayDescription;
     }
 
-    public function setDepartPlaceDisplay($departPlaceDisplay)
+    public function setDeparturePlaceDisplay($departurePlaceDisplay)
     {
-        $this->depart_place_display = $departPlaceDisplay;
+        $this->departure_place_display = $departurePlaceDisplay;
     }
     
-    public function setDepartPlace($departPlace)
+    public function setDeparturePlace($departurePlace)
     {
-        $this->depart_place = $departPlace;
+        $this->departure_place = $departurePlace;
     }
     
-    public function setDepartDate($departDate)
+    public function setDepartureDate($departureDate)
     {
-        $this->depart_date = $departDate;
+        $this->departure_date = $departureDate;
     }
 
-    public function setDepartTime($departTime)
+    public function setDepartureTime($departureTime)
     {
-        $this->depart_time = $departTime;
+        $this->departure_time = $departureTime;
     }
 
-    public function setArrivePlace($arrivePlace)
+    public function setArrivalPlace($arrivalPlace)
     {
-        $this->arrive_place = $arrivePlace;
+        $this->arrival_place = $arrivalPlace;
     }
 
-    public function setArrivePlaceDisplay($arrivePlaceDisplay)
+    public function setArrivalPlaceDisplay($arrivalPlaceDisplay)
     {
-        $this->arrive_place_display = $arrivePlaceDisplay;
+        $this->arrival_place_display = $arrivalPlaceDisplay;
     }
 
-    public function setArriveDate($arriveDate)
+    public function setArrivalDate($arrivalDate)
     {
-        $this->arrive_date = $arriveDate;
+        $this->arrival_date = $arrivalDate;
     }
 
-    public function setArriveTime($arriveTime)
+    public function setArrivalTime($arrivalTime)
     {
-        $this->arrive_time = $arriveTime;
+        $this->arrival_time = $arrivalTime;
     }
 
     public function addConsultantNotice($consultantNotice)
