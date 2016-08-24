@@ -45,17 +45,19 @@ $pax2 = $reservation->addPassenger($passenger);
 
 $product = new Product();
 
-$product->setProductAlias('railaustralia');
-$product->setDepartPlaceAlias('bne');
+$product->setProductAlias('xpt');
+$product->setDepartPlace('bne');
 $product->setDepartDate('2016-10-01');
-$product->setArrivePlaceAlias('hvb');
+$product->setArrivePlace('syd');
 $product->setArriveDate('2016-10-14');
 
 $product1 = $reservation->addProduct($product);
 
 $fare = new Fare();
 
-$fare->setFareBase('sydbne');
+$fare->setFarebase('sydbne');
+$fare->setServiceClass('daylight');
+$fare->setCabinClass('economy class seating');
 
 $fare1 = $reservation->addFare($fare);
 

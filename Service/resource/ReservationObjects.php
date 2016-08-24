@@ -443,11 +443,11 @@ class Product
     public $display;
     public $display_description;
     public $depart_place;
-    public $depart_place_alias;
+    public $depart_place_display;
     public $depart_date;
     public $depart_time;
     public $arrive_place;
-    public $arrive_place_alias;
+    public $arrive_place_display;
     public $arrive_date;
     public $arrive_time;
     public $consultant_notice;
@@ -504,9 +504,9 @@ class Product
         $this->display_description = $displayDescription;
     }
 
-    public function setDepartPlaceAlias($departPlaceAlias)
+    public function setDepartPlaceDisplay($departPlaceDisplay)
     {
-        $this->depart_place_alias = $departPlaceAlias;
+        $this->depart_place_display = $departPlaceDisplay;
     }
     
     public function setDepartPlace($departPlace)
@@ -529,9 +529,9 @@ class Product
         $this->arrive_place = $arrivePlace;
     }
 
-    public function setArrivePlaceAlias($arrivePlaceAlias)
+    public function setArrivePlaceDisplay($arrivePlaceDisplay)
     {
-        $this->arrive_place_alias = $arrivePlaceAlias;
+        $this->arrive_place_display = $arrivePlaceDisplay;
     }
 
     public function setArriveDate($arriveDate)
@@ -574,8 +574,8 @@ class Product
 
 class Fare
 {
-    public $fare_base;
-    public $discount_id;
+    public $farebase;
+    public $discount;
     public $pax_holds;
     public $id_conditions;
     public $retail_exchange;
@@ -598,6 +598,8 @@ class Fare
     public $commission_broker_percentage;
     public $commission_broker_amount;
     public $charges;
+    public $service_class;
+    public $cabin_class;
     public $uid;
     
     public function __construct()
@@ -611,14 +613,25 @@ class Fare
         $this->round_retail_price = true;
     }
 
-    public function setFareBase($fareBase)
+    public function setFarebase($farebase)
     {
-        $this->fare_base = $fareBase;
+        $this->farebase = $farebase;
+        $this->discount = null;
     }
 
-    public function setDiscountId($discountId)
+    public function setDiscount($discount)
     {
-        $this->discount_id = $discountId;
+        $this->discount = $discount;
+    }
+
+    public function setServiceClass($serviceClass)
+    {
+        $this->service_class = $serviceClass;
+    }
+
+    public function setCabinClass($cabinClass)
+    {
+        $this->cabin_class = $cabinClass;
     }
 
     public function setPaxHolds($maxPax)

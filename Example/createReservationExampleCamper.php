@@ -64,9 +64,9 @@ $pax2 = $reservation->addPassenger($passenger);
 $product = new Product();
 
 $product->setProductAlias('JUCNZ_CASA6'); //camper 2.0 kodierung
-$product->setDepartPlaceAlias('SYD1'); //camper 2.0 kodierung, depot oder city
+$product->setDepartPlace('SYD1'); //camper 2.0 kodierung, depot oder city
 $product->setDepartDate('2016-10-01'); //pickup
-$product->setArrivePlaceAlias('Syd1'); //drop
+$product->setArrivePlace('Syd1'); //drop
 $product->setArriveDate('2016-10-14');
 $product->isOptional(); //nur möglich bei status 'request'
 
@@ -84,9 +84,9 @@ $product1 = $reservation->addProduct($product);
 $product = new Product();
 
 $product->setProductAlias('JUCAU_CASA6');
-$product->setDepartPlaceAlias('SYD1');
+$product->setDepartPlace('SYD1');
 $product->setDepartDate('2016-10-01');
-$product->setArrivePlaceAlias('Syd1');
+$product->setArrivePlace('Syd1');
 $product->setArriveDate('2016-10-14');
 $product->isOptional();
 
