@@ -8,7 +8,7 @@ $general = new General();
 
 $general->setStatus('booking'); //request, booking
 $general->setOperator('hm-touristik');
-$general->setBroker('service');
+$general->setBroker('reisebine');
 $general->setTravelType('rail');
 $general->setCurrency('eur'); //vk
 $general->setIpReferred('127.0.0.1');
@@ -30,6 +30,7 @@ $contractor->setPhone('0123456');
 $contractor->isPassenger();
 $contractor->addTag('adult'); //tags für kalkulationsabhängigkeiten
 $contractor->addId('passport', 'DE123435678490');
+$contractor->addId('dob', '1991-07-02');
 
 $pax1 = $reservation->setContractor($contractor);
 
@@ -40,6 +41,7 @@ $passenger->setLastName('Doe');
 $passenger->setGender('male');
 $passenger->addTag('adult');
 $passenger->addId('passport', 'DE123435678491');
+$contractor->addId('dob', '1991-07-02');
 
 $pax2 = $reservation->addPassenger($passenger);
 
@@ -47,9 +49,8 @@ $product = new Product();
 
 $product->setProductAlias('xpt');
 $product->setDeparturePlace('bne');
-$product->setDepartureDate('2016-10-01');
 $product->setArrivalPlace('syd');
-$product->setArrivalDate('2016-10-14');
+$product->setDepartureDate('2017-02-12');
 
 $product1 = $reservation->addProduct($product);
 
@@ -58,6 +59,7 @@ $fare = new Fare();
 $fare->setFarebase('sydbne');
 $fare->setServiceClass('daylight');
 $fare->setCabinClass('economy class seating');
+$fare->setPaxType('adult');
 
 $fare1 = $reservation->addFare($fare);
 

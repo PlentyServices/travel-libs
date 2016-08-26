@@ -335,7 +335,7 @@ class Passenger
     public $nationality;
     public $consultant_notice;
     public $tags;
-    public $passport;
+    public $ids;
     public $uid;
 
     public function __construct()
