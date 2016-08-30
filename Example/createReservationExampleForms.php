@@ -41,7 +41,7 @@ $passenger->setLastName('Doe');
 $passenger->setGender('male');
 $passenger->addTag('adult');
 $passenger->addId('passport', 'DE123435678491');
-$contractor->addId('dob', '1991-07-02');
+$passenger->addId('dob', '1991-07-02');
 
 $pax2 = $reservation->addPassenger($passenger);
 
