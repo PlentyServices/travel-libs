@@ -56,10 +56,7 @@ $product1 = $reservation->addProduct($product);
 
 $fare = new Fare();
 
-$fare->setFarebase('sydbne');
-$fare->setServiceClass('daylight');
-$fare->setCabinClass('economy class seating');
-$fare->setPaxType('adult');
+$fare->setFareId(1);
 
 $fare1 = $reservation->addFare($fare);
 
