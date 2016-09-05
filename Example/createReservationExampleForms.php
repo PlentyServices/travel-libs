@@ -41,25 +41,22 @@ $passenger->setLastName('Doe');
 $passenger->setGender('male');
 $passenger->addTag('adult');
 $passenger->addId('passport', 'DE123435678491');
-$contractor->addId('dob', '1991-07-02');
+$passenger->addId('dob', '1991-07-02');
 
 $pax2 = $reservation->addPassenger($passenger);
 
 $product = new Product();
 
-$product->setProductAlias('xpt');
-$product->setDeparturePlace('bne');
-$product->setArrivalPlace('syd');
-$product->setDepartureDate('2017-02-12');
+$product->setProductAlias('the_ghan');
+$product->setDeparturePlace('asp');
+$product->setArrivalPlace('drw');
+$product->setDepartureDate('2017-03-13');
 
 $product1 = $reservation->addProduct($product);
 
 $fare = new Fare();
 
-$fare->setFarebase('sydbne');
-$fare->setServiceClass('daylight');
-$fare->setCabinClass('economy class seating');
-$fare->setPaxType('adult');
+$fare->setFareId(1);
 
 $fare1 = $reservation->addFare($fare);
 

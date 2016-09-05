@@ -574,6 +574,7 @@ class Product
 
 class Fare
 {
+    public $fare_id;
     public $farebase;
     public $discount;
     public $pax_type;
@@ -612,6 +613,11 @@ class Fare
         $this->consultant_notice = array();
         $this->contractor_notice = array();
         $this->round_retail_price = true;
+    }
+
+    public function setFareId($id)
+    {
+        $this->fare_id = $id;
     }
 
     public function setFarebase($farebase)
