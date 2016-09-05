@@ -86,8 +86,8 @@ class TravelApiRequest
     public function request()
     {
 
-        if ($this->userAuth && key_exists('user', $this->parameters) && key_exists('password', $this->parameters) && key_exists('corporate', $this->parameters)) {
-            $userAuth = '&user=' . $this->parameters['user'] . '&password=' . $this->parameters['password'] . '&profile=' . $this->parameters['corporate'];
+        if ($this->userAuth && key_exists('user', $this->parameters) && key_exists('password', $this->parameters) && key_exists('profile', $this->parameters)) {
+            $userAuth = '&user=' . $this->parameters['user'] . '&password=' . $this->parameters['password'] . '&profile=' . $this->parameters['profile'];
         }
 
         if (key_exists('password', $this->parameters)) unset($this->parameters['password']);
