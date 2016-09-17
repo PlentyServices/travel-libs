@@ -102,7 +102,7 @@ $chairs->setPurchase(0,'nuc'); //inklusive
 
 $fare->addCharge($chairs); //bei diesem tarif sind 4 campingstühle inkludiert
 
-$fare->setRetailExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
+$fare->setPurchaseExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
 $fare->setPurchase(50,'aud');
 $fare->setPaxHolds(2); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
 $fare->setDisplay('Basis Paket');

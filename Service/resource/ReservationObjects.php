@@ -728,6 +728,12 @@ class Fare
         $this->retail_exchange = $exchange;
     }
 
+    //retail exchange alias !!!muss im core noch geändert werden, damit fremdwährungen beim verkauf möglich sind!!!
+    public function setPurchaseExchange($exchange)
+    {
+        $this->retail_exchange = $exchange;
+    }
+
     public function setDisplay($display)
     {
         $this->display = $display;
