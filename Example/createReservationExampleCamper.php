@@ -84,10 +84,10 @@ $product1 = $reservation->addProduct($product);
 $product = new Product();
 
 $product->setProductAlias('JUCAU_CASA6');
-$product->setDeparturePlace('SYD1');
-$product->setDepartureDate('2016-10-01');
-$product->setArrivalPlace('Syd1');
-$product->setArrivalDate('2016-10-14');
+$product->setPickupPlace('SYD1');
+$product->setPickupDate('2016-10-01'); //oder dropTime mit Uhrzeit
+$product->setDropPlace('Syd1');
+$product->setDropDate('2016-10-14');
 $product->isOptional();
 
 $product2 = $reservation->addProduct($product);

@@ -508,6 +508,42 @@ class Product
     {
         $this->departure_place_display = $departurePlaceDisplay;
     }
+
+    //departure_place alias
+    public function setPickupPlace($pickupPlace)
+    {
+        $this->departure_place = $pickupPlace;
+    }
+
+    //arrival_place alias
+    public function setDropPlace($dropPlace)
+    {
+        $this->arrival_place = $dropPlace;
+    }
+
+    //departure_time alias
+    public function setPickupTime($pickupTime)
+    {
+        $this->departure_time = $pickupTime;
+    }
+
+    //arrival_time alias
+    public function setDropTime($dropTime)
+    {
+        $this->arrival_time = $dropTime;
+    }
+
+    //departure_date alias
+    public function setPickupDate($pickupDate)
+    {
+        $this->departure_date = $pickupDate;
+    }
+
+    //arrival_date alias
+    public function setDropDate($dropDate)
+    {
+        $this->arrival_date = $dropDate;
+    }
     
     public function setDeparturePlace($departurePlace)
     {
