@@ -84,10 +84,10 @@ $product1 = $reservation->addProduct($product);
 $product = new Product();
 
 $product->setProductAlias('JUCAU_CASA6');
-$product->setDeparturePlace('SYD1');
-$product->setDepartureDate('2016-10-01');
-$product->setArrivalPlace('Syd1');
-$product->setArrivalDate('2016-10-14');
+$product->setPickupPlace('SYD1');
+$product->setPickupDate('2016-10-01'); //oder dropTime mit Uhrzeit
+$product->setDropPlace('Syd1');
+$product->setDropDate('2016-10-14');
 $product->isOptional();
 
 $product2 = $reservation->addProduct($product);
@@ -102,7 +102,7 @@ $chairs->setPurchase(0,'nuc'); //inklusive
 
 $fare->addCharge($chairs); //bei diesem tarif sind 4 campingstühle inkludiert
 
-$fare->setRetailExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
+$fare->setPurchaseExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
 $fare->setPurchase(50,'aud');
 $fare->setPaxHolds(2); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
 $fare->setDisplay('Basis Paket');

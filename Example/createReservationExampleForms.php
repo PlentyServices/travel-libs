@@ -6,7 +6,7 @@ $reservation = new Reservation();
 
 $general = new General();
 
-$general->setStatus('booking'); //request, booking
+$general->setStatus('booking-request'); //request, booking
 $general->setOperator('hm-touristik');
 $general->setBroker('reisebine');
 $general->setTravelType('rail');
