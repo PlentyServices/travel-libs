@@ -119,7 +119,8 @@ class TravelApiRequest
             if ($error = curl_error($ch)) return $this->setError($error);
         }
 
-        $this->response = json_decode($response, true);
+        if(!$this->response = json_decode($response, true))
+            $this->response = $response;
 
         if ($this->response['error']) return $this->setError($this->response['error']);
 
