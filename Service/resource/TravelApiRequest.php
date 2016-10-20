@@ -18,6 +18,7 @@ class TravelApiRequest
         $this->apiEndpoint = 'https://travel.plenty.services';
         $this->authorityContext = $authorityContext;
         $this->parameters = $parameters;
+        $this->files = array();
         $this->action = $action;
         $this->error = false;
         $this->response = false;
