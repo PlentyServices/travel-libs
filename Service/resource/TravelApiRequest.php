@@ -48,6 +48,12 @@ class TravelApiRequest
         $this->parameters = $parameters;
     }
 
+    /* Add Parameters */
+    public function addParameter($name, $parameter)
+    {
+        $this->parameters[$name] = $parameter;
+    }
+
     /* Add file */
     public function addFile($post_name, $name, $mimetype = '')
     {
@@ -114,7 +120,7 @@ class TravelApiRequest
             $this->parameters = array_merge($this->parameters, $this->userAuth);
         }
 
-        $parameters = array('p' => $this->parameters);
+        $parameters = $this->parameters;
 
         foreach ($this->files as $file)
         {
