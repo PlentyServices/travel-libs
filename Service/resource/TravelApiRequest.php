@@ -4,30 +4,30 @@
 class TravelApiRequest
 {
     protected $apiEndpoint;
-    protected $apiKey;
+    protected $accessKey;
     protected $error;
     protected $action;
     protected $parameters;
     protected $response;
     protected $userAuth;
-    protected $userContext;
+    protected $authorityContext;
+    protected $files;
 
-    public function __construct($action = false, $parameters = array(), $userContext = false, $userAuth = false)
+    public function __construct($action = false, $parameters = array(), $authorityContext = false)
     {
-        $this->apiKey = '58E66190-BDDD-42EA-8D8F-D3BFBD05B91A';
         $this->apiEndpoint = 'https://travel.plenty.services';
+        $this->authorityContext = $authorityContext;
         $this->parameters = $parameters;
+        $this->files = array();
         $this->action = $action;
         $this->error = false;
         $this->response = false;
-        $this->userAuth = $userAuth;
-        $this->userContext = $userContext;
     }
     
-    /* Set API key */
-    public function setApiKey($key)
+    /* Set access key */
+    public function setAccessKey($key)
     {
-        $this->apiKey = $key;
+        $this->accessKey = $key;
     }
 
     /* Set API endpoint */
@@ -47,20 +47,37 @@ class TravelApiRequest
     {
         $this->parameters = $parameters;
     }
-    
-    /* Make User auth, obtain access key */
-    public function isUserAuth()
+
+    /* Add Parameters */
+    public function addParameter($name, $parameter)
     {
-        $this->userAuth = true;
+        $this->parameters[$name] = $parameter;
+    }
+
+    /* Add file */
+    public function addFile($post_name, $name, $mimetype = '')
+    {
+        $this->files[] = array(
+            'name' => $name,
+            'mimetype' => $mimetype,
+            'post_name' => $post_name
+        );
+    }
+
+    /* user auth, obtain user access key */
+    public function setUserAuth($user, $realm, $password)
+    {
+        $this->userAuth = array(
+            'user' => $user,
+            'realm' => $realm,
+            'password' => $password
+        );
     }
 
     /* Set User context */
-    public function setUserContext($accessKey, $authority)
+    public function setAuthorityContext($authority)
     {
-        $this->userContext = array(
-            'access_key' => $accessKey,
-            'authority' => $authority
-        );
+        $this->authorityContext = $authority;
     }
     
     /* Get Error */
@@ -86,34 +103,32 @@ class TravelApiRequest
     public function request()
     {
 
-        if ($this->userAuth && key_exists('user', $this->parameters) && key_exists('password', $this->parameters) && key_exists('profile', $this->parameters)) {
-            $userAuth = '&user=' . $this->parameters['user'] . '&password=' . $this->parameters['password'] . '&profile=' . $this->parameters['profile'];
-        }
-
-        if (key_exists('password', $this->parameters)) unset($this->parameters['password']);
-
-        $parameters = json_encode($this->parameters);
-
-        if ($this->userAuth) {
-            $apiSession = '?k=' . $this->apiKey . $userAuth;
-        } elseif ($this->userContext) {
-            $apiSession = '?s=' . $this->userContext['access_key'] . '&a=' . $this->userContext['authority'];
+        if ($this->authorityContext) {
+            $context = '?k=' . $this->accessKey . '&a=' . $this->authorityContext;
         } else {
-            $apiSession = '?k=' . $this->apiKey;
+            $context = '?k=' . $this->accessKey;
         }
 
-        $url = $this->apiEndpoint . $this->action . $apiSession;
+        $url = $this->apiEndpoint . $this->action . $context;
 
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POST, 1);
+
+        if ($this->userAuth) {
+            $this->parameters = array_merge($this->parameters, $this->userAuth);
+        }
+
+        $parameters = $this->parameters;
+
+        foreach ($this->files as $file)
+        {
+            $parameters[$file['post_name']] = new CURLFile($file['name'], $file['mimetype']);
+        }
+
         curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($parameters))
-        );
 
         if(!$response = curl_exec($ch)){
             if ($error = curl_error($ch)) return $this->setError($error);
