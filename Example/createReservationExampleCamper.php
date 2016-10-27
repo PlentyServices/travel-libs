@@ -150,7 +150,7 @@ print_r(json_encode($ro));
 $request = new TravelApiRequest();
 
 $request->setAction('/create/reservation');
-$request->setApiEndpoint('https://travel-dev.plenty.services');
+$request->setApiEndpoint('travel.plenty.services');
 $request->setAccessKey('58E66190-BDDD-42EA-8D8F-D3BFBD05B91A');
 $request->setParameters($ro);
 

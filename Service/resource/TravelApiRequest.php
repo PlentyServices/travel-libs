@@ -12,16 +12,18 @@ class TravelApiRequest
     protected $userAuth;
     protected $authorityContext;
     protected $files;
+    protected $dev_mode;
 
     public function __construct($action = false, $parameters = array(), $authorityContext = false)
     {
-        $this->apiEndpoint = 'https://travel.plenty.services';
+        $this->apiEndpoint = 'travel.plenty.services';
         $this->authorityContext = $authorityContext;
         $this->parameters = $parameters;
         $this->files = array();
         $this->action = $action;
         $this->error = false;
         $this->response = false;
+        $this->dev_mode = false;
     }
     
     /* Set access key */
@@ -99,6 +101,12 @@ class TravelApiRequest
         return false;
     }
 
+    /* Set DEV mode */
+    public function devMode()
+    {
+        $this->dev_mode = true;
+    }
+
     /* API Request */
     public function request()
     {
@@ -109,11 +117,10 @@ class TravelApiRequest
             $context = '?k=' . $this->accessKey;
         }
 
-        $url = $this->apiEndpoint . $this->action . $context;
+        $url = 'https://' . $this->apiEndpoint . $this->action . $context;
 
         $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
         curl_setopt($ch, CURLOPT_POST, 1);
 
         if ($this->userAuth) {
@@ -121,6 +128,14 @@ class TravelApiRequest
         }
 
         $parameters = $this->parameters;
+
+        if($this->dev_mode)
+        {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+            $parameters['dev'] = true;
+        }
 
         foreach ($this->files as $file)
         {
