@@ -71,6 +71,7 @@ $request = new TravelApiRequest();
 $request->setAction('/create/reservation');
 $request->setApiEndpoint('travel.plenty.services');
 $request->setAccessKey('58E66190-BDDD-42EA-8D8F-D3BFBD05B91A');
+$request->devMode(); //Resourcen werden als dummies gekennzeichnet und Email Benachrichtigungen gehen an hinterlegte Adresse (access key user)
 $request->setParameters($ro);
 
 $result = $request->request();
