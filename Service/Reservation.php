@@ -71,7 +71,7 @@ class Reservation
 
     public function serialize()
     {
-        return $this;
+        return json_encode($this);
     }
 
 }
