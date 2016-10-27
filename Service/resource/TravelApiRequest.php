@@ -56,6 +56,12 @@ class TravelApiRequest
         $this->parameters[$name] = $parameter;
     }
 
+    /* Add JSON Document */
+    public function addJsonDocument($json_document)
+    {
+        $this->addParameter('json_document', $json_document);
+    }
+
     /* Add file */
     public function addFile($post_name, $name, $mimetype = '')
     {
@@ -127,22 +133,20 @@ class TravelApiRequest
             $this->parameters = array_merge($this->parameters, $this->userAuth);
         }
 
-        $parameters = $this->parameters;
-
         if($this->dev_mode)
         {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
-            $parameters['dev'] = true;
+            $this->parameters['dev'] = true;
         }
 
         foreach ($this->files as $file)
         {
-            $parameters[$file['post_name']] = new CURLFile($file['name'], $file['mimetype']);
+            $this->parameters[$file['post_name']] = new CURLFile($file['name'], $file['mimetype']);
         }
 
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $this->parameters);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         if(!$response = curl_exec($ch)){
