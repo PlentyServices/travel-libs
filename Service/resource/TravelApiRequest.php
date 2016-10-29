@@ -12,7 +12,7 @@ class TravelApiRequest
     protected $userAuth;
     protected $authorityContext;
     protected $files;
-    protected $dev_mode;
+    protected $env;
 
     public function __construct($action = false, $parameters = array(), $authorityContext = false)
     {
@@ -23,7 +23,7 @@ class TravelApiRequest
         $this->action = $action;
         $this->error = false;
         $this->response = false;
-        $this->dev_mode = false;
+        $this->env = 'prod';
     }
     
     /* Set access key */
@@ -107,10 +107,16 @@ class TravelApiRequest
         return false;
     }
 
+    /* Set env */
+    public function setEnv($env)
+    {
+        $this->env = $env;
+    }
+
     /* Set DEV mode */
     public function devMode()
     {
-        $this->dev_mode = true;
+        $this->env = 'dev';
     }
 
     /* API Request */
@@ -133,12 +139,12 @@ class TravelApiRequest
             $this->parameters = array_merge($this->parameters, $this->userAuth);
         }
 
-        if($this->dev_mode)
+        if($this->env !== 'prod')
         {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
-            $this->parameters['dev'] = true;
+            $this->parameters['env'] = $this->env;
         }
 
         foreach ($this->files as $file)
