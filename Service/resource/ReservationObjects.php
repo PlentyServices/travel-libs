@@ -622,6 +622,7 @@ class Fare
     public $purchase_currency;
     public $purchase_commission_percentage;
     public $purchase_commission_amount;
+    public $retail_price;
     public $calc_from_gross;
     public $round_retail_price;
     public $display;
@@ -705,6 +706,11 @@ class Fare
     public function roundRetailPrice($bool = true)
     {
         $this->round_retail_price = $bool;
+    }
+
+    public function setRetailPrice($retailPrice)
+    {
+        $this->retail_price = $retailPrice;
     }
 
     public function setPurchase($cost, $currency, $commission = false)
@@ -808,6 +814,7 @@ class Charge
     public $purchase_currency;
     public $purchase_commission_percentage;
     public $purchase_commission_amount;
+    public $retail_price;
     public $calc_from_gross;
     public $round_retail_price;
     public $payable;
@@ -867,6 +874,10 @@ class Charge
         $this->purchase_currency = $currency;
     }
 
+    public function setRetailPrice($retailPrice)
+    {
+        $this->retail_price = $retailPrice;
+    }
 
     public function setRetailExchange($exchange)
     {
