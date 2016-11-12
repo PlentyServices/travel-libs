@@ -9,8 +9,7 @@ $general = new General();
 $general->setSystem('camper');
 $general->setStatus('request'); //request, booking
 $general->setOperator('alacampa');
-$general->setPeer('aer');
-$general->setBroker('service');
+$general->setBroker('aer');
 $general->setLocale('de');
 $general->setTransactionType('business'); //business => b2b, direct => b2c
 $general->setTravelType('camper');
@@ -81,8 +80,7 @@ $fare->setPaxHolds(0); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
 $fare->setDisplay('Basis Paket');
 $fare->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
 $fare->setIdCondition('driver', 'drivers-license'); //pax mit tag driver muss id drivers-license vorweisen
-$fare->setCommissionPeerAmount(10); //Bsp. AER
-$fare->setCommissionBrokerAmount(0); //null, da netto Preise
+$fare->setCommissionBrokerAmount(5); //AER ist vorerst broker, da dessen agenturen nettopreise bekommen und keine provision
 $fare->setRetailPrice(500); //VK
 
 $reservation->addFareToProduct($fare, $product); // ordnet fare zu Produkt zu und fügt Produkt zur Reservierung hinzu wenn noch nicht vorhanden
