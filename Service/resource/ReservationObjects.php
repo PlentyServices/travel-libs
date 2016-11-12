@@ -454,6 +454,7 @@ class Product
     public $contractor_notice;
     public $status;
     public $charges;
+    public $quantity;
     public $uid;
 
     public function __construct()
@@ -462,6 +463,12 @@ class Product
         $this->charges = array();
         $this->consultant_notice = array();
         $this->contractor_notice = array();
+        $this->quantity = 1;
+    }
+
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
     }
 
     public function setVendorAlias($vendorAlias)

@@ -37,7 +37,7 @@ $contractor->isPassenger();
 $contractor->addTag('driver'); //tags für kalkulationsabhängigkeiten
 $contractor->addId('drivers-license', 'DE123435678490');
 
-$pax1 = $reservation->setContractor($contractor);
+$reservation->setContractor($contractor);
 
 $billing = new BillingContact(); //wenn vom reiseanmelder abweichend
 
@@ -51,25 +51,19 @@ $billing->setCompany('Partyservice GmbH');
 
 $reservation->setBillingContact($billing);
 
-$passenger = new Passenger();
-
-$passenger->setFirstName('John');
-$passenger->setLastName('Doe');
-$passenger->setGender('male');
-$passenger->addTag('driver');
-$passenger->addId('drivers-license', 'DE123435678491');
-
-$pax2 = $reservation->addPassenger($passenger);
 
 $product = new Product();
 
 $product->setProductAlias('JUCNZ_CASA6'); //camper 2.0 kodierung
+$product->setVendorAlias('MAUI_AF_FTI'); //camper 2.0 kodierung
 $product->setDeparturePlace('SYD1'); //camper 2.0 kodierung, depot oder city
 $product->setDepartureDate('2016-10-01'); //pickup
 $product->setArrivalPlace('Syd1'); //drop
 $product->setArrivalDate('2016-10-14');
-$product->isOptional(); //nur möglich bei status 'request'
+//$product->isOptional(); //nur möglich bei status 'request'
 
+
+/* noch nicht möglich
 $charge = new Charge(); //surcharge, tax, item, service
 
 $charge->setChargeType('surcharge');
@@ -78,68 +72,31 @@ $charge->setPayable('on_arrival'); //default ist on_booking, on_arrival wird nic
 $charge->setPurchase(40,'aud');
 
 $product->addCharge($charge);
-
-$product1 = $reservation->addProduct($product);
-
-$product = new Product();
-
-$product->setProductAlias('JUCAU_CASA6');
-$product->setPickupPlace('SYD1');
-$product->setPickupDate('2016-10-01'); //oder dropTime mit Uhrzeit
-$product->setDropPlace('Syd1');
-$product->setDropDate('2016-10-14');
-$product->isOptional();
-
-$product2 = $reservation->addProduct($product);
-
+*/
 $fare = new Fare();
-
-$chairs = new Charge(); //zusatzleistung oder auch inkludierte leistung
-
-$chairs->setChargeType('item');
-$chairs->setDisplay('4 Campingstühle');
-$chairs->setPurchase(0,'nuc'); //inklusive
-
-$fare->addCharge($chairs); //bei diesem tarif sind 4 campingstühle inkludiert
 
 $fare->setPurchaseExchange(0.86); //default: 1 wenn currency = general currency, aus travel system hinterlegt sonst tagesaktuelle umrechnung
 $fare->setPurchase(50,'aud');
-$fare->setPaxHolds(2); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
+$fare->setPaxHolds(0); //anzahl der inkl. pax, wenn 0 wird nur einmal berechnet
 $fare->setDisplay('Basis Paket');
 $fare->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
 $fare->setIdCondition('driver', 'drivers-license'); //pax mit tag driver muss id drivers-license vorweisen
-$fare->setMarkupAmount(80); //alacampa
 $fare->setCommissionPeerAmount(10); //Bsp. AER
-$fare->setCommissionBrokerAmount(30); //Vermittler/Reisebüro
+$fare->setCommissionBrokerAmount(0); //null, da netto Preise
+$fare->setRetailPrice(500); //VK
 
-$fare1 = $reservation->addFare($fare);
+$reservation->addFareToProduct($fare, $product); // ordnet fare zu Produkt zu und fügt Produkt zur Reservierung hinzu wenn noch nicht vorhanden
 
+$passenger = new Passenger();
 
-$fare = new Fare();
+$passenger->setFirstName('John');
+$passenger->setLastName('Doe');
+$passenger->setGender('male');
+$passenger->addTag('driver');
+$passenger->addId('drivers-license', 'DE123435678491');
 
-$fare->setPurchase(50,'aud');
-$fare->setRetailExchange(0.86);
-$fare->setPaxHolds(2);
-$fare->setDisplay('Basis Paket');
-$fare->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
-$fare->setIdCondition('driver', 'drivers-license');
-$fare->setMarkupAmount(80);
-$fare->setCommissionPeerAmount(10);
-$fare->setCommissionBrokerAmount(30);
-
-$fare2 = $reservation->addFare($fare);
-
-$reservation->addAllocation($product1, array( //nicht nötig wenn nur ein product und eine fare vorhanden
-        $pax1 => $fare1, //pax uid zu fare uid
-        $pax2 => $fare1
-    ), 1 //plus optionaler parameter für quantity, default 1
-);
-
-$reservation->addAllocation($product2, array(
-        $pax1 => $fare2,
-        $pax2 => $fare2
-    )
-);
+$reservation->addPassengerToFare($passenger, $fare); //ordnet passagier zu fare zu und fügt passagier zur Reservierung hinzu wenn noch nicht vorhanden
+$reservation->addPassengerToFare($contractor, $fare);
 
 $ro = $reservation->serialize();
 
