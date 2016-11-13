@@ -89,8 +89,8 @@ class Reservation
         }
 
         //assoc fare with product
-        if(isset($this->allocation_fare_to_product[$product]) === false)
-            $this->allocation_fare_to_product[$product] = array();
+        if(isset($this->allocation_fare_to_product[$product->uid]) === false)
+            $this->allocation_fare_to_product[$product->uid] = array();
 
         $this->allocation_fare_to_product[$product->uid][] = $fare->uid;
     }
@@ -105,6 +105,9 @@ class Reservation
         }
 
         //assoc passenger with fare
+        if(isset($this->allocation_passenger_to_fare[$fare->uid]) === false)
+            $this->allocation_passenger_to_fare[$fare->uid] = array();
+
         $this->allocation_passenger_to_fare[$fare->uid][] = $passenger->uid;
     }
 
