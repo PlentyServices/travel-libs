@@ -121,17 +121,17 @@ class Reservation
                 {
                     if($allocated_fare === $fare)
                     {
-                        if(isset($current_passengers) === false)
-                            $current_passengers = array();
+                        if(isset($current_passengers_fares) === false)
+                            $current_passengers_fares = array();
 
                         foreach ($passengers as $passenger)
-                            $current_passengers[] = array($passenger => $fare);
+                            $current_passengers_fares[$passenger] = $fare;
                     }
                 }
             }
 
-            if(isset($current_passengers))
-                $this->addAllocation($product, $current_passengers, $this->products[$product]['quantity']);
+            if(isset($current_passengers_fares))
+                $this->addAllocation($product, $current_passengers_fares, $this->products[$product]['quantity']);
 
             unset($this->allocation_fare_to_product, $this->allocation_passenger_to_fare);
         }

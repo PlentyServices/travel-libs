@@ -702,7 +702,10 @@ class Fare
 
     public function setIdCondition($tag, $idName)
     {
-        $this->id_conditions[$tag] = $idName;
+        if(isset($this->id_conditions[$tag])===false)
+            $this->id_conditions[$tag] = array();
+
+        $this->id_conditions[$tag][] = $idName;
     }
 
     public function calcFromGross()
