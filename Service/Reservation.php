@@ -132,9 +132,9 @@ class Reservation
 
             if(isset($current_passengers_fares))
                 $this->addAllocation($product, $current_passengers_fares, $this->products[$product]['quantity']);
-
-            unset($this->allocation_fare_to_product, $this->allocation_passenger_to_fare);
         }
+
+        unset($this->allocation_fare_to_product, $this->allocation_passenger_to_fare);
     }
 
 
