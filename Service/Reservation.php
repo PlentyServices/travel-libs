@@ -20,6 +20,8 @@ class Reservation
         $this->fares = array();
         $this->passengers = array();
         $this->allocation = array();
+        $this->allocation_fare_to_product = array();
+        $this->allocation_passenger_to_fare = array();
     }
 
     public function setGeneralParameters($params)

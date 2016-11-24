@@ -624,6 +624,7 @@ class Fare
     public $pax_holds;
     public $id_conditions;
     public $retail_exchange;
+    public $purchase_exchange;
     public $purchase_nett;
     public $purchase_gross;
     public $purchase_currency;
@@ -744,10 +745,9 @@ class Fare
         $this->retail_exchange = $exchange;
     }
 
-    //retail exchange alias !!!muss im core noch geändert werden, damit fremdwährungen beim verkauf möglich sind!!!
     public function setPurchaseExchange($exchange)
     {
-        $this->retail_exchange = $exchange;
+        $this->purchase_exchange = $exchange;
     }
 
     public function setDisplay($display)
@@ -819,6 +819,7 @@ class Charge
     public $display;
     public $display_description;
     public $retail_exchange;
+    public $purchase_exchange;
     public $purchase_nett;
     public $purchase_gross;
     public $purchase_currency;
@@ -893,6 +894,12 @@ class Charge
     {
         $this->retail_exchange = $exchange;
     }
+
+    public function setPurchaseExchange($exchange)
+    {
+        $this->purchase_exchange = $exchange;
+    }
+
 
     public function calcFromGross()
     {
