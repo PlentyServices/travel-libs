@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+import "php.proto";
+//import "person.proto";
+
+package TravelLibs;
+
+
+
+/**
+ * Reservation
+ */
+message Reservation {
+    /* General parameters */
+    General general = 1;
+}
+
+
+/**
+ * General parameters
+ */
+message General {
+    /* Status of reservation */
+    Status status = 1;
+    /* The products system */
+    System system = 2;
+    /* Transaction type */
+    TransactionType transaction_type = 3;
+    /* Operator alias */
+    string operator = 4;
+    /* Peer alias */
+    string peer = 5;
+    /* Broker alias */
+    string broker = 6;
+    /* Travel type */
+    string travel_type = 7;
+    /* Travel subtype */
+    string travel_type_sub = 8;
+    /* Custom Display */
+    string display = 9;
+    /* Sell Currency */
+    string currency = 10;
+    /* Customers locale */
+    string locale = 11;
+    /* Payment type */
+    PaymentType payment_type = 12;
+    /* Payment surcharge amount */
+    double payment_surcharge_amount = 13;
+    /* Payment surcharge percentage */
+    int32 payment_surcharge_percentage = 14;
+    /* Reffered IP */
+    string ip_reffered = 15;
+    /* Notice to consultant */
+    repeated string consultant_notice = 16;
+    /* Notice to contractor */
+    repeated string contractor_notice = 17;
+
+    enum Status {
+        request = 0;
+        booking = 1;
+    }
+
+    enum System {
+        travel = 0;
+        camper = 1;
+    }
+
+    enum TransactionType {
+        direct = 0;
+        reseller = 1;
+    }
+
+    enum PaymentType {
+        invoice = 0;
+        credit_card = 1;
+    }
+}

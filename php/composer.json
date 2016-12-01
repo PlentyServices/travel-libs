@@ -1,0 +1,26 @@
+{
+  "name": "PlentyServices/travel-libs",
+  "description": "Plenty Services Travel Libs",
+  "keywords": ["plenty", "travel"],
+  "homepage": "https://plenty.support",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jan Kolosa",
+      "email": "jkolosa@plenty.services"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "stanley-cheung/protobuf-php": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {"TravelLibs\\": "src"}
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}

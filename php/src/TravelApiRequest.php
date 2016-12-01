@@ -1,5 +1,7 @@
 <?php
 
+namespace TravelLibs;
+
 
 class TravelApiRequest
 {

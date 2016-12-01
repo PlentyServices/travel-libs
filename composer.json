@@ -1,6 +1,0 @@
-{
-  "require":
-  {
-    "doctrine/common": "*"
-  }
-}
