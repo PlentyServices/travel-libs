@@ -11,9 +11,10 @@ use \DrSlump\Protobuf\Codec\Json;
 
 $reservation = new Reservation();
 
+/* General Parameters */
 $general = new Reservation\General();
 
-$general->setSystem('travel');
+$general->setSystem('camper');
 $general->setStatus('request');
 $general->setTransactionType('direct');
 $general->setOperator('alacampa');
@@ -22,12 +23,66 @@ $general->setPaymentType('invoice');
 
 $reservation->setGeneral($general);
 
+/* Contractor */
+$contractor = new Person();
 
+$contractor->setNameFirst('Darth');
+$contractor->setNameLast('Vader');
+$contractor->setNameTitle('Dr.');
+$contractor->setGender('male');
+$contractor->setDob('1921-07-02');
+$contractor->setCompany('Lukas Arts');
+$contractor->setPostal('12345');
+$contractor->setCity('Smallville');
+$contractor->setStreet('Batman Str. 123');
+$contractor->setEmail('badboy77@heromail.com');
+$contractor->setPhone('0123456');
+$contractor->addTags('driver');
+
+$reservation->setContractor($contractor);
+
+
+/* Product */
 $product = new Product();
 
+$product->setProductAlias('JUCNZ_CASA6');
+$product->setVendorAlias('MAUI_AF_FTI');
+$product->setPlaceFrom('SYD1');
+$product->setDepartureDate('2016-10-01');
+$product->setPlaceTo('Syd1');
+$product->setArrivalDate('2016-10-14');
+
+
+/* Fare */
 $fare = new Product\Fare();
 
-$person = new Person();
+$fare->setPurchaseExchange(0.86);
+$fare->setPurchaseCurrency('aud');
+$fare->setPurchaseNett(3000.21);
+$fare->setPaxHolds(0);
+$fare->setDisplay('Basis Paket');
+$fare->setDisplayDescription('Hier sind die Standard Leistungen enthalten');
+$fare->setCommissionBrokerAmount(5);
+$fare->setRetailPrice(5000);
+
+$condition = new Product\Fare\TagCondition();
+$condition->setTag('driver');
+$condition->addIds('drivers-license');
+
+$charge = new Product\Fare();
+$charge->setDisplay('Vor Ort Gebühr');
+$charge->setRetailPrice(100);
+$charge->setRetailCurrency('aud');
+$charge->setPayable('on-arrival');
+
+$fare->addTagConditions($condition);
+$fare->addCharges($charge);
+$fare->addPassengers($contractor);
+
+$product->addFares($fare);
+
+
+$reservation->addProducts($product);
 
 
 $codec = new Json();

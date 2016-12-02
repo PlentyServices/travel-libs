@@ -94,6 +94,7 @@ message Product {
         optional float purchase_commission_percentage = 14;
         optional float purchase_commission_amount = 15;
         optional float retail_price = 16;
+        optional string retail_currency = 34;
         optional bool calc_from_gross = 17;
         optional bool round_retail_price = 18;
         optional string display = 19;
