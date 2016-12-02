@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'TravelLibs\\' => array($baseDir . '/src'),
+    'PlentyServices\\TravelLibs\\' => array($baseDir . '/src'),
 );

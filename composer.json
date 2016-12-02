@@ -16,7 +16,7 @@
     "stanley-cheung/protobuf-php": "dev-master"
   },
   "autoload": {
-    "psr-4": {"TravelLibs\\": "src"}
+    "psr-4": {"PlentyServices\\TravelLibs\\": "src"}
   },
   "extra": {
     "branch-alias": {
