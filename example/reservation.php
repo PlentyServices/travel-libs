@@ -87,7 +87,7 @@ $reservation->addProducts($product);
 
 $codec = new Json();
 
-print_r($reservation->serialize($codec));
+echo $ro = $reservation->serialize($codec);
 
 
 /* MAKE REQUEST
