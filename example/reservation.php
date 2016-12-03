@@ -39,6 +39,13 @@ $contractor->setEmail('badboy77@heromail.com');
 $contractor->setPhone('0123456');
 $contractor->addTags('driver');
 
+$license = new Person\Id();
+
+$license->setType('drivers-license');
+$license->setId('DE1234');
+
+$contractor->addIds($license);
+
 $reservation->setContractor($contractor);
 
 
@@ -47,10 +54,10 @@ $product = new Product();
 
 $product->setProductAlias('JUCNZ_CASA6');
 $product->setVendorAlias('MAUI_AF_FTI');
-$product->setPlaceFrom('SYD1');
-$product->setDepartureDate('2016-10-01');
-$product->setPlaceTo('Syd1');
-$product->setArrivalDate('2016-10-14');
+$product->setFromPlace('SYD1');
+$product->setFromDate('2016-10-01');
+$product->setToPlace('Syd1');
+$product->setToDate('2016-10-14');
 
 
 /* Fare */
@@ -67,9 +74,9 @@ $fare->setRetailPrice(5000);
 
 $condition = new Product\Fare\TagCondition();
 $condition->setTag('driver');
-$condition->addIds('drivers-license');
+$condition->addRequiredIds('drivers-license');
 
-$charge = new Product\Fare();
+$charge = new Product\Fare\Charge();
 $charge->setDisplay('Vor Ort Gebühr');
 $charge->setRetailPrice(100);
 $charge->setRetailCurrency('aud');
@@ -94,7 +101,7 @@ echo $ro = $reservation->serialize($codec);
 
 $request = new TravelApiRequest();
 
-$request->setAction('/create/reservation');
+$request->setAction('/reservation');
 $request->setApiEndpoint('travel.plenty.services');
 $request->devMode();
 $request->setAccessKey('58E66190-BDDD-42EA-8D8F-D3BFBD05B91A');

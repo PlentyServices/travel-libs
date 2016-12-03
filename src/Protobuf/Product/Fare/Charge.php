@@ -3,25 +3,10 @@
 // Source: reservation.proto
 //   Date: 2016-12-03 20:48:43
 
-namespace PlentyServices\TravelLibs\Protobuf\Product {
+namespace PlentyServices\TravelLibs\Protobuf\Product\Fare {
 
-  class Fare extends \DrSlump\Protobuf\Message {
+  class Charge extends \DrSlump\Protobuf\Message {
 
-    /**  @var string */
-    public $fare_id = null;
-    
-    /**  @var string */
-    public $farebase = null;
-    
-    /**  @var string */
-    public $discount = null;
-    
-    /**  @var string */
-    public $pax_type = null;
-    
-    /**  @var string */
-    public $pax_holds = null;
-    
     /**  @var float */
     public $retail_exchange = null;
     
@@ -83,28 +68,10 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     public $commission_broker_amount = null;
     
     /**  @var string */
-    public $service_class = null;
-    
-    /**  @var string */
-    public $cabin_class = null;
-    
-    /**  @var string */
     public $payable = null;
     
     /**  @var int */
     public $quantity = null;
-    
-    /**  @var \PlentyServices\TravelLibs\Protobuf\Product\Fare\TagCondition[]  */
-    public $tag_conditions = array();
-    
-    /**  @var \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge[]  */
-    public $charges = array();
-    
-    /**  @var \PlentyServices\TravelLibs\Protobuf\Person[]  */
-    public $passengers = array();
-    
-    /**  @var string */
-    public $status = null;
     
 
     /** @var \Closure[] */
@@ -112,47 +79,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
 
     public static function descriptor()
     {
-      $descriptor = new \DrSlump\Protobuf\Descriptor(__CLASS__, 'PlentyServicesTravelLibs.Product.Fare');
-
-      // OPTIONAL STRING fare_id = 1
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 1;
-      $f->name      = "fare_id";
-      $f->type      = \DrSlump\Protobuf::TYPE_STRING;
-      $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
-      $descriptor->addField($f);
-
-      // OPTIONAL STRING farebase = 2
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 2;
-      $f->name      = "farebase";
-      $f->type      = \DrSlump\Protobuf::TYPE_STRING;
-      $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
-      $descriptor->addField($f);
-
-      // OPTIONAL STRING discount = 5
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 5;
-      $f->name      = "discount";
-      $f->type      = \DrSlump\Protobuf::TYPE_STRING;
-      $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
-      $descriptor->addField($f);
-
-      // OPTIONAL STRING pax_type = 6
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 6;
-      $f->name      = "pax_type";
-      $f->type      = \DrSlump\Protobuf::TYPE_STRING;
-      $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
-      $descriptor->addField($f);
-
-      // OPTIONAL STRING pax_holds = 7
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 7;
-      $f->name      = "pax_holds";
-      $f->type      = \DrSlump\Protobuf::TYPE_STRING;
-      $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
-      $descriptor->addField($f);
+      $descriptor = new \DrSlump\Protobuf\Descriptor(__CLASS__, 'PlentyServicesTravelLibs.Product.Fare.Charge');
 
       // OPTIONAL FLOAT retail_exchange = 9
       $f = new \DrSlump\Protobuf\Field();
@@ -314,22 +241,6 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
       $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
       $descriptor->addField($f);
 
-      // OPTIONAL STRING service_class = 31
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 31;
-      $f->name      = "service_class";
-      $f->type      = \DrSlump\Protobuf::TYPE_STRING;
-      $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
-      $descriptor->addField($f);
-
-      // OPTIONAL STRING cabin_class = 32
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 32;
-      $f->name      = "cabin_class";
-      $f->type      = \DrSlump\Protobuf::TYPE_STRING;
-      $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
-      $descriptor->addField($f);
-
       // OPTIONAL STRING payable = 33
       $f = new \DrSlump\Protobuf\Field();
       $f->number    = 33;
@@ -346,41 +257,6 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
       $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
       $descriptor->addField($f);
 
-      // REPEATED MESSAGE tag_conditions = 36
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 36;
-      $f->name      = "tag_conditions";
-      $f->type      = \DrSlump\Protobuf::TYPE_MESSAGE;
-      $f->rule      = \DrSlump\Protobuf::RULE_REPEATED;
-      $f->reference = '\PlentyServices\TravelLibs\Protobuf\Product\Fare\TagCondition';
-      $descriptor->addField($f);
-
-      // REPEATED MESSAGE charges = 40
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 40;
-      $f->name      = "charges";
-      $f->type      = \DrSlump\Protobuf::TYPE_MESSAGE;
-      $f->rule      = \DrSlump\Protobuf::RULE_REPEATED;
-      $f->reference = '\PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge';
-      $descriptor->addField($f);
-
-      // REPEATED MESSAGE passengers = 41
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 41;
-      $f->name      = "passengers";
-      $f->type      = \DrSlump\Protobuf::TYPE_MESSAGE;
-      $f->rule      = \DrSlump\Protobuf::RULE_REPEATED;
-      $f->reference = '\PlentyServices\TravelLibs\Protobuf\Person';
-      $descriptor->addField($f);
-
-      // OPTIONAL STRING status = 42
-      $f = new \DrSlump\Protobuf\Field();
-      $f->number    = 42;
-      $f->name      = "status";
-      $f->type      = \DrSlump\Protobuf::TYPE_STRING;
-      $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
-      $descriptor->addField($f);
-
       foreach (self::$__extensions as $cb) {
         $descriptor->addField($cb(), true);
       }
@@ -388,191 +264,6 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
       return $descriptor;
     }
 
-    /**
-     * Check if <fare_id> has a value
-     *
-     * @return boolean
-     */
-    public function hasFareId(){
-      return $this->_has(1);
-    }
-    
-    /**
-     * Clear <fare_id> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearFareId(){
-      return $this->_clear(1);
-    }
-    
-    /**
-     * Get <fare_id> value
-     *
-     * @return string
-     */
-    public function getFareId(){
-      return $this->_get(1);
-    }
-    
-    /**
-     * Set <fare_id> value
-     *
-     * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setFareId( $value){
-      return $this->_set(1, $value);
-    }
-    
-    /**
-     * Check if <farebase> has a value
-     *
-     * @return boolean
-     */
-    public function hasFarebase(){
-      return $this->_has(2);
-    }
-    
-    /**
-     * Clear <farebase> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearFarebase(){
-      return $this->_clear(2);
-    }
-    
-    /**
-     * Get <farebase> value
-     *
-     * @return string
-     */
-    public function getFarebase(){
-      return $this->_get(2);
-    }
-    
-    /**
-     * Set <farebase> value
-     *
-     * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setFarebase( $value){
-      return $this->_set(2, $value);
-    }
-    
-    /**
-     * Check if <discount> has a value
-     *
-     * @return boolean
-     */
-    public function hasDiscount(){
-      return $this->_has(5);
-    }
-    
-    /**
-     * Clear <discount> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearDiscount(){
-      return $this->_clear(5);
-    }
-    
-    /**
-     * Get <discount> value
-     *
-     * @return string
-     */
-    public function getDiscount(){
-      return $this->_get(5);
-    }
-    
-    /**
-     * Set <discount> value
-     *
-     * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setDiscount( $value){
-      return $this->_set(5, $value);
-    }
-    
-    /**
-     * Check if <pax_type> has a value
-     *
-     * @return boolean
-     */
-    public function hasPaxType(){
-      return $this->_has(6);
-    }
-    
-    /**
-     * Clear <pax_type> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearPaxType(){
-      return $this->_clear(6);
-    }
-    
-    /**
-     * Get <pax_type> value
-     *
-     * @return string
-     */
-    public function getPaxType(){
-      return $this->_get(6);
-    }
-    
-    /**
-     * Set <pax_type> value
-     *
-     * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setPaxType( $value){
-      return $this->_set(6, $value);
-    }
-    
-    /**
-     * Check if <pax_holds> has a value
-     *
-     * @return boolean
-     */
-    public function hasPaxHolds(){
-      return $this->_has(7);
-    }
-    
-    /**
-     * Clear <pax_holds> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearPaxHolds(){
-      return $this->_clear(7);
-    }
-    
-    /**
-     * Get <pax_holds> value
-     *
-     * @return string
-     */
-    public function getPaxHolds(){
-      return $this->_get(7);
-    }
-    
-    /**
-     * Set <pax_holds> value
-     *
-     * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setPaxHolds( $value){
-      return $this->_set(7, $value);
-    }
-    
     /**
      * Check if <retail_exchange> has a value
      *
@@ -585,7 +276,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <retail_exchange> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearRetailExchange(){
       return $this->_clear(9);
@@ -604,7 +295,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <retail_exchange> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setRetailExchange( $value){
       return $this->_set(9, $value);
@@ -622,7 +313,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <purchase_exchange> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearPurchaseExchange(){
       return $this->_clear(10);
@@ -641,7 +332,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <purchase_exchange> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setPurchaseExchange( $value){
       return $this->_set(10, $value);
@@ -659,7 +350,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <purchase_nett> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearPurchaseNett(){
       return $this->_clear(11);
@@ -678,7 +369,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <purchase_nett> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setPurchaseNett( $value){
       return $this->_set(11, $value);
@@ -696,7 +387,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <purchase_gross> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearPurchaseGross(){
       return $this->_clear(12);
@@ -715,7 +406,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <purchase_gross> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setPurchaseGross( $value){
       return $this->_set(12, $value);
@@ -733,7 +424,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <purchase_currency> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearPurchaseCurrency(){
       return $this->_clear(13);
@@ -752,7 +443,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <purchase_currency> value
      *
      * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setPurchaseCurrency( $value){
       return $this->_set(13, $value);
@@ -770,7 +461,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <purchase_commission_percentage> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearPurchaseCommissionPercentage(){
       return $this->_clear(14);
@@ -789,7 +480,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <purchase_commission_percentage> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setPurchaseCommissionPercentage( $value){
       return $this->_set(14, $value);
@@ -807,7 +498,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <purchase_commission_amount> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearPurchaseCommissionAmount(){
       return $this->_clear(15);
@@ -826,7 +517,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <purchase_commission_amount> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setPurchaseCommissionAmount( $value){
       return $this->_set(15, $value);
@@ -844,7 +535,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <retail_price> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearRetailPrice(){
       return $this->_clear(16);
@@ -863,7 +554,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <retail_price> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setRetailPrice( $value){
       return $this->_set(16, $value);
@@ -881,7 +572,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <retail_currency> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearRetailCurrency(){
       return $this->_clear(34);
@@ -900,7 +591,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <retail_currency> value
      *
      * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setRetailCurrency( $value){
       return $this->_set(34, $value);
@@ -918,7 +609,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <calc_from_gross> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearCalcFromGross(){
       return $this->_clear(17);
@@ -937,7 +628,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <calc_from_gross> value
      *
      * @param boolean $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setCalcFromGross( $value){
       return $this->_set(17, $value);
@@ -955,7 +646,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <round_retail_price> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearRoundRetailPrice(){
       return $this->_clear(18);
@@ -974,7 +665,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <round_retail_price> value
      *
      * @param boolean $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setRoundRetailPrice( $value){
       return $this->_set(18, $value);
@@ -992,7 +683,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <display> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearDisplay(){
       return $this->_clear(19);
@@ -1011,7 +702,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <display> value
      *
      * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setDisplay( $value){
       return $this->_set(19, $value);
@@ -1029,7 +720,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <display_description> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearDisplayDescription(){
       return $this->_clear(20);
@@ -1048,7 +739,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <display_description> value
      *
      * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setDisplayDescription( $value){
       return $this->_set(20, $value);
@@ -1066,7 +757,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <markup_percentage> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearMarkupPercentage(){
       return $this->_clear(23);
@@ -1085,7 +776,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <markup_percentage> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setMarkupPercentage( $value){
       return $this->_set(23, $value);
@@ -1103,7 +794,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <markup_amount> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearMarkupAmount(){
       return $this->_clear(24);
@@ -1122,7 +813,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <markup_amount> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setMarkupAmount( $value){
       return $this->_set(24, $value);
@@ -1140,7 +831,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <margin_percentage> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearMarginPercentage(){
       return $this->_clear(25);
@@ -1159,7 +850,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <margin_percentage> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setMarginPercentage( $value){
       return $this->_set(25, $value);
@@ -1177,7 +868,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <commission_peer_percentage> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearCommissionPeerPercentage(){
       return $this->_clear(26);
@@ -1196,7 +887,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <commission_peer_percentage> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setCommissionPeerPercentage( $value){
       return $this->_set(26, $value);
@@ -1214,7 +905,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <commission_peer_amount> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearCommissionPeerAmount(){
       return $this->_clear(27);
@@ -1233,7 +924,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <commission_peer_amount> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setCommissionPeerAmount( $value){
       return $this->_set(27, $value);
@@ -1251,7 +942,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <commission_broker_percentage> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearCommissionBrokerPercentage(){
       return $this->_clear(28);
@@ -1270,7 +961,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <commission_broker_percentage> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setCommissionBrokerPercentage( $value){
       return $this->_set(28, $value);
@@ -1288,7 +979,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <commission_broker_amount> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearCommissionBrokerAmount(){
       return $this->_clear(29);
@@ -1307,84 +998,10 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <commission_broker_amount> value
      *
      * @param float $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setCommissionBrokerAmount( $value){
       return $this->_set(29, $value);
-    }
-    
-    /**
-     * Check if <service_class> has a value
-     *
-     * @return boolean
-     */
-    public function hasServiceClass(){
-      return $this->_has(31);
-    }
-    
-    /**
-     * Clear <service_class> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearServiceClass(){
-      return $this->_clear(31);
-    }
-    
-    /**
-     * Get <service_class> value
-     *
-     * @return string
-     */
-    public function getServiceClass(){
-      return $this->_get(31);
-    }
-    
-    /**
-     * Set <service_class> value
-     *
-     * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setServiceClass( $value){
-      return $this->_set(31, $value);
-    }
-    
-    /**
-     * Check if <cabin_class> has a value
-     *
-     * @return boolean
-     */
-    public function hasCabinClass(){
-      return $this->_has(32);
-    }
-    
-    /**
-     * Clear <cabin_class> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearCabinClass(){
-      return $this->_clear(32);
-    }
-    
-    /**
-     * Get <cabin_class> value
-     *
-     * @return string
-     */
-    public function getCabinClass(){
-      return $this->_get(32);
-    }
-    
-    /**
-     * Set <cabin_class> value
-     *
-     * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setCabinClass( $value){
-      return $this->_set(32, $value);
     }
     
     /**
@@ -1399,7 +1016,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <payable> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearPayable(){
       return $this->_clear(33);
@@ -1418,7 +1035,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <payable> value
      *
      * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setPayable( $value){
       return $this->_set(33, $value);
@@ -1436,7 +1053,7 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
     /**
      * Clear <quantity> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function clearQuantity(){
       return $this->_clear(35);
@@ -1455,218 +1072,10 @@ namespace PlentyServices\TravelLibs\Protobuf\Product {
      * Set <quantity> value
      *
      * @param int $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
+     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
      */
     public function setQuantity( $value){
       return $this->_set(35, $value);
-    }
-    
-    /**
-     * Check if <tag_conditions> has a value
-     *
-     * @return boolean
-     */
-    public function hasTagConditions(){
-      return $this->_has(36);
-    }
-    
-    /**
-     * Clear <tag_conditions> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearTagConditions(){
-      return $this->_clear(36);
-    }
-    
-    /**
-     * Get <tag_conditions> value
-     *
-     * @param int $idx
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\TagCondition
-     */
-    public function getTagConditions($idx = NULL){
-      return $this->_get(36, $idx);
-    }
-    
-    /**
-     * Set <tag_conditions> value
-     *
-     * @param \PlentyServices\TravelLibs\Protobuf\Product\Fare\TagCondition $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setTagConditions(\PlentyServices\TravelLibs\Protobuf\Product\Fare\TagCondition $value, $idx = NULL){
-      return $this->_set(36, $value, $idx);
-    }
-    
-    /**
-     * Get all elements of <tag_conditions>
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\TagCondition[]
-     */
-    public function getTagConditionsList(){
-     return $this->_get(36);
-    }
-    
-    /**
-     * Add a new element to <tag_conditions>
-     *
-     * @param \PlentyServices\TravelLibs\Protobuf\Product\Fare\TagCondition $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function addTagConditions(\PlentyServices\TravelLibs\Protobuf\Product\Fare\TagCondition $value){
-     return $this->_add(36, $value);
-    }
-    
-    /**
-     * Check if <charges> has a value
-     *
-     * @return boolean
-     */
-    public function hasCharges(){
-      return $this->_has(40);
-    }
-    
-    /**
-     * Clear <charges> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearCharges(){
-      return $this->_clear(40);
-    }
-    
-    /**
-     * Get <charges> value
-     *
-     * @param int $idx
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge
-     */
-    public function getCharges($idx = NULL){
-      return $this->_get(40, $idx);
-    }
-    
-    /**
-     * Set <charges> value
-     *
-     * @param \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setCharges(\PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge $value, $idx = NULL){
-      return $this->_set(40, $value, $idx);
-    }
-    
-    /**
-     * Get all elements of <charges>
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge[]
-     */
-    public function getChargesList(){
-     return $this->_get(40);
-    }
-    
-    /**
-     * Add a new element to <charges>
-     *
-     * @param \PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function addCharges(\PlentyServices\TravelLibs\Protobuf\Product\Fare\Charge $value){
-     return $this->_add(40, $value);
-    }
-    
-    /**
-     * Check if <passengers> has a value
-     *
-     * @return boolean
-     */
-    public function hasPassengers(){
-      return $this->_has(41);
-    }
-    
-    /**
-     * Clear <passengers> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearPassengers(){
-      return $this->_clear(41);
-    }
-    
-    /**
-     * Get <passengers> value
-     *
-     * @param int $idx
-     * @return \PlentyServices\TravelLibs\Protobuf\Person
-     */
-    public function getPassengers($idx = NULL){
-      return $this->_get(41, $idx);
-    }
-    
-    /**
-     * Set <passengers> value
-     *
-     * @param \PlentyServices\TravelLibs\Protobuf\Person $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setPassengers(\PlentyServices\TravelLibs\Protobuf\Person $value, $idx = NULL){
-      return $this->_set(41, $value, $idx);
-    }
-    
-    /**
-     * Get all elements of <passengers>
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Person[]
-     */
-    public function getPassengersList(){
-     return $this->_get(41);
-    }
-    
-    /**
-     * Add a new element to <passengers>
-     *
-     * @param \PlentyServices\TravelLibs\Protobuf\Person $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function addPassengers(\PlentyServices\TravelLibs\Protobuf\Person $value){
-     return $this->_add(41, $value);
-    }
-    
-    /**
-     * Check if <status> has a value
-     *
-     * @return boolean
-     */
-    public function hasStatus(){
-      return $this->_has(42);
-    }
-    
-    /**
-     * Clear <status> value
-     *
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function clearStatus(){
-      return $this->_clear(42);
-    }
-    
-    /**
-     * Get <status> value
-     *
-     * @return string
-     */
-    public function getStatus(){
-      return $this->_get(42);
-    }
-    
-    /**
-     * Set <status> value
-     *
-     * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Product\Fare
-     */
-    public function setStatus( $value){
-      return $this->_set(42, $value);
     }
   }
 }

@@ -56,7 +56,12 @@ message Person {
     optional string nationality = 15;
     optional string language = 16;
     repeated string tags = 20;
-    repeated string ids = 21;
+    repeated Id ids = 21;
+
+    message Id {
+        required string type = 1;
+        required string id = 2;
+    }
 }
 
 message Product {
@@ -68,17 +73,15 @@ message Product {
     optional string product_subtype = 6;
     optional string display = 7;
     optional string display_description = 8;
-    optional string place_from = 9;
-    optional string place_from_display = 10;
-    optional string place_to = 11;
-    optional string place_to_display = 12;
-    optional string departure_date = 13;
-    optional string departure_time = 14;
-    optional string arrival_date = 15;
-    optional string arrival_time = 16;
-    repeated Fare fares = 18;
-    optional string status = 20;
-    optional int32 quantity = 21;
+    optional string from_place = 9;
+    optional string from_place_display = 10;
+    optional string from_date = 11;
+    optional string from_time = 12;
+    optional string to_place = 15;
+    optional string to_place_display = 16;
+    optional string to_date = 17;
+    optional string to_time = 18;
+    repeated Fare fares = 20;
 
     message Fare {
         optional string fare_id = 1;
@@ -109,14 +112,44 @@ message Product {
         optional string service_class = 31;
         optional string cabin_class = 32;
         optional string payable = 33;
+        optional int32 quantity = 35;
         repeated TagCondition tag_conditions = 36;
-        repeated Fare charges = 40;
+        repeated Charge charges = 40;
         repeated Person passengers = 41;
+        optional string status = 42;
 
         message TagCondition {
             required string tag = 1;
-            repeated string ids = 2;
-            repeated int32 max = 3;
+            repeated string required_ids = 2;
+            optional int32 pax_max = 3;
+            optional int32 pax_min = 4;
+            optional bool strict = 5;
+            optional bool included = 6;
+        }
+
+        message Charge {
+            optional float retail_exchange = 9;
+            optional float purchase_exchange = 10;
+            optional float purchase_nett = 11;
+            optional float purchase_gross = 12;
+            optional string purchase_currency = 13;
+            optional float purchase_commission_percentage = 14;
+            optional float purchase_commission_amount = 15;
+            optional float retail_price = 16;
+            optional string retail_currency = 34;
+            optional bool calc_from_gross = 17;
+            optional bool round_retail_price = 18;
+            optional string display = 19;
+            optional string display_description = 20;
+            optional float markup_percentage = 23;
+            optional float markup_amount = 24;
+            optional float margin_percentage = 25;
+            optional float commission_peer_percentage = 26;
+            optional float commission_peer_amount = 27;
+            optional float commission_broker_percentage = 28;
+            optional float commission_broker_amount = 29;
+            optional string payable = 33;
+            optional int32 quantity = 35;
         }
     }
 }
