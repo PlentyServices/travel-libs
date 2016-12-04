@@ -25,7 +25,7 @@ class ComposerStaticInitf0a06822aa41010cdbcc2f267d39f89b
         array (
             'DrSlump' => 
             array (
-                0 => __DIR__ . '/..' . '/stanley-cheung/protobuf-php/library',
+                0 => __DIR__ . '/../..' . '/src/Protobuf/library',
             ),
         ),
     );

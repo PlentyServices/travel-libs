@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'DrSlump' => array($vendorDir . '/stanley-cheung/protobuf-php/library'),
+    'DrSlump' => array($baseDir . '/src/Protobuf/library'),
 );
