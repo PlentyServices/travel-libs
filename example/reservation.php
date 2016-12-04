@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-
 require_once '../vendor/autoload.php';
 
 use \PlentyServices\TravelLibs\Protobuf\Reservation;
@@ -17,8 +15,8 @@ $general = new Reservation\General();
 $general->setSystem('camper');
 $general->setStatus('request');
 $general->setTransactionType('direct');
-$general->setOperator('alacampa');
-$general->setBroker('reisebine');
+$general->setOperator('veranstalter');
+$general->setBroker('vermittler');
 $general->setCurrency('eur');
 $general->setPaymentType('invoice');
 
@@ -36,7 +34,7 @@ $contractor->setCompany('Lukas Arts');
 $contractor->setPostal('12345');
 $contractor->setCity('Smallville');
 $contractor->setStreet('Batman Str. 123');
-$contractor->setEmail('badboy77@heromail.com');
+$contractor->setEmail('batboy77@heromail.com');
 $contractor->setPhone('0123456');
 $contractor->addTags('driver');
 
