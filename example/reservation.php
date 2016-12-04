@@ -18,6 +18,7 @@ $general->setSystem('camper');
 $general->setStatus('request');
 $general->setTransactionType('direct');
 $general->setOperator('alacampa');
+$general->setBroker('reisebine');
 $general->setCurrency('eur');
 $general->setPaymentType('invoice');
 
@@ -54,10 +55,10 @@ $product = new Product();
 
 $product->setProductAlias('JUCNZ_CASA6');
 $product->setVendorAlias('MAUI_AF_FTI');
-$product->setFromPlace('SYD1');
-$product->setFromDate('2016-10-01');
-$product->setToPlace('Syd1');
-$product->setToDate('2016-10-14');
+$product->setPlaceFrom('SYD1');
+$product->setDateFrom('2016-10-01');
+$product->setPlaceTo('Syd1');
+$product->setDateTo('2016-10-14');
 
 
 /* Fare */

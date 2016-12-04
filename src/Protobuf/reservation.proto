@@ -73,14 +73,14 @@ message Product {
     optional string product_subtype = 6;
     optional string display = 7;
     optional string display_description = 8;
-    optional string from_place = 9;
-    optional string from_place_display = 10;
-    optional string from_date = 11;
-    optional string from_time = 12;
-    optional string to_place = 15;
-    optional string to_place_display = 16;
-    optional string to_date = 17;
-    optional string to_time = 18;
+    optional string place_from = 9;
+    optional string place_from_display = 10;
+    optional string date_from = 11;
+    optional string time_from = 12;
+    optional string place_to = 15;
+    optional string place_to_display = 16;
+    optional string date_to = 17;
+    optional string time_to = 18;
     repeated Fare fares = 20;
 
     message Fare {
