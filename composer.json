@@ -1,6 +1,26 @@
 {
-  "require":
-  {
-    "doctrine/common": "*"
+  "name": "plenty/travel-libs",
+  "description": "Plenty Services Travel Libs",
+  "keywords": ["plenty", "travel"],
+  "homepage": "https://plenty.support",
+  "type": "library",
+  "license": "(C) 2017 Plenty Services GmbH",
+  "authors": [
+    {
+      "name": "Jan Kolosa",
+      "email": "jkolosa@plenty.services"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "autoload": {
+    "psr-4": {"PlentyServices\\TravelLibs\\": "src"},
+    "psr-0": {"DrSlump": "src/Protobuf/library"}
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-mastergit ": "1.0-dev"
+    }
   }
 }

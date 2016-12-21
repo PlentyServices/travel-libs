@@ -1,5 +1,7 @@
 <?php
 
+namespace PlentyServices\TravelLibs;
+
 
 class TravelApiRequest
 {
