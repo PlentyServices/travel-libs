@@ -57,6 +57,7 @@ $product->setPlaceFrom('SYD1');
 $product->setDateFrom('2016-10-01');
 $product->setPlaceTo('Syd1');
 $product->setDateTo('2016-10-14');
+$product->addInternalNotice('Internal Message');
 
 
 /* Fare */

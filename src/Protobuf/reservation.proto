@@ -81,6 +81,7 @@ message Product {
     optional string place_to_display = 16;
     optional string date_to = 17;
     optional string time_to = 18;
+    repeated string internal_notice = 19;
     repeated Fare fares = 20;
 
     message Fare {
