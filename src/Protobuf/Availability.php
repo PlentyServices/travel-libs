@@ -3,15 +3,15 @@
 // Source: reservation.proto
 //   Date: 2017-04-06 12:24:40
 
-namespace PlentyServices\TravelLibs\Protobuf\Person {
+namespace PlentyServices\TravelLibs\Protobuf {
 
-  class Id extends \DrSlump\Protobuf\Message {
+  class Availability extends \DrSlump\Protobuf\Message {
 
     /**  @var string */
-    public $type = null;
+    public $status = null;
     
     /**  @var string */
-    public $id = null;
+    public $rate = null;
     
 
     /** @var \Closure[] */
@@ -19,22 +19,22 @@ namespace PlentyServices\TravelLibs\Protobuf\Person {
 
     public static function descriptor()
     {
-      $descriptor = new \DrSlump\Protobuf\Descriptor(__CLASS__, 'PlentyServicesTravelLibs.Person.Id');
+      $descriptor = new \DrSlump\Protobuf\Descriptor(__CLASS__, 'PlentyServicesTravelLibs.Availability');
 
-      // REQUIRED STRING type = 1
+      // REQUIRED STRING status = 1
       $f = new \DrSlump\Protobuf\Field();
       $f->number    = 1;
-      $f->name      = "type";
+      $f->name      = "status";
       $f->type      = \DrSlump\Protobuf::TYPE_STRING;
       $f->rule      = \DrSlump\Protobuf::RULE_REQUIRED;
       $descriptor->addField($f);
 
-      // REQUIRED STRING id = 2
+      // OPTIONAL STRING rate = 2
       $f = new \DrSlump\Protobuf\Field();
       $f->number    = 2;
-      $f->name      = "id";
+      $f->name      = "rate";
       $f->type      = \DrSlump\Protobuf::TYPE_STRING;
-      $f->rule      = \DrSlump\Protobuf::RULE_REQUIRED;
+      $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
       $descriptor->addField($f);
 
       foreach (self::$__extensions as $cb) {
@@ -45,76 +45,76 @@ namespace PlentyServices\TravelLibs\Protobuf\Person {
     }
 
     /**
-     * Check if <type> has a value
+     * Check if <status> has a value
      *
      * @return boolean
      */
-    public function hasType(){
+    public function hasStatus(){
       return $this->_has(1);
     }
     
     /**
-     * Clear <type> value
+     * Clear <status> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Person\Id
+     * @return \PlentyServices\TravelLibs\Protobuf\Availability
      */
-    public function clearType(){
+    public function clearStatus(){
       return $this->_clear(1);
     }
     
     /**
-     * Get <type> value
+     * Get <status> value
      *
      * @return string
      */
-    public function getType(){
+    public function getStatus(){
       return $this->_get(1);
     }
     
     /**
-     * Set <type> value
+     * Set <status> value
      *
      * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Person\Id
+     * @return \PlentyServices\TravelLibs\Protobuf\Availability
      */
-    public function setType( $value){
+    public function setStatus( $value){
       return $this->_set(1, $value);
     }
     
     /**
-     * Check if <id> has a value
+     * Check if <rate> has a value
      *
      * @return boolean
      */
-    public function hasId(){
+    public function hasRate(){
       return $this->_has(2);
     }
     
     /**
-     * Clear <id> value
+     * Clear <rate> value
      *
-     * @return \PlentyServices\TravelLibs\Protobuf\Person\Id
+     * @return \PlentyServices\TravelLibs\Protobuf\Availability
      */
-    public function clearId(){
+    public function clearRate(){
       return $this->_clear(2);
     }
     
     /**
-     * Get <id> value
+     * Get <rate> value
      *
      * @return string
      */
-    public function getId(){
+    public function getRate(){
       return $this->_get(2);
     }
     
     /**
-     * Set <id> value
+     * Set <rate> value
      *
      * @param string $value
-     * @return \PlentyServices\TravelLibs\Protobuf\Person\Id
+     * @return \PlentyServices\TravelLibs\Protobuf\Availability
      */
-    public function setId( $value){
+    public function setRate( $value){
       return $this->_set(2, $value);
     }
   }

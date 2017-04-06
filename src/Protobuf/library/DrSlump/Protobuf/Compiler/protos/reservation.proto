@@ -15,10 +15,7 @@ message Reservation {
     required Person contractor = 2;
     optional Person billing_contact = 3;
     repeated Product products = 4;
-    repeated string operator_notice = 10;
-    repeated string contractor_notice = 11;
-    repeated string peer_notice = 12;
-    repeated string broker_notice = 13;
+    repeated Message messages = 20;
 
     message General {
         required string status = 1;
@@ -81,7 +78,6 @@ message Product {
     optional string place_to_display = 16;
     optional string date_to = 17;
     optional string time_to = 18;
-    repeated string internal_notice = 19;
     repeated Fare fares = 20;
 
     message Fare {
@@ -118,6 +114,9 @@ message Product {
         repeated Charge charges = 40;
         repeated Person passengers = 41;
         optional string status = 42;
+        optional string condition_code = 50;
+        optional Availability availability = 51;
+        repeated Message messages = 52;
 
         message TagCondition {
             required string tag = 1;
@@ -151,6 +150,27 @@ message Product {
             optional float commission_broker_amount = 29;
             optional string payable = 33;
             optional int32 quantity = 35;
+            optional Availability availability = 50;
+            repeated Message messages = 51;
         }
     }
+}
+
+message Message {
+    enum Access {
+        ANY = 0;
+        OPERATOR = 1;
+        CONSULANT = 2;
+        BROKER = 3;
+        PEER = 4;
+    }
+    // repeated Visibilities visibility = 1;
+    repeated string access = 1;
+    required string identifier = 2;
+    required string message = 3;
+}
+
+message Availability {
+    required string status = 1;
+    optional string rate = 2;
 }
