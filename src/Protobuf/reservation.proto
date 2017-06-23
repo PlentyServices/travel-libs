@@ -117,6 +117,8 @@ message Product {
         optional string condition_code = 50;
         optional Availability availability = 51;
         repeated Message messages = 52;
+        optional string offer_text = 53;
+        optional string voucher_text = 55;
 
         message TagCondition {
             required string tag = 1;
