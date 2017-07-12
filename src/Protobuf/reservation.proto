@@ -54,6 +54,7 @@ message Person {
     optional string language = 16;
     repeated string tags = 20;
     repeated Id ids = 21;
+    optional string phone_mobile = 22;
 
     message Id {
         required string type = 1;
