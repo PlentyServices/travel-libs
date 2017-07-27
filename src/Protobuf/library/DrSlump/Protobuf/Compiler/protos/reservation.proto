@@ -120,6 +120,8 @@ message Product {
         repeated Message messages = 52;
         optional string offer_text = 53;
         optional string voucher_text = 55;
+        optional string booking_class = 56;
+        optional int32 kilometers = 57;
 
         message TagCondition {
             required string tag = 1;
