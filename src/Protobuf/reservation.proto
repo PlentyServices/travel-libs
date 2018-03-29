@@ -33,12 +33,6 @@ message Reservation {
         optional double payment_surcharge_amount = 13;
         optional int32 payment_surcharge_percentage = 14;
         optional string ip_referred = 15;
-        optional string departure_place = 16;
-        optional string departure_time = 17;
-        optional string destination_place = 18;
-        optional string destination_time = 19;
-        optional string return_place = 20;
-        optional string return_time = 21;
     }
 }
 
@@ -85,9 +79,7 @@ message Product {
     optional string place_to_display = 16;
     optional string date_to = 17;
     optional string time_to = 18;
-    optional int32 sort = 19;
-    repeated Fare fares = 30;
-    repeated Product sub_products = 50;
+    repeated Fare fares = 20;
 
     message Fare {
         optional string fare_id = 1;
