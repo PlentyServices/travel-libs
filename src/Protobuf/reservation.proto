@@ -15,6 +15,7 @@ message Reservation {
     required Person contractor = 2;
     optional Person billing_contact = 3;
     repeated Product products = 4;
+    repeated Package packages = 5;
     repeated Message messages = 20;
 
     message General {
@@ -22,17 +23,27 @@ message Reservation {
         required string system = 2;
         required string transaction_type = 3;
         required string operator = 4;
-        optional string peer = 5;
-        optional string broker = 6;
-        optional string travel_type = 7;
-        optional string travel_type_sub = 8;
-        optional string display = 9;
-        required string currency = 10;
-        optional string locale = 11;
-        required string payment_type = 12;
-        optional double payment_surcharge_amount = 13;
-        optional int32 payment_surcharge_percentage = 14;
-        optional string ip_referred = 15;
+        optional bool operator_is_broker = 5;
+        optional string peer = 6;
+        optional string broker = 7;
+        optional string travel_type = 8;
+        optional string travel_type_sub = 9;
+        optional string display = 10;
+        required string currency = 11;
+        optional string locale = 12;
+        required string payment_type = 13;
+        optional double payment_surcharge_amount = 14;
+        optional int32 payment_surcharge_percentage = 15;
+        optional string ip_referred = 16;
+        optional string departure_place = 17;
+        optional string departure_time = 18;
+        optional string destination_place = 19;
+        optional string destination_time = 20;
+        optional string return_place = 21;
+        optional string return_time = 22;
+        optional string source = 23;
+        optional string campaign = 24;
+        optional string campaign_reference = 25;
     }
 }
 
@@ -62,6 +73,12 @@ message Person {
     }
 }
 
+message Package {
+    required string name = 1;
+    optional int32 sort = 2;
+    repeated Product products = 10;
+}
+
 message Product {
     optional string product_uid = 1;
     optional string product_alias = 2;
@@ -79,14 +96,17 @@ message Product {
     optional string place_to_display = 16;
     optional string date_to = 17;
     optional string time_to = 18;
-    repeated Fare fares = 20;
+    optional int32 sort = 19;
+    optional bool hidden = 25;
+    optional string external_reference = 26;
+    repeated Fare fares = 30;
 
     message Fare {
         optional string fare_id = 1;
         optional string farebase = 2;
         optional string discount = 5;
         optional string pax_type = 6;
-        optional string pax_holds = 7;
+        optional int32 pax_holds = 7;
         optional float retail_exchange = 9;
         optional float purchase_exchange = 10;
         optional float purchase_nett = 11;
@@ -98,8 +118,9 @@ message Product {
         optional string retail_currency = 34;
         optional bool calc_from_gross = 17;
         optional bool round_retail_price = 18;
-        optional string display = 19;
-        optional string display_description = 20;
+        optional string round_retail_price_method = 19;
+        optional string display = 20;
+        optional string display_description = 21;
         optional float markup_percentage = 23;
         optional float markup_amount = 24;
         optional float margin_percentage = 25;
@@ -122,6 +143,10 @@ message Product {
         optional string voucher_text = 55;
         optional string booking_class = 56;
         optional int32 kilometers = 57;
+        optional bool hidden = 58;
+        optional bool hide_retail_price = 59;
+        optional string confirmation_number = 60;
+        optional string external_reference = 61;
 
         message TagCondition {
             required string tag = 1;
@@ -155,8 +180,11 @@ message Product {
             optional float commission_broker_amount = 29;
             optional string payable = 33;
             optional int32 quantity = 35;
-            optional Availability availability = 50;
-            repeated Message messages = 51;
+            optional bool optional = 36;
+            optional bool hidden = 37;
+            optional bool hide_retail_price = 38;
+            repeated Message messages = 40;
+            optional string external_reference = 41;
         }
     }
 }

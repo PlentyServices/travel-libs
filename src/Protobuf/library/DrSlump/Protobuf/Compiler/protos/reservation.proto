@@ -23,23 +23,27 @@ message Reservation {
         required string system = 2;
         required string transaction_type = 3;
         required string operator = 4;
-        optional string peer = 5;
-        optional string broker = 6;
-        optional string travel_type = 7;
-        optional string travel_type_sub = 8;
-        optional string display = 9;
-        required string currency = 10;
-        optional string locale = 11;
-        required string payment_type = 12;
-        optional double payment_surcharge_amount = 13;
-        optional int32 payment_surcharge_percentage = 14;
-        optional string ip_referred = 15;
-        optional string departure_place = 16;
-        optional string departure_time = 17;
-        optional string destination_place = 18;
-        optional string destination_time = 19;
-        optional string return_place = 20;
-        optional string return_time = 21;
+        optional bool operator_is_broker = 5;
+        optional string peer = 6;
+        optional string broker = 7;
+        optional string travel_type = 8;
+        optional string travel_type_sub = 9;
+        optional string display = 10;
+        required string currency = 11;
+        optional string locale = 12;
+        required string payment_type = 13;
+        optional double payment_surcharge_amount = 14;
+        optional int32 payment_surcharge_percentage = 15;
+        optional string ip_referred = 16;
+        optional string departure_place = 17;
+        optional string departure_time = 18;
+        optional string destination_place = 19;
+        optional string destination_time = 20;
+        optional string return_place = 21;
+        optional string return_time = 22;
+        optional string source = 23;
+        optional string campaign = 24;
+        optional string campaign_reference = 25;
     }
 }
 
