@@ -41,9 +41,10 @@ message Reservation {
         optional string destination_time = 20;
         optional string return_place = 21;
         optional string return_time = 22;
-        optional string source = 23;
-        optional string campaign = 24;
-        optional string campaign_reference = 25;
+        optional string referer = 23;
+        optional string source = 24;
+        optional string campaign = 25;
+        optional string campaign_reference = 26;
     }
 }
 
