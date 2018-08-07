@@ -45,6 +45,7 @@ message Reservation {
         optional string source = 24;
         optional string campaign = 25;
         optional string campaign_reference = 26;
+        optional string ga_gclid = 27;
         optional string datetime_booking = 30;
     }
 }
