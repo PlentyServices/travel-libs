@@ -48,6 +48,7 @@ message Reservation {
         optional string conversion_target = 27;
         optional string ga_gclid = 28;
         optional string datetime_booking = 30;
+        optional string external_reference = 31;
     }
 }
 
