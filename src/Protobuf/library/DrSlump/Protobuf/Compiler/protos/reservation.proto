@@ -89,8 +89,8 @@ message Product {
     optional string product_alias = 2;
     optional string vendor_uid = 3;
     optional string vendor_alias = 4;
-    optional string product_type = 5;
-    optional string product_subtype = 6;
+    optional string type = 5;
+    optional string subtype = 6;
     optional string display = 7;
     optional string display_description = 8;
     optional string place_from = 9;
