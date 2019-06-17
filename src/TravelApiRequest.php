@@ -5,172 +5,155 @@ namespace PlentyServices\TravelLibs;
 
 class TravelApiRequest
 {
-    protected $apiEndpoint;
-    protected $accessKey;
-    protected $error;
-    protected $action;
-    protected $parameters;
-    protected $response;
-    protected $userAuth;
-    protected $authorityContext;
-    protected $files;
-    protected $env;
 
-    public function __construct($action = false, $parameters = array(), $authorityContext = false)
-    {
-        $this->apiEndpoint = 'travel.plenty.services';
-        $this->authorityContext = $authorityContext;
-        $this->parameters = $parameters;
-        $this->files = array();
-        $this->action = $action;
-        $this->error = false;
-        $this->response = false;
-        $this->env = 'prod';
-    }
-    
-    /* Set access key */
-    public function setAccessKey($key)
-    {
-        $this->accessKey = $key;
-    }
+  protected $apiEndpoint;
+  protected $env;
+  protected $token;
 
-    /* Set API endpoint */
-    public function setApiEndpoint($endpoint)
-    {
-        $this->apiEndpoint = $endpoint;
-    }
-    
-    /* Set Action */
-    public function setAction($action)
-    {
-        $this->action = $action;
-    }
+  /**
+   * @param string $apiEndpoint
+   */
+  public function setApiEndpoint($apiEndpoint)
+  {
+    $this->apiEndpoint = $apiEndpoint;
+  }
 
-    /* Set Parameters */
-    public function setParameters($parameters)
-    {
-        $this->parameters = $parameters;
-    }
+  /**
+   * @return string
+   */
+  public function getEnv()
+  {
+    return $this->env;
+  }
 
-    /* Add Parameters */
-    public function addParameter($name, $parameter)
-    {
-        $this->parameters[$name] = $parameter;
-    }
+  /**
+   * @param string $env
+   */
+  public function setEnv($env)
+  {
+    $this->env = $env;
+  }
 
-    /* Add JSON Document */
-    public function addJsonDocument($json_document)
-    {
-        $this->addParameter('json_document', $json_document);
-    }
+  /**
+   * @return string
+   */
+  public function getToken() {
+    return $this->token;
+  }
 
-    /* Add file */
-    public function addFile($post_name, $name, $mimetype = '')
-    {
-        $this->files[] = array(
-            'name' => $name,
-            'mimetype' => $mimetype,
-            'post_name' => $post_name
-        );
-    }
+  /**
+   * @param string $token
+   */
+  public function setToken($token) {
+    $this->token = $token;
+  }
 
-    /* user auth, obtain user access key */
-    public function setUserAuth($user, $realm, $password)
-    {
-        $this->userAuth = array(
-            'user' => $user,
-            'realm' => $realm,
-            'password' => $password
-        );
+  public function __construct()
+  {
+    $this->apiEndpoint = 'https://travel-api.plenty.services';
+    $this->env = 'prod';
+  }
+
+  /**
+   * Send a cURL request to Travel API.
+   *
+   * @param $action
+   * @param string $method
+   * @param null $data
+   * @return mixed
+   * @throws \Exception
+   */
+  public function request($action, $method = 'GET', $data = null) {
+
+    // Set Url.
+    $url = $this->apiEndpoint . $action;
+    // Add data as query params if method id GET.
+    if ($method == 'GET' && !empty($data)) {
+      $data = http_build_query($data);
+      $url .= '?' . $data;
     }
 
-    /* Set User context */
-    public function setAuthorityContext($authority)
-    {
-        $this->authorityContext = $authority;
-    }
-    
-    /* Get Error */
-    public function getError()
-    {
-        return $this->error;
-    }
-    
-    /* Get Result */
-    public function getResponse()
-    {
-        return $this->response;
+    // Set headers.
+    $headers = array(
+      'Accept: application/json',
+      'Authorization: Bearer ' . $this->token
+    );
+
+    if ($method != 'GET') {
+      $headers[] = 'Content-Type: application/json';
     }
 
-    /* Set Error */
-    private function setError($error)
-    {
-        $this->error = $error;
-        return false;
+    /*
+    dsm($url);
+    dsm($headers);
+    */
+
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_HEADER, TRUE);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($curl, CURLOPT_FAILONERROR, FALSE);
+
+    if ($method == 'POST') {
+      curl_setopt($curl, CURLOPT_POST, 1);
+    }
+    else if ($method == 'PUT') {
+      curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
     }
 
-    /* Set env */
-    public function setEnv($env)
-    {
-        $this->env = $env;
+    if ($method != 'GET' && !empty($data)) {
+      curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
     }
 
-    /* Set DEV mode */
-    public function devMode()
-    {
-        $this->env = 'dev';
+    if ($this->env !== 'prod') {
+      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
     }
 
-    /* API Request */
-    public function request()
-    {
+    // Get response.
+    $response = curl_exec($curl);
 
-        if ($this->authorityContext) {
-            $context = '?k=' . $this->accessKey . '&a=' . $this->authorityContext;
-        } else {
-            $context = '?k=' . $this->accessKey;
-        }
+    // dump($response);
 
-        $url = 'https://' . $this->apiEndpoint . $this->action . $context;
+    // Split header and body from response.
+    $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+    $bodyJson = substr($response, $header_size);
+    $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-        $ch = curl_init($url);
+    // Decode
+    $body = json_decode($bodyJson, true);
+    $header = substr($response, 0, $header_size);
 
-        curl_setopt($ch, CURLOPT_POST, 1);
+    /*
+    dsm($header);
+    dsm($body);
+    dsm($http_code);
+    */
 
-        if ($this->userAuth) {
-            $this->parameters = array_merge($this->parameters, $this->userAuth);
-        }
-
-        if($this->env !== 'prod')
-        {
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-
-            $this->parameters['env'] = $this->env;
-        }
-
-        foreach ($this->files as $file)
-        {
-            $this->parameters[$file['post_name']] = new CURLFile($file['name'], $file['mimetype']);
-        }
-
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $this->parameters);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        if(!$response = curl_exec($ch)){
-            if ($error = curl_error($ch)) return $this->setError($error);
-        }
-
-        if($this->response = json_decode($response, true))
-        {
-            if ($this->response['error']) return $this->setError($this->response['error']);
-        } else {
-            $this->response = $response;
-        }
-
-        return $this->response;
-
+    // Request was successful.
+    if ($http_code >= 200 && $http_code < 300) {
+      curl_close($curl);
+      return $body;
     }
+    else {
+      $curlError = curl_error($curl);
+      curl_close($curl);
 
+      // Check for error in Result.
+      $errorDescription = array();
+      if (!empty($curlError)) {
+        $errorDescription[] = 'cURL: ' . $curlError;
+      }
+
+      if (!empty($body['title'])) {
+        $errorDescription[] = 'Title: ' . $body['title'];
+      }
+
+      if (!empty($body['detail'])) {
+        $errorDescription[] = "Detail:\n" . $body['detail'];
+      }
+
+      throw new \Exception("Error on Travel API request with status $http_code: \n" . implode("\n", $errorDescription));
+    }
+  }
 }
-
