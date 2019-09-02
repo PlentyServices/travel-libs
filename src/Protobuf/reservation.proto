@@ -49,6 +49,7 @@ message Reservation {
         optional string ga_gclid = 28;
         optional string datetime_booking = 30;
         optional string external_reference = 31;
+        optional string filekey = 32;
     }
 }
 

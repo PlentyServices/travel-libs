@@ -345,6 +345,14 @@ namespace PlentyServices\TravelLibs\Protobuf\Reservation {
       $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
       $descriptor->addField($f);
 
+      // OPTIONAL STRING filekey = 32
+      $f = new \DrSlump\Protobuf\Field();
+      $f->number    = 32;
+      $f->name      = "filekey";
+      $f->type      = \DrSlump\Protobuf::TYPE_STRING;
+      $f->rule      = \DrSlump\Protobuf::RULE_OPTIONAL;
+      $descriptor->addField($f);
+
       foreach (self::$__extensions as $cb) {
         $descriptor->addField($cb(), true);
       }
@@ -1460,6 +1468,43 @@ namespace PlentyServices\TravelLibs\Protobuf\Reservation {
      */
     public function setExternalReference( $value){
       return $this->_set(31, $value);
+    }
+
+    /**
+     * Check if <filekey> has a value
+     *
+     * @return boolean
+     */
+    public function hasFilekey(){
+      return $this->_has(32);
+    }
+
+    /**
+     * Clear <filekey> value
+     *
+     * @return \PlentyServices\TravelLibs\Protobuf\Reservation\General
+     */
+    public function clearFilekey(){
+      return $this->_clear(32);
+    }
+
+    /**
+     * Get <filekey> value
+     *
+     * @return string
+     */
+    public function getFilekey(){
+      return $this->_get(32);
+    }
+
+    /**
+     * Set <filekey> value
+     *
+     * @param string $value
+     * @return \PlentyServices\TravelLibs\Protobuf\Reservation\General
+     */
+    public function setFilekey( $value){
+      return $this->_set(32, $value);
     }
   }
 }
