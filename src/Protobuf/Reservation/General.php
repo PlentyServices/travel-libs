@@ -96,7 +96,9 @@ namespace PlentyServices\TravelLibs\Protobuf\Reservation {
     
     /**  @var string */
     public $external_reference = null;
-    
+
+    /**  @var string */
+    public $filekey = null;
 
     /** @var \Closure[] */
     protected static $__extensions = array();
